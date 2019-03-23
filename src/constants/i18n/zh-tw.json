@@ -1,0 +1,23 @@
+{
+    "station.taichung": "臺中",
+
+    "filter.wheel_chair": "輪椅",
+    "filter.nursing_room": "哺乳室",
+    "filter.bike_parking": "自行車位",
+
+    "sort.arrival": "離站時間",
+    "sort.departure": "抵達時間",
+    "sort.cost": "票價",
+    "sort.transfer": "轉乘次數",
+
+    "train_type.puyuma": "普悠瑪",
+    "train_type.taroko": "太魯閣",
+    "train_type.limited_express": "自強號",
+    "train_type.express": "莒光號",
+    "train_type.semi_express": "復興號",
+    "train_type.local_train": "區間車",
+    "train_type.ordinary_train": "普快車",
+
+    "train_route.mountain_line": "山線",
+    "train_route.coast_line": "海線"
+}
