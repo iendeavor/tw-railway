@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux'
 import Select from 'react-select'
 import {
     Row,
@@ -25,7 +26,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => null
 
-
 const Station = props => {
     const selectedOption = 'ChangHua'
     const options = [
@@ -43,7 +43,7 @@ const Station = props => {
                 />
             </Col>
             <Col xs={1} className="align-content-center justify-content-center p-0">
-                <Icon.ArrowRight size={"100%"}/>
+                <Icon.ArrowRight/>
             </Col>
             <Col>
                 <Select
@@ -55,5 +55,5 @@ const Station = props => {
     )
 }
 
-export default Station
+export default connect(mapStateToProps, mapDispatchToProps)(Station)
 
