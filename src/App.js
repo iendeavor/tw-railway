@@ -1,28 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Provider } from 'react-redux'
+import {
+    Container,
+    Row,
+    Col
+} from 'react-bootstrap'
 
-class App extends Component {
-  render() {
+import Station from './components/Station'
+import DatePicker from './components/DatePicker'
+import Filter from './components/Filter'
+import Sort from './components/Sort'
+
+const App = props => {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+        <Container>
+            <Row className="justify-content-center">
+                <Col xs={12} sm={10} md={8} lg={6}>
+                    <div className="m-1">
+                        <DatePicker />
+                    </div>
+                    <div className="m-1">
+                        <Station />
+                    </div>
+                    <div className="m-1">
+                        <Filter />
+                    </div>
+                    <div className="m-1">
+                        <Sort />
+                    </div>
+                </Col>
+            </Row>
+        </Container>
+    )
 }
 
-export default App;
+export default App
+
