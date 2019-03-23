@@ -1,45 +1,50 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import Select from 'react-select'
-import {
-    Row,
-    Col,
-} from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import * as Icon from 'react-feather'
 
-import {
-    SET_STATION,
-} from '../constants/actionTypes'
-import {
-    START_STATION,
-    END_STATION,
-} from '../constants/enums'
+import { SET_START_STATION, SET_END_STATION } from '../constants/actionTypes'
+import { START_STATION, END_STATION, STATIONS } from '../constants/keys'
+import { stations } from '../data/stations'
 
 const mapStateToProps = state => ({
-    selectedOption: 'ChangHua',
-    options: [
-        {value: 'ChangHua', label: '彰化'},
-        {value: 'Taichung', label: '臺中'},
-        {value: 'Kaushung', label: '高雄'},
-    ]
+    [START_STATION]: state.station[START_STATION],
+    [END_STATION]: state.station[END_STATION],
+    [STATIONS]: state.station[STATIONS],
 })
 
-const mapDispatchToProps = dispatch => null
+const mapDispatchToProps = dispatch => ({
+    onChangeStartStation: event => (
+        dispatch({
+            type: SET_START_STATION,
+            payload: {
+                [START_STATION]: event.value,
+            }
+        })
+    ),
+    onChangeEndStation: event => (
+        dispatch({
+            type: SET_END_STATION,
+            payload: {
+                [END_STATION]: event.value,
+            }
+        })
+    )
+})
 
 const Station = props => {
-    const selectedOption = 'ChangHua'
-    const options = [
-        {value: 'ChangHua', label: '彰化'},
-        {value: 'Taichung', label: '臺中'},
-        {value: 'Kaushung', label: '高雄'},
-    ]
+    const startStation = props[START_STATION]
+    const endStation = props[END_STATION]
+    const options = props[STATIONS]
 
     return (
         <Row>
             <Col>
                 <Select
-                  value={ selectedOption }
+                  defaultValue={ startStation }
                   options={ options }
+                  onChange={props.onChangeStartStation}
                 />
             </Col>
             <Col xs={1} className="align-content-center justify-content-center p-0">
@@ -47,8 +52,9 @@ const Station = props => {
             </Col>
             <Col>
                 <Select
-                  value={ selectedOption }
+                  defaultValue={ endStation }
                   options={ options }
+                  onChange={props.onChangeEndStation}
                 />
             </Col>
         </Row>

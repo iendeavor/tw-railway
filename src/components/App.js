@@ -6,10 +6,10 @@ import {
     Col
 } from 'react-bootstrap'
 
-import Station from './components/Station'
-import DatePicker from './components/DatePicker'
-import Filter from './components/Filter'
-import Sort from './components/Sort'
+import Station from './Station'
+import DatePicker from './DatePicker'
+import Filter from './Filter'
+import Sort from './Sort'
 
 class App extends Component {
     constructor(props) {
@@ -30,6 +30,7 @@ class App extends Component {
                         <div className="m-1">
                             <Filter />
                         </div>
+                        <hr />
                         <div className="m-1">
                             <Sort />
                         </div>

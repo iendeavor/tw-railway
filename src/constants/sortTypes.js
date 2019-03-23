@@ -13,16 +13,16 @@ export const LABEL = {
         [CHEAP_COST]: '票價',
         [SMALL_TRANSFER]: '轉乘次數',
         [FIRST]: {
-            [ARRIVE]: '最晚優先',
-            [DEPARTURE]: '最早優先',
-            [CHEAP_COST]: '便宜優先',
-            [SMALL_TRANSFER]: '最少優先',
+            [ARRIVE]: '最晚',
+            [DEPARTURE]: '最早',
+            [CHEAP_COST]: '便宜',
+            [SMALL_TRANSFER]: '最少',
         },
         [LAST]: {
-            [ARRIVE]: '最早優先',
-            [DEPARTURE]: '最晚優先',
-            [CHEAP_COST]: '最貴優先',
-            [SMALL_TRANSFER]: '最多優先',
+            [ARRIVE]: '最早',
+            [DEPARTURE]: '最晚',
+            [CHEAP_COST]: '昂貴',
+            [SMALL_TRANSFER]: '最多',
         }
     }
 }

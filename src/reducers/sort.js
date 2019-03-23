@@ -35,7 +35,6 @@ export default (state = {}, action) => {
         default:
             break
     }
-    console.log(next)
 
     return next
 }

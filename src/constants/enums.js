@@ -1,3 +1,0 @@
-export const START_STATION = 'START_STATION'
-export const END_STATION = 'END_STATION'
-
