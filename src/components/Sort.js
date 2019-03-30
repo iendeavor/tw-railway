@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, Button, FormControl, FormHelperText, InputLabel, Select } from '@material-ui/core'
+import { Grid, FormControl, InputLabel, Select } from '@material-ui/core'
 
 import {
     SET_SORT,

@@ -2,12 +2,6 @@ import {
     ADD_FILTER,
     REMOVE_FILTER,
 } from '../constants/actionTypes'
-import {
-    WHEEL_CHAIR,
-    BIKE_SPACE,
-    NURSING_ROOM,
-    LABEL,
-} from '../constants/filter'
 
 
 const defaultState = {

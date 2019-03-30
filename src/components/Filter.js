@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, FormControl, FormHelperText, MenuItem, Checkbox, ListItemText, Chip, InputLabel, Select } from '@material-ui/core'
+import { FormControl, InputLabel, Select } from '@material-ui/core'
 
 import {
     ADD_FILTER,
@@ -13,12 +13,17 @@ import {
     LABEL,
 } from '../constants/filter'
 
-const mapStateToProps = state => ({
-    selectedValues: Array.from(state.filter.selectedValues),
-})
+const mapStateToProps = state => {
+    console.log('---')
+    console.log(state.filter.selectedValues)
+    return {
+        selectedValues: Array.from(state.filter.selectedValues),
+    }
+}
 
 const mapDispatchToProps = dispatch => ({
     addFilter: value => {
+        console.log('add')
         dispatch({
             type: ADD_FILTER,
             payload: {
@@ -27,6 +32,7 @@ const mapDispatchToProps = dispatch => ({
         })
     },
     removeFilter: value=> {
+        console.log('remove')
         dispatch({
             type: REMOVE_FILTER,
             payload: {
@@ -51,29 +57,31 @@ const Filter = props => {
                 </InputLabel>
 
                 <Select
+                  native
                   multiple
                   value={ props.selectedValues }
-                  renderValue={ selected => selected.join(', ') }
                   onChange={event => {
-                    if (props.selectedValues.length < event.target.value.length) {
-                        const value = event.target.value.filter(v => props.selectedValues.indexOf(v) === -1)
-                        props.addFilter(value[0])
-                    } else {
-                        const value = props.selectedValues.filter(v => event.target.value.indexOf(v) === -1)
-                        props.removeFilter(value[0])
-                    }
+                      const value = event.target.value
+                      console.log('+++')
+                      console.log(value)
+                      if (value !== '') {
+                          if (props.selectedValues.indexOf(value) === -1) {
+                            props.addFilter(value)
+                          } else {
+                            props.removeFilter(value)
+                          }
+                      }
                   }}
                 >
                 {
                     options.map(option => {
                         return (
-                            <MenuItem
+                            <option
                               key={option.value}
                               value={option.value}
                             >
-                                <Checkbox checked={ props.selectedValues.indexOf(option.value) > -1 } />
-                                <ListItemText primary={option.label} />
-                            </MenuItem>
+                                {option.label}
+                            </option>
                         )
                     })
                 }

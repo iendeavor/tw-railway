@@ -1,11 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
-import { Grid, FormControl, FormHelperText, InputLabel, Select } from '@material-ui/core'
-import * as Icon from 'react-feather'
+import { Grid, FormControl, InputLabel, Select } from '@material-ui/core'
 
 import { SET_START_STATION, SET_END_STATION } from '../constants/actionTypes'
 import { START_STATION, END_STATION, STATIONS } from '../constants/keys'
-import { stations } from '../resources/stations'
 
 const mapStateToProps = state => ({
     [START_STATION]: state.station[START_STATION],

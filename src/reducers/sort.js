@@ -8,11 +8,7 @@ import {
 } from '../constants/keys'
 import {
     ARRIVAL,
-    DEPARTURE,
-    CHEAP_COST,
-    SMALL_TRANSFER,
     FIRST,
-    LAST,
 } from '../constants/sortTypes'
 
 const defaultState = {
