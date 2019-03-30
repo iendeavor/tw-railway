@@ -3,11 +3,36 @@ import { connect } from 'react-redux'
 import Select from 'react-select'
 
 import {
+    ADD_FILTER,
+    REMOVE_FILTER,
+} from '../constants/actionTypes'
+import {
     WHEEL_CHAIR,
     BIKE_SPACE,
     NURSING_ROOM,
     LABEL,
 } from '../constants/filter'
+
+const mapStateToProps = state => ({
+    [WHEEL_CHAIR]: state[WHEEL_CHAIR],
+    [BIKE_SPACE]: state[BIKE_SPACE],
+    [NURSING_ROOM]: state[NURSING_ROOM],
+})
+
+const mapDispatchToProps = dispatch => ({
+    onAddFilter: event => dispatch({
+        type: ADD_FILTER,
+        payload: {
+            [event.value]: true,
+        }
+    }),
+    onRemoveFilter: event => dispatch({
+        type: REMOVE_FILTER,
+        payload: {
+            [event.value]: false,
+        }
+    }),
+})
 
 const Filter = props => {
     const options = [
@@ -18,6 +43,7 @@ const Filter = props => {
 
     return (
         <Select
+          isSearchable={ false }
           closeMenuOnSelect={false}
           isMulti
           options={options}
@@ -25,5 +51,5 @@ const Filter = props => {
     )
 }
 
-export default Filter
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)
 

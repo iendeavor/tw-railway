@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Select from 'react-select'
+import { FormControl, FormHelperText, InputLabel, Select } from '@material-ui/core'
 import {
     Row,
     Col,
@@ -65,11 +65,28 @@ const Sort = props => {
         <div>
             <Row>
                 <Col className="pr-1">
-                    <Select
-                      defaultValue={selectedSort}
-                      options={options}
-                      onChange={props.onChangeSort}
-                    />
+                    <FormControl required>
+                        <InputLabel htmlFor="sort-required">
+                            Sort by
+                        </InputLabel>
+
+                        <Select
+                          native
+                          isSearchable={ false }
+                          defaultValue={selectedSort}
+                          onChange={props.onChangeSort}
+                        >
+                        {
+                            options.map(option => {
+                                return (
+                                    <option value={option.value}>
+                                        {option.label}
+                                    </option>
+                                )
+                            })
+                        }
+                        </Select>
+                    </FormControl>
                 </Col>
 
                 <Col className="pl-1">

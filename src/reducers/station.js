@@ -7,7 +7,7 @@ import {
     END_STATION,
     STATIONS,
 } from '../constants/keys'
-import { stations } from '../data/stations'
+import { stations } from '../resources/stations'
 
 
 const options = stations.map(station => {

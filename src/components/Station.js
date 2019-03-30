@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import Select from 'react-select'
 import { Row, Col } from 'react-bootstrap'
+import { FormControl, FormHelperText, InputLabel, Select } from '@material-ui/core'
 import * as Icon from 'react-feather'
 
 import { SET_START_STATION, SET_END_STATION } from '../constants/actionTypes'
 import { START_STATION, END_STATION, STATIONS } from '../constants/keys'
-import { stations } from '../data/stations'
+import { stations } from '../resources/stations'
 
 const mapStateToProps = state => ({
     [START_STATION]: state.station[START_STATION],
@@ -41,21 +41,53 @@ const Station = props => {
     return (
         <Row>
             <Col>
-                <Select
-                  defaultValue={ startStation }
-                  options={ options }
-                  onChange={props.onChangeStartStation}
-                />
-            </Col>
-            <Col xs={1} className="align-content-center justify-content-center p-0">
-                <Icon.ArrowRight/>
+                <FormControl required>
+                    <InputLabel htmlFor="from-required">
+                        From
+                    </InputLabel>
+
+                    <Select
+                      native
+                      isSearchable={ false }
+                      defaultValue={ startStation }
+                      options={ options }
+                      onChange={props.onChangeStartStation}
+                    >
+                    {
+                        options.map(option => {
+                            return (
+                                <option value={option.value}>
+                                    {option.label}
+                                </option>
+                            )
+                        })
+                    }
+                    </Select>
+                </FormControl>
             </Col>
             <Col>
-                <Select
-                  defaultValue={ endStation }
-                  options={ options }
-                  onChange={props.onChangeEndStation}
-                />
+                <FormControl required>
+                    <InputLabel htmlFor="to-required">
+                        to
+                    </InputLabel>
+
+                    <Select
+                      native
+                      isSearchable={ false }
+                      defaultValue={ endStation }
+                      onChange={props.onChangeStartStation}
+                    >
+                    {
+                        options.map(option => {
+                            return (
+                                <option value={option.value}>
+                                    {option.label}
+                                </option>
+                            )
+                        })
+                    }
+                    </Select>
+                </FormControl>
             </Col>
         </Row>
     )

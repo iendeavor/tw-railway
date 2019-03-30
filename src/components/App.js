@@ -18,7 +18,7 @@ class App extends Component {
 
     render() {
         return (
-            <Container>
+            <Container className="p-0">
                 <Row className="justify-content-center">
                     <Col xs={12} sm={10} md={8} lg={6}>
                         <div className="m-1">
