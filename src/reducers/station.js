@@ -23,7 +23,7 @@ const default_state = {
     [STATIONS]: options,
 }
 
-export default (state = default_state, action) => {
+export default (state=default_state, action) => {
     const next = {...state}
 
     switch (action.type) {

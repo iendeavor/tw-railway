@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { FormControl, FormHelperText, InputLabel, Select } from '@material-ui/core'
-import {
-    Row,
-    Col,
-    ButtonToolbar,
-    ButtonGroup,
-    Button
-} from 'react-bootstrap'
+import { Grid, Button, FormControl, FormHelperText, InputLabel, Select } from '@material-ui/core'
 
 import {
     SET_SORT,
@@ -18,7 +11,7 @@ import {
     ORDER_BY,
 } from '../constants/keys'
 import {
-    ARRIVE,
+    ARRIVAL,
     DEPARTURE,
     CHEAP_COST,
     SMALL_TRANSFER,
@@ -38,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
     onChangeSort: event => dispatch({
         type: SET_SORT,
         payload: {
-            [SORT_BY]: event.value
+            [SORT_BY]: event.target.value
         }
     }),
     onChangeOrder: event => dispatch({
@@ -51,67 +44,74 @@ const mapDispatchToProps = dispatch => ({
 
 const Sort = props => {
     const selectedSort = props[SORT_BY]
-    const options = [
-        {value: ARRIVE, label: LABEL.tw[ARRIVE]},
+    const selectedOrder = props[ORDER_BY]
+    const sortOptions = [
+        {value: ARRIVAL, label: LABEL.tw[ARRIVAL]},
         {value: DEPARTURE, label: LABEL.tw[DEPARTURE]},
         {value: CHEAP_COST, label: LABEL.tw[CHEAP_COST]},
         {value: SMALL_TRANSFER, label: LABEL.tw[SMALL_TRANSFER]},
     ]
-    const first = LABEL.tw[FIRST][props[SORT_BY]]
-    const last = LABEL.tw[LAST][props[SORT_BY]]
-    const selectedOrder = props[ORDER_BY]
+    const orderOptions = [
+        {value: FIRST, label: LABEL.tw[FIRST][props[SORT_BY]]},
+        {value: LAST, label: LABEL.tw[LAST][props[SORT_BY]]},
+    ]
 
     return (
-        <div>
-            <Row>
-                <Col className="pr-1">
-                    <FormControl required>
-                        <InputLabel htmlFor="sort-required">
-                            Sort by
-                        </InputLabel>
+        <Grid container>
+            <Grid item xs={6}>
+                <FormControl>
+                    <InputLabel htmlFor="sort-required">
+                        Sort by
+                    </InputLabel>
 
-                        <Select
-                          native
-                          isSearchable={ false }
-                          defaultValue={selectedSort}
-                          onChange={props.onChangeSort}
-                        >
-                        {
-                            options.map(option => {
-                                return (
-                                    <option value={option.value}>
-                                        {option.label}
-                                    </option>
-                                )
-                            })
-                        }
-                        </Select>
-                    </FormControl>
-                </Col>
+                    <Select
+                      native
+                      defaultValue={selectedSort}
+                      onChange={props.onChangeSort}
+                    >
+                    {
+                        sortOptions.map(option => {
+                            return (
+                                <option
+                                  key={option.value}
+                                  value={option.value}
+                                >
+                                    {option.label}
+                                </option>
+                            )
+                        })
+                    }
+                    </Select>
+                </FormControl>
+            </Grid>
 
-                <Col className="pl-1">
-                    <ButtonToolbar aria-label="Toolbar with button groups">
-                        <ButtonGroup className="w-100">
-                            <Button
-                              value={LAST}
-                              variant={selectedOrder === LAST ? 'primary' : 'secondary'}
-                              onClick={props.onChangeOrder}
-                            >
-                                {last}
-                            </Button>
+            <Grid item xs={6}>
+                <FormControl>
+                    <InputLabel htmlFor="order-required">
+                        Order by
+                    </InputLabel>
 
-                            <Button
-                              value={FIRST}
-                              variant={selectedOrder === FIRST ? 'primary' : 'secondary'}
-                              onClick={props.onChangeOrder}
-                            >
-                                {first}
-                            </Button>
-                        </ButtonGroup>
-                    </ButtonToolbar>
-                </Col>
-            </Row>
-        </div>
+                    <Select
+                      native
+                      defaultValue={selectedOrder}
+                      onChange={props.onChangeOrder}
+                    >
+                    {
+                        orderOptions.map(option => {
+                            return (
+                                <option
+                                  key={option.value}
+                                  value={option.value}
+                                >
+                                    {option.label}
+                                </option>
+                            )
+                        })
+                    }
+                    </Select>
+                </FormControl>
+            </Grid>
+        </Grid>
     )
 }
 

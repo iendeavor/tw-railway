@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
-import { FormControl, FormHelperText, InputLabel, Select } from '@material-ui/core'
+import { Grid, FormControl, FormHelperText, InputLabel, Select } from '@material-ui/core'
 import * as Icon from 'react-feather'
 
 import { SET_START_STATION, SET_END_STATION } from '../constants/actionTypes'
@@ -39,24 +38,25 @@ const Station = props => {
     const options = props[STATIONS]
 
     return (
-        <Row>
-            <Col>
-                <FormControl required>
+        <Grid container>
+            <Grid item xs={6}>
+                <FormControl>
                     <InputLabel htmlFor="from-required">
                         From
                     </InputLabel>
 
                     <Select
                       native
-                      isSearchable={ false }
                       defaultValue={ startStation }
-                      options={ options }
                       onChange={props.onChangeStartStation}
                     >
                     {
                         options.map(option => {
                             return (
-                                <option value={option.value}>
+                                <option
+                                  key={option.value}
+                                  value={option.value}
+                                >
                                     {option.label}
                                 </option>
                             )
@@ -64,23 +64,26 @@ const Station = props => {
                     }
                     </Select>
                 </FormControl>
-            </Col>
-            <Col>
-                <FormControl required>
+            </Grid>
+
+            <Grid item xs={6}>
+                <FormControl>
                     <InputLabel htmlFor="to-required">
-                        to
+                        To
                     </InputLabel>
 
                     <Select
                       native
-                      isSearchable={ false }
                       defaultValue={ endStation }
                       onChange={props.onChangeStartStation}
                     >
                     {
                         options.map(option => {
                             return (
-                                <option value={option.value}>
+                                <option
+                                  key={option.value}
+                                  value={option.value}
+                                >
                                     {option.label}
                                 </option>
                             )
@@ -88,8 +91,8 @@ const Station = props => {
                     }
                     </Select>
                 </FormControl>
-            </Col>
-        </Row>
+            </Grid>
+        </Grid>
     )
 }
 

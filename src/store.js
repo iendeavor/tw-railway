@@ -6,15 +6,11 @@ import {
     ORDER_BY,
 } from './constants/keys'
 import {
-    ARRIVE,
+    ARRIVAL,
     FIRST,
 } from './constants/sortTypes'
 
 const default_state = {
-    sort: {
-        [SORT_BY]: ARRIVE,
-        [ORDER_BY]: FIRST,
-    },
 }
 
 const store = createStore(

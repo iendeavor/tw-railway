@@ -6,13 +6,15 @@
     "filter.bike_parking": "自行車位",
 
     "sort.arrival": "離站時間",
-    "sort.departure": "到站時間",
+    "sort.departure": "抵達時間",
+    "sort.cost": "票價",
+    "sort.transfer": "轉乘次數",
 
     "train_type.puyuma": "普悠瑪",
     "train_type.taroko": "太魯閣",
-    "train_type.tze_chiang_limited_express": "自強號",
-    "train_type.chu_kuang_express": "莒光號",
-    "train_type.fu_hsing_semi_express": "復興號",
+    "train_type.limited_express": "自強號",
+    "train_type.express": "莒光號",
+    "train_type.semi_express": "復興號",
     "train_type.local_train": "區間車",
     "train_type.ordinary_train": "普快車",
 

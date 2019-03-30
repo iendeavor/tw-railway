@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Select from 'react-select'
+import { Grid, FormControl, FormHelperText, MenuItem, Checkbox, ListItemText, Chip, InputLabel, Select } from '@material-ui/core'
 
 import {
     ADD_FILTER,
@@ -14,24 +14,26 @@ import {
 } from '../constants/filter'
 
 const mapStateToProps = state => ({
-    [WHEEL_CHAIR]: state[WHEEL_CHAIR],
-    [BIKE_SPACE]: state[BIKE_SPACE],
-    [NURSING_ROOM]: state[NURSING_ROOM],
+    selectedValues: Array.from(state.filter.selectedValues),
 })
 
 const mapDispatchToProps = dispatch => ({
-    onAddFilter: event => dispatch({
-        type: ADD_FILTER,
-        payload: {
-            [event.value]: true,
-        }
-    }),
-    onRemoveFilter: event => dispatch({
-        type: REMOVE_FILTER,
-        payload: {
-            [event.value]: false,
-        }
-    }),
+    addFilter: value => {
+        dispatch({
+            type: ADD_FILTER,
+            payload: {
+                value: value
+            }
+        })
+    },
+    removeFilter: value=> {
+        dispatch({
+            type: REMOVE_FILTER,
+            payload: {
+                value: value
+            }
+        })
+    },
 })
 
 const Filter = props => {
@@ -42,12 +44,42 @@ const Filter = props => {
     ]
 
     return (
-        <Select
-          isSearchable={ false }
-          closeMenuOnSelect={false}
-          isMulti
-          options={options}
-        />
+        <React.Fragment>
+            <FormControl>
+                <InputLabel shrink htmlFor="filter-required">
+                    Filter
+                </InputLabel>
+
+                <Select
+                  multiple
+                  value={ props.selectedValues }
+                  renderValue={ selected => selected.join(', ') }
+                  onChange={event => {
+                    if (props.selectedValues.length < event.target.value.length) {
+                        const value = event.target.value.filter(v => props.selectedValues.indexOf(v) === -1)
+                        props.addFilter(value[0])
+                    } else {
+                        const value = props.selectedValues.filter(v => event.target.value.indexOf(v) === -1)
+                        props.removeFilter(value[0])
+                    }
+                  }}
+                >
+                {
+                    options.map(option => {
+                        return (
+                            <MenuItem
+                              key={option.value}
+                              value={option.value}
+                            >
+                                <Checkbox checked={ props.selectedValues.indexOf(option.value) > -1 } />
+                                <ListItemText primary={option.label} />
+                            </MenuItem>
+                        )
+                    })
+                }
+                </Select>
+            </FormControl>
+        </React.Fragment>
     )
 }
 

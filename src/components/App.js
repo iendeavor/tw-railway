@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-    Container,
-    Row,
-    Col
-} from 'react-bootstrap'
+import { Grid } from '@material-ui/core'
 
 import Station from './Station'
-import DatePicker from './DatePicker'
+import Date from './Date'
 import Filter from './Filter'
 import Sort from './Sort'
 
@@ -18,25 +14,23 @@ class App extends Component {
 
     render() {
         return (
-            <Container className="p-0">
-                <Row className="justify-content-center">
-                    <Col xs={12} sm={10} md={8} lg={6}>
-                        <div className="m-1">
-                            <DatePicker />
-                        </div>
-                        <div className="m-1">
-                            <Station />
-                        </div>
-                        <div className="m-1">
-                            <Filter />
-                        </div>
-                        <hr />
-                        <div className="m-1">
-                            <Sort />
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
+            <Grid container>
+                <Grid item xs={12} sm={6}>
+                    <Date />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                    <Station />
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                    <Filter />
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                    <Sort />
+                </Grid>
+            </Grid>
         )
     }
 }

@@ -7,7 +7,7 @@ import {
     ORDER_BY,
 } from '../constants/keys'
 import {
-    ARRIVE,
+    ARRIVAL,
     DEPARTURE,
     CHEAP_COST,
     SMALL_TRANSFER,
@@ -15,15 +15,13 @@ import {
     LAST,
 } from '../constants/sortTypes'
 
+const defaultState = {
+    [SORT_BY]: ARRIVAL,
+    [ORDER_BY]: FIRST,
+}
 
-export default (state = {}, action) => {
+export default (state=defaultState, action) => {
     const next = {...state}
-    if (next[SORT_BY] === undefined) {
-        next[SORT_BY] = ARRIVE
-    }
-    if (next[ORDER_BY] === undefined) {
-        next[ORDER_BY] = FIRST
-    }
 
     switch (action.type) {
         case SET_SORT:

@@ -10,18 +10,19 @@ import {
 } from '../constants/filter'
 
 
-export default (state = {}, action) => {
+const defaultState = {
+    selectedValues: new Set(),
+}
+
+export default (state=defaultState, action) => {
     const next = {...state}
-    if (next.chooses === undefined) {
-        next.chooses = new Set()
-    }
 
     switch (action.type) {
         case ADD_FILTER:
-            next.chooses.add(action.payload.filter)
+            next.selectedValues.add(action.payload.value)
             break
         case REMOVE_FILTER:
-            delete action.payload['key']
+            next.selectedValues.delete(action.payload.value)
             break
         default:
             break
