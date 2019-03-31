@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, Card, Button, Breadcrumbs, Link } from '@material-ui/core'
+import { Grid, Card, Breadcrumbs, Link } from '@material-ui/core'
 
 import { LIMITED_EXPRESS, EXPRESS } from '../constants/train'
 import { WHEEL_CHAIR } from '../constants/filter'
@@ -47,9 +47,10 @@ const mapDispatchToProps = dispatch => {
 }
 
 const Schedule = props => {
-    const via = props.station.via.map( v => (
+    const via = props.station.via.map((v, i) => (
         <Grid
           container
+          key={i}
         >
             <Grid
               item
@@ -77,7 +78,7 @@ const Schedule = props => {
 
     return (
         <Card
-          style={{width: '100%', 'background-color': '#eee'}}
+          style={ {width: '100%'} }
         >
             {via}
         </Card>

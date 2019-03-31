@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, FormControl, FormHelperText, MenuItem, Checkbox, ListItemText, Chip, InputLabel, Select } from '@material-ui/core'
+import { Grid, Button, InputLabel } from '@material-ui/core'
 
 import {
     ADD_FILTER,
@@ -13,28 +13,44 @@ import {
     LABEL,
 } from '../constants/filter'
 
-const mapStateToProps = state => ({
-    selectedValues: Array.from(state.filter.selectedValues),
-})
+const mapStateToProps = state => {
+    return {
+       selectedValues: Array.from(state.filter.selectedValues),
+    }
+}
 
-const mapDispatchToProps = dispatch => ({
-    addFilter: value => {
-        dispatch({
-            type: ADD_FILTER,
-            payload: {
-                value: value
-            }
-        })
-    },
-    removeFilter: value=> {
-        dispatch({
-            type: REMOVE_FILTER,
-            payload: {
-                value: value
-            }
-        })
-    },
-})
+const mapDispatchToProps = dispatch => {
+    return {
+        handleAddingFilter: value => {
+            dispatch({
+                type: ADD_FILTER,
+                payload: {
+                    value: value,
+                },
+                meta: {
+                    debounce: {
+                        time: 300,
+                        leading: true,
+                    },
+                },
+            })
+        },
+        handleRemovingFilter: value=> {
+            dispatch({
+                type: REMOVE_FILTER,
+                payload: {
+                    value: value,
+                },
+                meta: {
+                    debounce: {
+                        time: 300,
+                        leading: true,
+                    },
+                },
+            })
+        },
+    }
+}
 
 const Filter = props => {
     const options = [
@@ -44,46 +60,39 @@ const Filter = props => {
     ]
 
     return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-        >
-            <FormControl style={{width: '100%'}}>
-                <InputLabel shrink htmlFor="filter-required">
-                    Filter
-                </InputLabel>
+        <React.Fragment>
+            <InputLabel shrink>
+                Must have
+            </InputLabel>
 
-                <Select
-                  multiple
-                  value={ props.selectedValues }
-                  renderValue={ selected => selected.join(', ') }
-                  onChange={event => {
-                    if (props.selectedValues.length < event.target.value.length) {
-                        const value = event.target.value.filter(v => props.selectedValues.indexOf(v) === -1)
-                        props.addFilter(value[0])
-                    } else {
-                        const value = props.selectedValues.filter(v => event.target.value.indexOf(v) === -1)
-                        props.removeFilter(value[0])
-                    }
-                  }}
-                >
-                {
-                    options.map(option => {
-                        return (
-                            <MenuItem
-                              key={option.value}
-                              value={option.value}
-                            >
-                                <Checkbox checked={ props.selectedValues.indexOf(option.value) > -1 } />
-                                <ListItemText primary={option.label} />
-                            </MenuItem>
-                        )
-                    })
-                }
-                </Select>
-            </FormControl>
-        </Grid>
+            <Grid
+              container
+            >
+            {
+                options.map(option => (
+                    <Grid
+                      item
+                      key={ option.value }
+                    >
+                        <Button
+                          size='small'
+                          variant={ props.selectedValues.indexOf(option.value) === -1 ? 'outlined' : 'contained' }
+                          color='primary'
+                          onClick={ _ => {
+                              if (props.selectedValues.indexOf(option.value) === -1) {
+                                  props.handleAddingFilter(option.value)
+                              } else {
+                                  props.handleRemovingFilter(option.value)
+                              }
+                          }}
+                        >
+                            { option.label }
+                        </Button>
+                    </Grid>
+                ))
+            }
+            </Grid>
+        </React.Fragment>
     )
 }
 

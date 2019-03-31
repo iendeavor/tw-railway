@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, FormControl, InputLabel, Select } from '@material-ui/core'
+import { Grid, InputLabel, Button } from '@material-ui/core'
 
 import {
     SET_SORT,
@@ -27,20 +27,38 @@ const mapStateToProps = state => {
     }
 };
 
-const mapDispatchToProps = dispatch => ({
-    onChangeSort: event => dispatch({
-        type: SET_SORT,
-        payload: {
-            [SORT_BY]: event.target.value
-        }
-    }),
-    onChangeOrder: event => dispatch({
-        type: SET_ORDER,
-        payload: {
-            [ORDER_BY]: event.target.value
-        }
-    })
-})
+const mapDispatchToProps = dispatch => {
+    return {
+        handleChangeSort: value => {
+            dispatch({
+                type: SET_SORT,
+                payload: {
+                    [SORT_BY]: value,
+                },
+                meta: {
+                    debounce: {
+                        time: 300,
+                        leading: true,
+                    },
+                },
+            })
+        },
+        handleChangeOrder: value => {
+            dispatch({
+                type: SET_ORDER,
+                payload: {
+                    [ORDER_BY]: value,
+                },
+                meta: {
+                    debounce: {
+                        time: 300,
+                        leading: true,
+                    },
+                },
+            })
+        },
+    }
+}
 
 const Sort = props => {
     const selectedSort = props[SORT_BY]
@@ -59,62 +77,63 @@ const Sort = props => {
     return (
         <Grid
           container
-          justify="center"
-          alignItems="center"
+          spacing={1}
         >
-            <FormControl
-              style={{width: '50%'}}
+            <Grid
+              item
             >
-                <InputLabel htmlFor="sort-required">
-                    Sort by
+                <InputLabel shrink>
+                    Sort
                 </InputLabel>
 
-                <Select
-                  native
-                  defaultValue={selectedSort}
-                  onChange={props.onChangeSort}
+                <Grid
+                  container
                 >
                 {
-                    sortOptions.map(option => {
-                        return (
-                            <option
-                              key={option.value}
-                              value={option.value}
-                            >
-                                {option.label}
-                            </option>
-                        )
-                    })
+                    sortOptions.map(option => (
+                        <Button
+                          size="small"
+                          key={ option.value }
+                          variant={ selectedSort === option.value ? 'contained' : 'outlined' }
+                          color='primary'
+                          onClick={ _ => {
+                              props.handleChangeSort(option.value)
+                          }}
+                        >
+                            { option.label }
+                        </Button>
+                    ))
                 }
-                </Select>
-            </FormControl>
+                </Grid>
+            </Grid>
 
-            <FormControl
-              style={{width: '50%'}}
+            <Grid
+              item
             >
-                <InputLabel htmlFor="order-required">
-                    Order by
+                <InputLabel shrink>
+                    Primary
                 </InputLabel>
 
-                <Select
-                  native
-                  defaultValue={selectedOrder}
-                  onChange={props.onChangeOrder}
+                <Grid
+                  container
                 >
                 {
-                    orderOptions.map(option => {
-                        return (
-                            <option
-                              key={option.value}
-                              value={option.value}
-                            >
-                                {option.label}
-                            </option>
-                        )
-                    })
+                    orderOptions.map(option => (
+                        <Button
+                          size="small"
+                          key={ option.value }
+                          variant={ selectedOrder === option.value ? 'contained' : 'outlined' }
+                          color='primary'
+                          onClick={ _ => {
+                              props.handleChangeOrder(option.value)
+                          }}
+                        >
+                            { option.label }
+                        </Button>
+                    ))
                 }
-                </Select>
-            </FormControl>
+                </Grid>
+            </Grid>
         </Grid>
     )
 }

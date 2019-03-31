@@ -1,34 +1,50 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Grid, FormControl, InputLabel, Select } from '@material-ui/core'
+import { Button, Grid, InputLabel, Select } from '@material-ui/core'
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 
-import { SET_START_STATION, SET_END_STATION } from '../constants/actionTypes'
+import { SWAP_STATION, SET_START_STATION, SET_END_STATION } from '../constants/actionTypes'
 import { START_STATION, END_STATION, STATIONS } from '../constants/keys'
 
-const mapStateToProps = state => ({
-    [START_STATION]: state.station[START_STATION],
-    [END_STATION]: state.station[END_STATION],
-    [STATIONS]: state.station[STATIONS],
-})
+const mapStateToProps = state => {
+    return {
+        [START_STATION]: state.station[START_STATION],
+        [END_STATION]: state.station[END_STATION],
+        [STATIONS]: state.station[STATIONS],
+    }
+}
 
-const mapDispatchToProps = dispatch => ({
-    onChangeStartStation: event => (
-        dispatch({
-            type: SET_START_STATION,
-            payload: {
-                [START_STATION]: event.value,
-            }
-        })
-    ),
-    onChangeEndStation: event => (
-        dispatch({
-            type: SET_END_STATION,
-            payload: {
-                [END_STATION]: event.value,
-            }
-        })
-    )
-})
+const mapDispatchToProps = dispatch => {
+    return {
+        handleChangeStartStation: event => {
+            dispatch({
+                type: SET_START_STATION,
+                payload: {
+                    [START_STATION]: event.target.value,
+                },
+            })
+        },
+        handleChangeEndStation: event => {
+            dispatch({
+                type: SET_END_STATION,
+                payload: {
+                    [END_STATION]: event.target.value,
+                },
+            })
+        },
+        handleSwapStation: event => {
+            dispatch({
+                type: SWAP_STATION,
+                meta: {
+                    debounce: {
+                        time: 300,
+                        leading: true,
+                    },
+                },
+            })
+        },
+    }
+}
 
 const Station = props => {
     const startStation = props[START_STATION]
@@ -38,18 +54,21 @@ const Station = props => {
     return (
         <Grid
           container
-          justify="center"
-          alignItems="center"
+          alignItems="flex-end"
+          spacing={1}
         >
-            <FormControl style={{width: '50%'}}>
-                <InputLabel htmlFor="from-required">
+            <Grid
+              item
+            >
+                <InputLabel shrink>
                     From
                 </InputLabel>
 
                 <Select
                   native
+                  key={ startStation }
                   defaultValue={ startStation }
-                  onChange={props.onChangeStartStation}
+                  onChange={ props.handleChangeStartStation }
                 >
                 {
                     options.map(option => {
@@ -64,17 +83,30 @@ const Station = props => {
                     })
                 }
                 </Select>
-            </FormControl>
+            </Grid>
 
-            <FormControl style={{width: '50%'}}>
-                <InputLabel htmlFor="to-required">
+            <Grid
+              item
+            >
+                <Button
+                  onClick={props.handleSwapStation}
+                >
+                    <SwapHorizIcon />
+                </Button>
+            </Grid>
+
+            <Grid
+              item
+            >
+                <InputLabel shrink>
                     To
                 </InputLabel>
 
                 <Select
                   native
+                  key={ endStation }
                   defaultValue={ endStation }
-                  onChange={props.onChangeStartStation}
+                  onChange={ props.handleChangeEndStation }
                 >
                 {
                     options.map(option => {
@@ -89,7 +121,7 @@ const Station = props => {
                     })
                 }
                 </Select>
-            </FormControl>
+            </Grid>
         </Grid>
     )
 }

@@ -1,3 +1,4 @@
+export const SWAP_STATION      = Symbol()
 export const SET_START_STATION = Symbol()
 export const SET_END_STATION   = Symbol()
 export const SET_DATE          = Symbol()

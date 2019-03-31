@@ -3,7 +3,7 @@ import src from './stations.json'
 export const stations = Object.freeze(
     src.map(station => {
         return {
-            id: station['StationID'],
+            id: station['StationID'] + '',
             name: station['StationName']['Zh_tw'],
         }
     })

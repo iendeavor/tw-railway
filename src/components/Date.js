@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, TextField, Button } from '@material-ui/core';
+import { InputLabel, Grid, TextField, Button } from '@material-ui/core';
 import 'react-datepicker/dist/react-datepicker.css'
 
 import { SET_DATE } from '../constants/actionTypes'
 
 
 const toYYYYMMDD = date => date.toISOString().slice(0, 10)
+const getToday = () => new Date()
+const getTomorrow = () => new Date(getToday() / 1 + (86400 * 1000))
 
 const mapStateToProps = state => {
     return {
@@ -22,24 +24,39 @@ const mapDispatchToProps = dispatch => {
                 payload: {
                     date: new Date(event.target.value),
                 },
+                meta: {
+                    debounce: {
+                        time: 300,
+                        leading: true,
+                    },
+                },
             })
         },
         handleSetToday: event => {
-            const today = new Date()
             dispatch({
                 type: SET_DATE,
                 payload: {
-                    date: today,
+                    date: getToday(),
+                },
+                meta: {
+                    debounce: {
+                        time: 300,
+                        leading: true,
+                    },
                 },
             })
         },
         handleSetTomorrow: event => {
-            const today = Math.floor(Date.now())
-            const tomorrow = new Date(today + 86400 * 1000)
             dispatch({
                 type: SET_DATE,
                 payload: {
-                    date: tomorrow,
+                    date: getTomorrow(),
+                },
+                meta: {
+                    debounce: {
+                        time: 300,
+                        leading: true,
+                    },
                 },
             })
         },
@@ -50,16 +67,17 @@ const Date_ = props => {
     return(
         <Grid
           container
-          justify="center"
-          alignItems="center"
+          alignItems="flex-end"
         >
             <Grid
               item
-              xs={5}
             >
+                <InputLabel shrink>
+                    Depature date
+                </InputLabel>
+
                 <TextField
                   style={{width: '100%'}}
-                  label="To date"
                   type="date"
                   value={ props.yyyymmdd }
                   onChange={ props.handleChangeDate }
@@ -68,23 +86,19 @@ const Date_ = props => {
 
             <Grid
               item
-              xs={7}
             >
                 <Button
-                  style={{width: '50%'}}
-                  variant="outlined"
+                  variant={ props.yyyymmdd === toYYYYMMDD(getToday())? 'contained' : 'outlined' }
                   size="small"
-                  color="primary"
+                  color='primary'
                   onClick={ props.handleSetToday }
                 >
                     Today
                 </Button>
-
                 <Button
-                  style={{width: '50%'}}
-                  variant="outlined"
+                  variant={ props.yyyymmdd === toYYYYMMDD(getTomorrow())? 'contained' : 'outlined' }
                   size="small"
-                  color="primary"
+                  color='primary'
                   onClick={ props.handleSetTomorrow }
                 >
                     Tomorrow
