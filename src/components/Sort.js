@@ -57,60 +57,64 @@ const Sort = props => {
     ]
 
     return (
-        <Grid container>
-            <Grid item xs={6}>
-                <FormControl>
-                    <InputLabel htmlFor="sort-required">
-                        Sort by
-                    </InputLabel>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+        >
+            <FormControl
+              style={{width: '50%'}}
+            >
+                <InputLabel htmlFor="sort-required">
+                    Sort by
+                </InputLabel>
 
-                    <Select
-                      native
-                      defaultValue={selectedSort}
-                      onChange={props.onChangeSort}
-                    >
-                    {
-                        sortOptions.map(option => {
-                            return (
-                                <option
-                                  key={option.value}
-                                  value={option.value}
-                                >
-                                    {option.label}
-                                </option>
-                            )
-                        })
-                    }
-                    </Select>
-                </FormControl>
-            </Grid>
+                <Select
+                  native
+                  defaultValue={selectedSort}
+                  onChange={props.onChangeSort}
+                >
+                {
+                    sortOptions.map(option => {
+                        return (
+                            <option
+                              key={option.value}
+                              value={option.value}
+                            >
+                                {option.label}
+                            </option>
+                        )
+                    })
+                }
+                </Select>
+            </FormControl>
 
-            <Grid item xs={6}>
-                <FormControl>
-                    <InputLabel htmlFor="order-required">
-                        Order by
-                    </InputLabel>
+            <FormControl
+              style={{width: '50%'}}
+            >
+                <InputLabel htmlFor="order-required">
+                    Order by
+                </InputLabel>
 
-                    <Select
-                      native
-                      defaultValue={selectedOrder}
-                      onChange={props.onChangeOrder}
-                    >
-                    {
-                        orderOptions.map(option => {
-                            return (
-                                <option
-                                  key={option.value}
-                                  value={option.value}
-                                >
-                                    {option.label}
-                                </option>
-                            )
-                        })
-                    }
-                    </Select>
-                </FormControl>
-            </Grid>
+                <Select
+                  native
+                  defaultValue={selectedOrder}
+                  onChange={props.onChangeOrder}
+                >
+                {
+                    orderOptions.map(option => {
+                        return (
+                            <option
+                              key={option.value}
+                              value={option.value}
+                            >
+                                {option.label}
+                            </option>
+                        )
+                    })
+                }
+                </Select>
+            </FormControl>
         </Grid>
     )
 }

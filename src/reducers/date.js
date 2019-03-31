@@ -1,12 +1,10 @@
 import { SET_DATE } from '../constants/actionTypes'
 
 
-const convertToYYYYMMDD = date => (  // 1970-01-01
-    date.toISOString().substring(0, 10)
-)
+const toYYYYMMDD = date => date.toISOString().substring(0, 10)  // 1970-01-01
 
 const defaultState = {
-    value: convertToYYYYMMDD(new Date())
+    date: new Date()
 }
 
 export default (state=defaultState, action) => {
@@ -14,13 +12,12 @@ export default (state=defaultState, action) => {
 
     switch (action.type) {
         case SET_DATE:
-            if (action.payload.value !== '') {
-                const today = Math.floor(new Date(convertToYYYYMMDD(new Date())) / 1000)
-                const date = Math.floor(new Date(action.payload.value) / 1000)
-                if (date >= today) {
-                    next.value = action.payload.value
-                }
+            const today = Math.floor(new Date(toYYYYMMDD(new Date())) / 1000)
+            const date = Math.floor(action.payload.date / 1000)
+            if (date >= today) {
+                next.date = action.payload.date
             }
+            console.log(next.date)
             break
         default:
             break

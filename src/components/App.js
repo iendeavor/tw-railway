@@ -6,23 +6,46 @@ import Station from './Station'
 import Date from './Date'
 import Filter from './Filter'
 import Sort from './Sort'
+import Schedule from './Schedule'
 
 const App = props => (
-    <Grid container>
-        <Grid item xs={12} sm={6}>
+    <Grid
+      container
+      spacing={2}
+    >
+        <Grid
+          item
+          xs={12}
+        >
             <Date />
         </Grid>
 
-        <Grid item xs={12} sm={6}>
+        <Grid
+          item
+          xs={12}
+        >
             <Station />
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid
+          item
+          xs={12}
+        >
             <Filter />
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid
+          item
+          xs={12}
+        >
             <Sort />
+        </Grid>
+
+        <Grid
+          item
+          xs={12}
+        >
+            <Schedule />
         </Grid>
     </Grid>
 )

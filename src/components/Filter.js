@@ -44,8 +44,12 @@ const Filter = props => {
     ]
 
     return (
-        <React.Fragment>
-            <FormControl>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+        >
+            <FormControl style={{width: '100%'}}>
                 <InputLabel shrink htmlFor="filter-required">
                     Filter
                 </InputLabel>
@@ -79,7 +83,7 @@ const Filter = props => {
                 }
                 </Select>
             </FormControl>
-        </React.Fragment>
+        </Grid>
     )
 }
 

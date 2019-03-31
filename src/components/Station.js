@@ -36,60 +36,60 @@ const Station = props => {
     const options = props[STATIONS]
 
     return (
-        <Grid container>
-            <Grid item xs={6}>
-                <FormControl>
-                    <InputLabel htmlFor="from-required">
-                        From
-                    </InputLabel>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+        >
+            <FormControl style={{width: '50%'}}>
+                <InputLabel htmlFor="from-required">
+                    From
+                </InputLabel>
 
-                    <Select
-                      native
-                      defaultValue={ startStation }
-                      onChange={props.onChangeStartStation}
-                    >
-                    {
-                        options.map(option => {
-                            return (
-                                <option
-                                  key={option.value}
-                                  value={option.value}
-                                >
-                                    {option.label}
-                                </option>
-                            )
-                        })
-                    }
-                    </Select>
-                </FormControl>
-            </Grid>
+                <Select
+                  native
+                  defaultValue={ startStation }
+                  onChange={props.onChangeStartStation}
+                >
+                {
+                    options.map(option => {
+                        return (
+                            <option
+                              key={option.value}
+                              value={option.value}
+                            >
+                                {option.label}
+                            </option>
+                        )
+                    })
+                }
+                </Select>
+            </FormControl>
 
-            <Grid item xs={6}>
-                <FormControl>
-                    <InputLabel htmlFor="to-required">
-                        To
-                    </InputLabel>
+            <FormControl style={{width: '50%'}}>
+                <InputLabel htmlFor="to-required">
+                    To
+                </InputLabel>
 
-                    <Select
-                      native
-                      defaultValue={ endStation }
-                      onChange={props.onChangeStartStation}
-                    >
-                    {
-                        options.map(option => {
-                            return (
-                                <option
-                                  key={option.value}
-                                  value={option.value}
-                                >
-                                    {option.label}
-                                </option>
-                            )
-                        })
-                    }
-                    </Select>
-                </FormControl>
-            </Grid>
+                <Select
+                  native
+                  defaultValue={ endStation }
+                  onChange={props.onChangeStartStation}
+                >
+                {
+                    options.map(option => {
+                        return (
+                            <option
+                              key={option.value}
+                              value={option.value}
+                            >
+                                {option.label}
+                            </option>
+                        )
+                    })
+                }
+                </Select>
+            </FormControl>
         </Grid>
     )
 }
