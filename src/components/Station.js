@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { Button, Grid, InputLabel, Select } from '@material-ui/core'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 
-import { SWAP_STATION, SET_START_STATION, SET_END_STATION } from '../constants/actionTypes'
-import { START_STATION, END_STATION, STATIONS } from '../constants/keys'
+import { SWAP_STATION, SET_FROM_STATION, SET_TO_STATION } from '../constants/actionTypes'
+import { FROM_STATION, TO_STATION, STATIONS } from '../constants/keys'
 
 const mapStateToProps = state => {
     return {
-        [START_STATION]: state.station[START_STATION],
-        [END_STATION]: state.station[END_STATION],
+        [FROM_STATION]: state.station[FROM_STATION],
+        [TO_STATION]: state.station[TO_STATION],
         [STATIONS]: state.station[STATIONS],
     }
 }
@@ -18,17 +18,17 @@ const mapDispatchToProps = dispatch => {
     return {
         handleChangeStartStation: event => {
             dispatch({
-                type: SET_START_STATION,
+                type: SET_FROM_STATION,
                 payload: {
-                    [START_STATION]: event.target.value,
+                    [FROM_STATION]: event.target.value,
                 },
             })
         },
         handleChangeEndStation: event => {
             dispatch({
-                type: SET_END_STATION,
+                type: SET_TO_STATION,
                 payload: {
-                    [END_STATION]: event.target.value,
+                    [TO_STATION]: event.target.value,
                 },
             })
         },
@@ -47,15 +47,14 @@ const mapDispatchToProps = dispatch => {
 }
 
 const Station = props => {
-    const startStation = props[START_STATION]
-    const endStation = props[END_STATION]
+    const startStation = props[FROM_STATION]
+    const endStation = props[TO_STATION]
     const options = props[STATIONS]
 
     return (
         <Grid
           container
           alignItems="flex-end"
-          spacing={1}
         >
             <Grid
               item

@@ -88,20 +88,26 @@ const Sort = props => {
 
                 <Grid
                   container
+                  spacing={1}
                 >
                 {
                     sortOptions.map(option => (
-                        <Button
-                          size="small"
-                          key={ option.value }
-                          variant={ selectedSort === option.value ? 'contained' : 'outlined' }
-                          color='primary'
-                          onClick={ _ => {
-                              props.handleChangeSort(option.value)
-                          }}
+                        <Grid
+                          item
+                          xs={3}
                         >
-                            { option.label }
-                        </Button>
+                            <Button
+                              size="small"
+                              key={ option.value }
+                              variant={ selectedSort === option.value ? 'contained' : 'outlined' }
+                              color='primary'
+                              onClick={ _ => {
+                                  props.handleChangeSort(option.value)
+                              }}
+                            >
+                                { option.label }
+                            </Button>
+                        </Grid>
                     ))
                 }
                 </Grid>
@@ -116,6 +122,7 @@ const Sort = props => {
 
                 <Grid
                   container
+                  spacing={1}
                 >
                 {
                     orderOptions.map(option => (

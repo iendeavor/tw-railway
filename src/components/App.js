@@ -3,11 +3,8 @@ import { connect } from 'react-redux'
 import { Grid } from '@material-ui/core'
 
 import Header from './Header'
-import Station from './Station'
-import DateComponent from './Date'
-import Filter from './Filter'
-import Sort from './Sort'
-import Schedule from './Schedule'
+import Main from './Main'
+import Footer from './Footer'
 
 const App = props => (
     <Grid
@@ -18,58 +15,19 @@ const App = props => (
           item
           xs={12}
         >
-            <Grid
-              container
-              style={ {'marginBottom': '10px',} }
-            >
-                <Grid
-                  item
-                  xs={12}
-                >
-                    <Header />
-                </Grid>
-            </Grid>
+            <Header />
         </Grid>
 
         <Grid
           item
         >
-            <Grid
-              container
-              spacing={2}
-              style={ {'maxWidth': '720px', 'padding': '2px'} }
-            >
-                <Grid
-                  item
-                  xs={12}
-                  sm={7}
-                >
-                    <DateComponent />
-                </Grid>
+            <Main />
+        </Grid>
 
-                <Grid
-                  item
-                  xs={12}
-                  sm={5}
-                >
-                    <Station />
-                </Grid>
-
-                <Grid
-                  item
-                  xs={12}
-                >
-                    <Filter />
-                </Grid>
-
-                <Grid
-                  item
-                  xs={12}
-                >
-                    <Sort />
-                </Grid>
-
-            </Grid>
+        <Grid
+          item
+        >
+            <Footer />
         </Grid>
     </Grid>
 )

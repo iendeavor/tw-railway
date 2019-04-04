@@ -1,10 +1,11 @@
 import { SET_DATE } from '../constants/actionTypes'
+import { ON_DATE } from '../constants/keys'
 
 
 const toYYYYMMDD = date => date.toISOString().substring(0, 10)  // 1970-01-01
 
 const defaultState = {
-    date: new Date()
+    [ON_DATE]: new Date()
 }
 
 export default (state=defaultState, action) => {
@@ -15,9 +16,8 @@ export default (state=defaultState, action) => {
             const today = Math.floor(new Date(toYYYYMMDD(new Date())) / 1000)
             const date = Math.floor(action.payload.date / 1000)
             if (date >= today) {
-                next.date = action.payload.date
+                next[ON_DATE] = action.payload.date
             }
-            console.log(next.date)
             break
         default:
             break

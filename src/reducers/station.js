@@ -1,11 +1,11 @@
 import {
-    SET_START_STATION,
-    SET_END_STATION,
+    SET_FROM_STATION,
+    SET_TO_STATION,
     SWAP_STATION,
 } from '../constants/actionTypes'
 import {
-    START_STATION,
-    END_STATION,
+    FROM_STATION,
+    TO_STATION,
     STATIONS,
 } from '../constants/keys'
 import { stations } from '../resources/stations'
@@ -19,8 +19,8 @@ const options = stations.map(station => {
 })
 
 const default_state = {
-    [START_STATION]: 1008,
-    [END_STATION]: 1238,
+    [FROM_STATION]: 1008,
+    [TO_STATION]: 1238,
     [STATIONS]: options,
 }
 
@@ -28,21 +28,20 @@ export default (state=default_state, action) => {
     const next = {...state}
 
     switch (action.type) {
-        case SET_START_STATION:
-            next[START_STATION] = parseInt(action.payload[START_STATION])
+        case SET_FROM_STATION:
+            next[FROM_STATION] = parseInt(action.payload[FROM_STATION])
             break
-        case SET_END_STATION:
-            next[END_STATION] = parseInt(action.payload[END_STATION])
+        case SET_TO_STATION:
+            next[TO_STATION] = parseInt(action.payload[TO_STATION])
             break
         case SWAP_STATION:
-            next[START_STATION] = state[END_STATION]
-            next[END_STATION] = state[START_STATION]
+            next[FROM_STATION] = state[TO_STATION]
+            next[TO_STATION] = state[FROM_STATION]
             break
         default:
             break
     }
 
-    console.log(next)
     return next
 }
 

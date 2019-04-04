@@ -67,6 +67,7 @@ const Filter = props => {
 
             <Grid
               container
+              spacing={1}
             >
             {
                 options.map(option => (

@@ -4,6 +4,7 @@ import { InputLabel, Grid, TextField, Button } from '@material-ui/core';
 import 'react-datepicker/dist/react-datepicker.css'
 
 import { SET_DATE } from '../constants/actionTypes'
+import { ON_DATE } from '../constants/keys'
 
 
 const toYYYYMMDD = date => date.toISOString().slice(0, 10)
@@ -12,7 +13,7 @@ const getTomorrow = () => new Date(getToday() / 1 + (86400 * 1000))
 
 const mapStateToProps = state => {
     return {
-        yyyymmdd: toYYYYMMDD(state.date.date),
+        yyyymmdd: toYYYYMMDD(state.date[ON_DATE]),
     }
 }
 
@@ -71,6 +72,7 @@ const Date_ = props => {
         >
             <Grid
               item
+              xs={5}
             >
                 <InputLabel shrink>
                     Depature date
@@ -86,23 +88,36 @@ const Date_ = props => {
 
             <Grid
               item
+              xs={7}
             >
-                <Button
-                  variant={ props.yyyymmdd === toYYYYMMDD(getToday())? 'contained' : 'outlined' }
-                  size="small"
-                  color='primary'
-                  onClick={ props.handleSetToday }
+                <Grid
+                  container
                 >
-                    Today
-                </Button>
-                <Button
-                  variant={ props.yyyymmdd === toYYYYMMDD(getTomorrow())? 'contained' : 'outlined' }
-                  size="small"
-                  color='primary'
-                  onClick={ props.handleSetTomorrow }
-                >
-                    Tomorrow
-                </Button>
+                    <Grid
+                      item
+                    >
+                        <Button
+                          variant={ props.yyyymmdd === toYYYYMMDD(getToday())? 'contained' : 'outlined' }
+                          size="small"
+                          color='primary'
+                          onClick={ props.handleSetToday }
+                        >
+                            Today
+                        </Button>
+                    </Grid>
+                    <Grid
+                      item
+                    >
+                        <Button
+                          variant={ props.yyyymmdd === toYYYYMMDD(getTomorrow())? 'contained' : 'outlined' }
+                          size="small"
+                          color='primary'
+                          onClick={ props.handleSetTomorrow }
+                        >
+                            Tomorrow
+                        </Button>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     )
