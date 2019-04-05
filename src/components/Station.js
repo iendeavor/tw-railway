@@ -1,73 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Button, Grid, InputLabel, Select } from '@material-ui/core'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 import SearchIcon from '@material-ui/icons/Search'
 
-import { SEARCH, SWAP_STATION, SET_FROM_STATION, SET_TO_STATION } from '../constants/actionTypes'
-import { FROM_STATION, TO_STATION, ON_DATE, STATIONS } from '../constants/keys'
-import store from '../store'
+import { FROM_STATION, TO_STATION, STATIONS } from '../constants/keys'
 
-const mapStateToProps = state => {
-    return {
-        [FROM_STATION]: state.station[FROM_STATION],
-        [TO_STATION]: state.station[TO_STATION],
-        [STATIONS]: state.station[STATIONS],
-    }
-}
 
-const mapDispatchToProps = dispatch => {
-    return {
-        handleChangeStartStation: event => {
-            dispatch({
-                type: SET_FROM_STATION,
-                payload: {
-                    [FROM_STATION]: event.target.value,
-                },
-            })
-        },
-        handleChangeEndStation: event => {
-            dispatch({
-                type: SET_TO_STATION,
-                payload: {
-                    [TO_STATION]: event.target.value,
-                },
-            })
-        },
-        handleSwapStation: event => {
-            dispatch({
-                type: SWAP_STATION,
-                meta: {
-                    debounce: {
-                        time: 300,
-                        leading: true,
-                    },
-                },
-            })
-        },
-        handleSearch: event => {
-            dispatch({
-                type: SEARCH,
-                payload: {
-                    [FROM_STATION]: store.getState().station[FROM_STATION],
-                    [TO_STATION]: store.getState().station[TO_STATION],
-                    [ON_DATE]: store.getState().date[ON_DATE],
-                },
-                meta: {
-                    debounce: {
-                        time: 500,
-                    },
-                },
-            })
-        },
-    }
-}
-
-const Station = props => {
-    const startStation = props[FROM_STATION]
-    const endStation = props[TO_STATION]
-    const options = props[STATIONS]
-
+const Station = ({from, to, stations,
+                  handleSwapStation, handleSetFromStation, handleSetToStation, handleSearch}) => {
     return (
         <Grid
           container
@@ -91,13 +32,13 @@ const Station = props => {
 
                         <Select
                           native
-                          key={ startStation }
-                          defaultValue={ startStation }
-                          onChange={ props.handleChangeStartStation }
+                          key={ from }
+                          defaultValue={ from }
+                          onChange={ handleSetFromStation }
                           style={ {width: '100%'} }
                         >
                         {
-                            options.map(option => {
+                            stations.map(option => {
                                 return (
                                     <option
                                       key={option.value}
@@ -115,7 +56,7 @@ const Station = props => {
                       xs={3}
                     >
                         <Button
-                          onClick={props.handleSwapStation}
+                          onClick={ handleSwapStation }
                           variant='text'
                           color='primary'
                           size='small'
@@ -141,19 +82,19 @@ const Station = props => {
 
                         <Select
                           native
-                          key={ endStation }
-                          defaultValue={ endStation }
-                          onChange={ props.handleChangeEndStation }
+                          key={ to }
+                          defaultValue={ to }
+                          onChange={ handleSetToStation }
                           style={ {width: '100%'} }
                         >
                         {
-                            options.map(option => {
+                            stations.map(station => {
                                 return (
                                     <option
-                                      key={option.value}
-                                      value={option.value}
+                                      key={ station.value }
+                                      value={ station.value }
                                     >
-                                        {option.label}
+                                        { station.label }
                                     </option>
                                 )
                             })
@@ -166,7 +107,7 @@ const Station = props => {
                       xs={3}
                     >
                         <Button
-                          onClick={ props.handleSearch }
+                          onClick={ handleSearch }
                           variant='text'
                           color='secondary'
                           size='small'
@@ -180,5 +121,15 @@ const Station = props => {
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Station)
+Station.propTypes = {
+    from: PropTypes.string.isRequired,
+    to: PropTypes.string.isRequired,
+    stations: PropTypes.array.isRequired,
+    handleSwapStation: PropTypes.func.isRequired,
+    handleSetFromStation: PropTypes.func.isRequired,
+    handleSetToStation: PropTypes.func.isRequired,
+    handleSearch: PropTypes.func.isRequired,
+}
+
+export default Station
 

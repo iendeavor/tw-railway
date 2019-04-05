@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { InputLabel, Grid, TextField, Button } from '@material-ui/core';
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -7,64 +7,8 @@ import { SET_DATE } from '../constants/actionTypes'
 import { ON_DATE } from '../constants/keys'
 
 
-const toYYYYMMDD = date => date.toISOString().slice(0, 10)
-const getToday = () => new Date()
-const getTomorrow = () => new Date(getToday() / 1 + (86400 * 1000))
-
-const mapStateToProps = state => {
-    return {
-        yyyymmdd: toYYYYMMDD(state.date[ON_DATE]),
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        handleChangeDate: event => {
-            dispatch({
-                type: SET_DATE,
-                payload: {
-                    date: new Date(event.target.value),
-                },
-                meta: {
-                    debounce: {
-                        time: 300,
-                        leading: true,
-                    },
-                },
-            })
-        },
-        handleSetToday: event => {
-            dispatch({
-                type: SET_DATE,
-                payload: {
-                    date: getToday(),
-                },
-                meta: {
-                    debounce: {
-                        time: 300,
-                        leading: true,
-                    },
-                },
-            })
-        },
-        handleSetTomorrow: event => {
-            dispatch({
-                type: SET_DATE,
-                payload: {
-                    date: getTomorrow(),
-                },
-                meta: {
-                    debounce: {
-                        time: 300,
-                        leading: true,
-                    },
-                },
-            })
-        },
-    }
-}
-
-const Date_ = props => {
+const Date_ = ({yyyymmdd, isToday, isTomorrow,
+                handleChangeDate, handleSetToday, handleSetTomorrow}) => {
     return(
         <Grid
           container
@@ -80,8 +24,8 @@ const Date_ = props => {
                 <TextField
                   style={{width: '100%'}}
                   type="date"
-                  value={ props.yyyymmdd }
-                  onChange={ props.handleChangeDate }
+                  value={ yyyymmdd }
+                  onChange={ handleChangeDate }
                 />
             </Grid>
 
@@ -95,9 +39,9 @@ const Date_ = props => {
                       item
                     >
                         <Button
-                          variant={ props.yyyymmdd === toYYYYMMDD(getToday())? 'contained' : 'text' }
+                          variant={ isToday ? 'contained' : 'text' }
                           color='primary'
-                          onClick={ props.handleSetToday }
+                          onClick={ handleSetToday }
                           size='small'
                         >
                             Today
@@ -107,9 +51,9 @@ const Date_ = props => {
                       item
                     >
                         <Button
-                          variant={ props.yyyymmdd === toYYYYMMDD(getTomorrow())? 'contained' : 'text' }
+                          variant={ isTomorrow ? 'contained' : 'text' }
                           color='primary'
-                          onClick={ props.handleSetTomorrow }
+                          onClick={ handleSetTomorrow }
                           size='small'
                         >
                             Tomorrow
@@ -121,5 +65,14 @@ const Date_ = props => {
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Date_)
+Date_.propTypes = {
+    yyyymmdd: PropTypes.string.isRequired,
+    handleChangeDate: PropTypes.func.isRequired,
+    handleSetToday: PropTypes.func.isRequired,
+    handleSetTomorrow: PropTypes.func.isRequired,
+    isToday: PropTypes.bool,
+    isTomorrow: PropTypes.bool,
+}
+
+export default Date_
 

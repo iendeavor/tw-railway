@@ -1,11 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Grid, Button, InputLabel } from '@material-ui/core'
 
-import {
-    ADD_FILTER,
-    REMOVE_FILTER,
-} from '../constants/actionTypes'
 import {
     WHEEL_CHAIR,
     BIKE_SPACE,
@@ -13,46 +9,8 @@ import {
     LABEL,
 } from '../constants/filter'
 
-const mapStateToProps = state => {
-    return {
-       selectedValues: Array.from(state.filter.selectedValues),
-    }
-}
 
-const mapDispatchToProps = dispatch => {
-    return {
-        handleAddingFilter: value => {
-            dispatch({
-                type: ADD_FILTER,
-                payload: {
-                    value: value,
-                },
-                meta: {
-                    debounce: {
-                        time: 300,
-                        leading: true,
-                    },
-                },
-            })
-        },
-        handleRemovingFilter: value=> {
-            dispatch({
-                type: REMOVE_FILTER,
-                payload: {
-                    value: value,
-                },
-                meta: {
-                    debounce: {
-                        time: 300,
-                        leading: true,
-                    },
-                },
-            })
-        },
-    }
-}
-
-const Filter = props => {
+const Filter = ({selectedValues, handleAddingFilter, handleRemovingFilter}) => {
     const options = [
         {value: WHEEL_CHAIR, label: LABEL.tw[WHEEL_CHAIR]},
         {value: BIKE_SPACE, label: LABEL.tw[BIKE_SPACE]},
@@ -75,14 +33,14 @@ const Filter = props => {
                       key={ option.value }
                     >
                         <Button
-                          variant={ props.selectedValues.indexOf(option.value) === -1 ? 'text' : 'contained' }
+                          variant={ selectedValues.indexOf(option.value) === -1 ? 'text' : 'contained' }
                           size='small'
                           color='primary'
                           onClick={ _ => {
-                              if (props.selectedValues.indexOf(option.value) === -1) {
-                                  props.handleAddingFilter(option.value)
+                              if (selectedValues.indexOf(option.value) === -1) {
+                                  handleAddingFilter(option.value)
                               } else {
-                                  props.handleRemovingFilter(option.value)
+                                  handleRemovingFilter(option.value)
                               }
                           }}
                           style={ {width: '100%'} }
@@ -97,5 +55,11 @@ const Filter = props => {
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+Filter.propTypes = {
+    selectedValues: PropTypes.array.isRequired,
+    handleAddingFilter: PropTypes.func.isRequired,
+    handleRemovingFilter: PropTypes.func.isRequired,
+}
+
+export default Filter
 

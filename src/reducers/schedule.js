@@ -28,6 +28,7 @@ export default (state=default_state, action) => {
             break
         case SEARCHED:
             next[SCHEDULES] = action.payload[SCHEDULES]
+            break
         default:
             break
     }

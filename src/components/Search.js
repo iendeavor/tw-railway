@@ -1,29 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Grid, Button } from '@material-ui/core';
-import { SEARCH } from '../constants/actionTypes'
-import { FROM_STATION, TO_STATION, ON_DATE } from '../constants/keys'
 import SearchIcon from '@material-ui/icons/Search'
 
-import store from '../store'
 
-
-const handleSearch = event => {
-    store.dispatch({
-        type: SEARCH,
-        payload: {
-            [FROM_STATION]: store.getState().station[FROM_STATION],
-            [TO_STATION]: store.getState().station[TO_STATION],
-            [ON_DATE]: store.getState().date[ON_DATE],
-        },
-        meta: {
-            debounce: {
-                time: 500,
-            },
-        },
-    })
-}
-
-const Search = () => {
+const Search = ({ handleSearch }) => {
     return (
         <Grid
           container
@@ -45,6 +26,10 @@ const Search = () => {
             </Grid>
         </Grid>
     )
+}
+
+Search.propTypes = {
+    handleSearch: PropTypes.func.isRequired,
 }
 
 export default Search

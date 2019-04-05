@@ -1,12 +1,12 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
 
-import Station from './Station'
-import DateComponent from './Date'
-import Filter from './Filter'
-import Sort from './Sort'
-import ScheduleList from './ScheduleList'
-import Search from './Search'
+import Station from '../containers/Station'
+import DateComponent from '../containers/Date'
+import Filter from '../containers/Filter'
+import Sort from '../containers/Sort'
+import ScheduleList from '../containers/ScheduleList'
+import Search from '../containers/Search'
 
 const Main = props => (
     <Grid
