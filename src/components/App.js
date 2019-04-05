@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Grid } from '@material-ui/core'
 
 import Header from './Header'
@@ -23,7 +22,7 @@ const App = props => (
           xs={12}
           sm={8}
           xl={6}
-          style={ {padding: '2px'} }
+          style={ {padding: '0.3rem'} }
         >
             <Main />
         </Grid>
@@ -37,5 +36,5 @@ const App = props => (
     </Grid>
 )
 
-export default connect()(App)
+export default App
 

@@ -67,11 +67,11 @@ const Date_ = ({yyyymmdd, isToday, isTomorrow,
 
 Date_.propTypes = {
     yyyymmdd: PropTypes.string.isRequired,
+    isToday: PropTypes.bool,
+    isTomorrow: PropTypes.bool,
     handleChangeDate: PropTypes.func.isRequired,
     handleSetToday: PropTypes.func.isRequired,
     handleSetTomorrow: PropTypes.func.isRequired,
-    isToday: PropTypes.bool,
-    isTomorrow: PropTypes.bool,
 }
 
 export default Date_

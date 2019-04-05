@@ -13,3 +13,8 @@ export const ON_DATE       = 'ON_DATE'
 
 export const SCHEDULES     = 'SCHEDULES'
 
+export const WHEEL_CHAIR  = 'WHEEL_CHAIR'
+export const BIKE_SPACE   = 'BIKE_SPACE'
+export const NURSING_ROOM = 'NURSING_ROOM'
+export const TRAIN_TYPE   = 'TRAIN_TYPE'
+

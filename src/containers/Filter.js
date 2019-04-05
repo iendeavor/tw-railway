@@ -9,8 +9,7 @@ import {
     WHEEL_CHAIR,
     BIKE_SPACE,
     NURSING_ROOM,
-    LABEL,
-} from '../constants/filter'
+} from '../constants/keys'
 
 const mapStateToProps = state => {
     return {

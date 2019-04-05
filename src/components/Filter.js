@@ -6,15 +6,17 @@ import {
     WHEEL_CHAIR,
     BIKE_SPACE,
     NURSING_ROOM,
-    LABEL,
-} from '../constants/filter'
+} from '../constants/keys'
+import {
+    FILTER_LABELS,
+} from '../constants/labels'
 
 
 const Filter = ({selectedValues, handleAddingFilter, handleRemovingFilter}) => {
     const options = [
-        {value: WHEEL_CHAIR, label: LABEL.tw[WHEEL_CHAIR]},
-        {value: BIKE_SPACE, label: LABEL.tw[BIKE_SPACE]},
-        {value: NURSING_ROOM, label: LABEL.tw[NURSING_ROOM]},
+        {value: WHEEL_CHAIR, label: FILTER_LABELS.tw[WHEEL_CHAIR]},
+        {value: BIKE_SPACE, label: FILTER_LABELS.tw[BIKE_SPACE]},
+        {value: NURSING_ROOM, label: FILTER_LABELS.tw[NURSING_ROOM]},
     ]
 
     return (
