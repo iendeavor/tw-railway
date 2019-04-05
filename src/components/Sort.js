@@ -75,73 +75,38 @@ const Sort = props => {
     ]
 
     return (
-        <Grid
-          container
-          spacing={1}
-        >
-            <Grid
-              item
-            >
-                <InputLabel shrink>
-                    Sort
-                </InputLabel>
-
-                <Grid
-                  container
-                  spacing={1}
-                >
-                {
-                    sortOptions.map(option => (
-                        <Grid
-                          item
-                          xs={3}
-                        >
-                            <Button
-                              size="small"
-                              key={ option.value }
-                              variant={ selectedSort === option.value ? 'contained' : 'outlined' }
-                              color='primary'
-                              onClick={ _ => {
-                                  props.handleChangeSort(option.value)
-                              }}
-                            >
-                                { option.label }
-                            </Button>
-                        </Grid>
-                    ))
-                }
-                </Grid>
-            </Grid>
+        <React.Fragment>
+            <InputLabel shrink>
+                Sort
+            </InputLabel>
 
             <Grid
-              item
+              container
             >
-                <InputLabel shrink>
-                    Primary
-                </InputLabel>
-
-                <Grid
-                  container
-                  spacing={1}
-                >
-                {
-                    orderOptions.map(option => (
+            {
+                sortOptions.map(option => (
+                    <Grid
+                      key={option.value}
+                      item
+                      xs={3}
+                    >
                         <Button
-                          size="small"
                           key={ option.value }
-                          variant={ selectedOrder === option.value ? 'contained' : 'outlined' }
+                          size='small'
+                          variant={ selectedSort === option.value ? 'contained' : 'text' }
                           color='primary'
                           onClick={ _ => {
-                              props.handleChangeOrder(option.value)
+                              props.handleChangeSort(option.value)
                           }}
+                          style={ {width: '100%'} }
                         >
                             { option.label }
                         </Button>
-                    ))
-                }
-                </Grid>
+                    </Grid>
+                ))
+            }
             </Grid>
-        </Grid>
+        </React.Fragment>
     )
 }
 

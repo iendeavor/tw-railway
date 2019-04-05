@@ -1,119 +1,53 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Grid, Card, Breadcrumbs, Link } from '@material-ui/core'
+import PropTypes from 'prop-types'
+import { Grid, Breadcrumbs, Link } from '@material-ui/core'
 
 import { LIMITED_EXPRESS, EXPRESS } from '../constants/train'
 import { WHEEL_CHAIR } from '../constants/filter'
+import { FROM_STATION, TO_STATION, DEPARTURE, ARRIVAL, COST } from '../constants/keys'
+import { getName } from '../resources/stations'
 
-
-const getSchedule = schedule => {
-    return schedule.via.map((v, i) => {
-        return (
-            <Grid
-              container
-              key={i}
-            >
-                <Grid
-                  item
-                  xs={8}
-                >
-                    <Breadcrumbs separator=">">
-                        <Link>
-                            { v.from }
-                        </Link>
-                        <Link>
-                            { v.to }
-                        </Link>
-                    </Breadcrumbs>
-                </Grid>
-
-                <Grid
-                  item
-                  xs={4}
-                >
-                    { v.duration }
-                </Grid>
-            </Grid>
-        )
-    })
-}
-
-const getSchedules = schedules => {
-    return schedules.map((schedule, i) => {
-        return (
-            <Grid
-              item
-              key={i}
-              xs={12}
-            >
-                <Card>
-                    { getSchedule(schedule) }
-                </Card>
-            </Grid>
-        )
-    })
-}
-
-const mapStateToProps = state => {
-    return {
-        schedules: [
-            {
-                via: [
-                    {
-                        from: 'Taichung',
-                        to: 'Changhua',
-                        departure: '05:58',
-                        arrival: '08:27',
-                        duration: '02:29',
-                        number: '371',
-                    },
-                    {
-                        from: 'Changhua',
-                        to: 'Kaushung',
-                        departure: '08:45',
-                        arrival: '09:15',
-                        duration: '00:30',
-                        number: '247',
-                    },
-                ],
-            },
-            {
-                via: [
-                    {
-                        from: 'Taipei',
-                        to: 'Taichung',
-                        departure: '05:58',
-                        arrival: '08:27',
-                        duration: '02:29',
-                        number: '371',
-                    },
-                    {
-                        from: 'Taichung',
-                        to: 'Kaushung',
-                        departure: '08:45',
-                        arrival: '09:15',
-                        duration: '00:30',
-                        number: '247',
-                    },
-                ],
-            },
-        ],
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {}
-}
 
 const Schedule = props => {
     return (
         <Grid
           container
+          justify='center'
         >
-            { getSchedules(props.schedules) }
+            <Grid
+              item
+              xs={12}
+            >
+                <Breadcrumbs separator=">">
+                    <Link>
+                        { props.schedule[DEPARTURE] }
+                    </Link>
+                    <Link>
+                        { props.schedule[ARRIVAL] }
+                    </Link>
+                </Breadcrumbs>
+                <Breadcrumbs separator=">">
+                    <Link>
+                        { getName(props.schedule[FROM_STATION]) }
+                    </Link>
+                    <Link>
+                        { getName(props.schedule[TO_STATION]) }
+                    </Link>
+                </Breadcrumbs>
+            </Grid>
+
+            <Grid
+              item
+              xs={4}
+            >
+            </Grid>
         </Grid>
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Schedule)
+Schedule.propTypes = {
+    schedule: PropTypes.object.isRequired,
+}
+
+export default Schedule
 

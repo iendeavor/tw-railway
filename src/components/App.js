@@ -20,12 +20,17 @@ const App = props => (
 
         <Grid
           item
+          xs={12}
+          sm={8}
+          xl={6}
+          style={ {padding: '2px'} }
         >
             <Main />
         </Grid>
 
         <Grid
           item
+          xs={12}
         >
             <Footer />
         </Grid>

@@ -4,17 +4,22 @@ export const stations = Object.freeze(
     src.map(station => {
         return {
             id: station['StationID'] + '',
-            name: station['StationName']['Zh_tw'],
+            name: station['StationName']['En'],
         }
     })
 )
 
-export const id_name_mapping = Object.freeze(
+const mapping = Object.freeze(
     src.map(station => {
         return {
-            [station['StationId']]: station['StationName']['Zh_tw'],
-            [station['StationName']['Zh_tw']]: station['StationId'],
+            [station['StationID']]: station['StationName']['En'],
+            [station['StationName']['En']]: station['StationID'],
         }
+    }).reduce((accu, curr) => {
+        return Object.assign({}, accu, curr)
     })
 )
+
+export const getName = ID => mapping[ID]
+export const getID = name => mapping[name]
 

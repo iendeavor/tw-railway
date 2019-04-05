@@ -5,15 +5,13 @@ import Station from './Station'
 import DateComponent from './Date'
 import Filter from './Filter'
 import Sort from './Sort'
-import Schedule from './Schedule'
+import ScheduleList from './ScheduleList'
 import Search from './Search'
 
 const Main = props => (
     <Grid
       container
-      style={ {'maxWidth': '95%', 'padding': '2px', 'margin': 'auto'} }
-      alignItems='flex-end'
-      spacing={1}
+      justify='space-between'
     >
         <Grid
           item
@@ -26,24 +24,14 @@ const Main = props => (
         <Grid
           item
           xs={12}
-          sm={9}
-          md={5}
+          md={6}
         >
             <Station />
         </Grid>
 
         <Grid
           item
-          xs={12}
-          sm={3}
-          md={1}
-        >
-            <Search />
-        </Grid>
-
-        <Grid
-          item
-          xs={12}
+          xs={10}
         >
             <Filter />
         </Grid>
@@ -59,7 +47,7 @@ const Main = props => (
           item
           xs={12}
         >
-            <Schedule />
+            <ScheduleList />
         </Grid>
     </Grid>
 )

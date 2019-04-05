@@ -67,7 +67,6 @@ const Filter = props => {
 
             <Grid
               container
-              spacing={1}
             >
             {
                 options.map(option => (
@@ -76,8 +75,8 @@ const Filter = props => {
                       key={ option.value }
                     >
                         <Button
+                          variant={ props.selectedValues.indexOf(option.value) === -1 ? 'text' : 'contained' }
                           size='small'
-                          variant={ props.selectedValues.indexOf(option.value) === -1 ? 'outlined' : 'contained' }
                           color='primary'
                           onClick={ _ => {
                               if (props.selectedValues.indexOf(option.value) === -1) {
@@ -86,6 +85,7 @@ const Filter = props => {
                                   props.handleRemovingFilter(option.value)
                               }
                           }}
+                          style={ {width: '100%'} }
                         >
                             { option.label }
                         </Button>

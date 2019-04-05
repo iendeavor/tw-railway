@@ -11,4 +11,5 @@ export const ADD_FILTER        = Symbol()
 export const REMOVE_FILTER     = Symbol()
 
 export const SEARCH            = Symbol()
+export const SEARCHED          = Symbol()
 

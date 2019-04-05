@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Button, Grid, InputLabel, Select } from '@material-ui/core'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
+import SearchIcon from '@material-ui/icons/Search'
 
-import { SWAP_STATION, SET_FROM_STATION, SET_TO_STATION } from '../constants/actionTypes'
-import { FROM_STATION, TO_STATION, STATIONS } from '../constants/keys'
+import { SEARCH, SWAP_STATION, SET_FROM_STATION, SET_TO_STATION } from '../constants/actionTypes'
+import { FROM_STATION, TO_STATION, ON_DATE, STATIONS } from '../constants/keys'
+import store from '../store'
 
 const mapStateToProps = state => {
     return {
@@ -43,6 +45,21 @@ const mapDispatchToProps = dispatch => {
                 },
             })
         },
+        handleSearch: event => {
+            dispatch({
+                type: SEARCH,
+                payload: {
+                    [FROM_STATION]: store.getState().station[FROM_STATION],
+                    [TO_STATION]: store.getState().station[TO_STATION],
+                    [ON_DATE]: store.getState().date[ON_DATE],
+                },
+                meta: {
+                    debounce: {
+                        time: 500,
+                    },
+                },
+            })
+        },
     }
 }
 
@@ -54,72 +71,110 @@ const Station = props => {
     return (
         <Grid
           container
-          alignItems="flex-end"
         >
             <Grid
               item
+              xs={12}
             >
-                <InputLabel shrink>
-                    From
-                </InputLabel>
-
-                <Select
-                  native
-                  key={ startStation }
-                  defaultValue={ startStation }
-                  onChange={ props.handleChangeStartStation }
+                <Grid
+                  container
+                  alignItems='flex-end'
+                  justify='space-between'
                 >
-                {
-                    options.map(option => {
-                        return (
-                            <option
-                              key={option.value}
-                              value={option.value}
-                            >
-                                {option.label}
-                            </option>
-                        )
-                    })
-                }
-                </Select>
-            </Grid>
+                    <Grid
+                      item
+                      xs={9}
+                    >
+                        <InputLabel shrink>
+                            From
+                        </InputLabel>
 
-            <Grid
-              item
-            >
-                <Button
-                  onClick={props.handleSwapStation}
+                        <Select
+                          native
+                          key={ startStation }
+                          defaultValue={ startStation }
+                          onChange={ props.handleChangeStartStation }
+                          style={ {width: '100%'} }
+                        >
+                        {
+                            options.map(option => {
+                                return (
+                                    <option
+                                      key={option.value}
+                                      value={option.value}
+                                    >
+                                        {option.label}
+                                    </option>
+                                )
+                            })
+                        }
+                        </Select>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={3}
+                    >
+                        <Button
+                          onClick={props.handleSwapStation}
+                          variant='text'
+                          color='primary'
+                          size='small'
+                        >
+                            <SwapHorizIcon />
+                        </Button>
+                    </Grid>
+
+                </Grid>
+
+                <Grid
+                  container
+                  alignItems='flex-end'
+                  justify='space-between'
                 >
-                    <SwapHorizIcon />
-                </Button>
-            </Grid>
+                    <Grid
+                      item
+                      xs={9}
+                    >
+                        <InputLabel shrink>
+                            To
+                        </InputLabel>
 
-            <Grid
-              item
-            >
-                <InputLabel shrink>
-                    To
-                </InputLabel>
+                        <Select
+                          native
+                          key={ endStation }
+                          defaultValue={ endStation }
+                          onChange={ props.handleChangeEndStation }
+                          style={ {width: '100%'} }
+                        >
+                        {
+                            options.map(option => {
+                                return (
+                                    <option
+                                      key={option.value}
+                                      value={option.value}
+                                    >
+                                        {option.label}
+                                    </option>
+                                )
+                            })
+                        }
+                        </Select>
+                    </Grid>
 
-                <Select
-                  native
-                  key={ endStation }
-                  defaultValue={ endStation }
-                  onChange={ props.handleChangeEndStation }
-                >
-                {
-                    options.map(option => {
-                        return (
-                            <option
-                              key={option.value}
-                              value={option.value}
-                            >
-                                {option.label}
-                            </option>
-                        )
-                    })
-                }
-                </Select>
+                    <Grid
+                      item
+                      xs={3}
+                    >
+                        <Button
+                          onClick={ props.handleSearch }
+                          variant='text'
+                          color='secondary'
+                          size='small'
+                        >
+                            <SearchIcon />
+                        </Button>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     )

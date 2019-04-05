@@ -1,34 +1,51 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Button } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 import { SEARCH } from '../constants/actionTypes'
+import { FROM_STATION, TO_STATION, ON_DATE } from '../constants/keys'
+import SearchIcon from '@material-ui/icons/Search'
+
+import store from '../store'
 
 
-const mapStateToProps = state => { return {} }
-
-const mapDispatchToProps = dispatch => {
-    return {
-        handleSearch: event => {
-            dispatch({
-                type: SEARCH,
-            })
-        }
-    }
+const handleSearch = event => {
+    store.dispatch({
+        type: SEARCH,
+        payload: {
+            [FROM_STATION]: store.getState().station[FROM_STATION],
+            [TO_STATION]: store.getState().station[TO_STATION],
+            [ON_DATE]: store.getState().date[ON_DATE],
+        },
+        meta: {
+            debounce: {
+                time: 500,
+            },
+        },
+    })
 }
 
-const Search = props => {
+const Search = () => {
     return (
-        <Button
-          variant='contained'
-          size='small'
-          color='secondary'
-          onClick={ props.handleSearch }
-          style={ {width: '100%'} }
+        <Grid
+          container
+          alignItems='flex-end'
+          style={ {height: '100%'} }
+          justify='flex-end'
         >
-            Search
-        </Button>
+            <Grid
+              item
+            >
+                <Button
+                  size='small'
+                  onClick={ handleSearch }
+                  variant='contained'
+                  color='secondary'
+                >
+                    <SearchIcon />
+                </Button>
+            </Grid>
+        </Grid>
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search)
+export default Search
 

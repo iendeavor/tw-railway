@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import createDebounce from 'redux-debounced'
 
-import reducer from './reducer'
+import reducer from './reducers'
 
 const store = createStore(
     reducer,

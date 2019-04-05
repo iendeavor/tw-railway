@@ -72,7 +72,6 @@ const Date_ = props => {
         >
             <Grid
               item
-              xs={5}
             >
                 <InputLabel shrink>
                     Depature date
@@ -88,7 +87,6 @@ const Date_ = props => {
 
             <Grid
               item
-              xs={7}
             >
                 <Grid
                   container
@@ -97,10 +95,10 @@ const Date_ = props => {
                       item
                     >
                         <Button
-                          variant={ props.yyyymmdd === toYYYYMMDD(getToday())? 'contained' : 'outlined' }
-                          size="small"
+                          variant={ props.yyyymmdd === toYYYYMMDD(getToday())? 'contained' : 'text' }
                           color='primary'
                           onClick={ props.handleSetToday }
+                          size='small'
                         >
                             Today
                         </Button>
@@ -109,10 +107,10 @@ const Date_ = props => {
                       item
                     >
                         <Button
-                          variant={ props.yyyymmdd === toYYYYMMDD(getTomorrow())? 'contained' : 'outlined' }
-                          size="small"
+                          variant={ props.yyyymmdd === toYYYYMMDD(getTomorrow())? 'contained' : 'text' }
                           color='primary'
                           onClick={ props.handleSetTomorrow }
+                          size='small'
                         >
                             Tomorrow
                         </Button>
