@@ -1,15 +1,16 @@
-export const SWAP_STATION      = Symbol()
-export const SET_FROM_STATION  = Symbol()
-export const SET_TO_STATION    = Symbol()
-export const SET_DATE          = Symbol()
-export const SET_TIME          = Symbol()
+export const SWAP_STATION      = 'ACTION_SWAP_STATION'
+export const SET_FROM_STATION  = 'ACTION_SET_FROM_STATION'
+export const SET_TO_STATION    = 'ACTION_SET_TO_STATION'
+export const SET_DATE          = 'ACTION_SET_DATE'
+export const SET_TIME          = 'ACTION_SET_TIME'
 
-export const SET_SORT          = Symbol()
-export const SET_ORDER         = Symbol()
+export const SET_SORT          = 'ACTION_SET_SORT'
+export const SET_ORDER         = 'ACTION_SET_ORDER'
 
-export const ADD_FILTER        = Symbol()
-export const REMOVE_FILTER     = Symbol()
+export const ADD_FILTER        = 'ACTION_ADD_FILTER'
+export const REMOVE_FILTER     = 'ACTION_REMOVE_FILTER'
 
-export const SEARCH            = Symbol()
-export const SEARCHED          = Symbol()
+export const SEARCH            = 'ACTION_SEARCH'
+export const SEARCHED          = 'ACTION_SEARCHED'
+export const SORT              = 'ACTION_SORT'
 
