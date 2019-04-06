@@ -1,7 +1,7 @@
 import { SEARCH, SEARCHED } from '../constants/actionTypes'
 import { getTimetable } from '../resources/timetable'
 import store from '../store'
-import { ON_DATE, FROM_STATION, TO_STATION, SCHEDULES, DEPARTURE, ARRIVAL } from '../constants/keys'
+import { DEPARTURE_DATE, FROM_STATION, TO_STATION, SCHEDULES, DEPARTURE, ARRIVAL } from '../constants/keys'
 
 
 const example = [
@@ -45,7 +45,7 @@ export default (state=default_state, action) => {
         case SEARCH:
             const from = action.payload[FROM_STATION]
             const to = action.payload[TO_STATION]
-            const on = action.payload[ON_DATE]
+            const on = action.payload[DEPARTURE_DATE]
             const promise = getTimetable(from, to, on)
             promise.then(timetable => {
                 store.dispatch({

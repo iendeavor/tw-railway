@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import Station from '../components/Station'
 import { SEARCH, SWAP_STATION, SET_FROM_STATION, SET_TO_STATION } from '../constants/actionTypes'
-import { FROM_STATION, TO_STATION, ON_DATE, STATIONS } from '../constants/keys'
+import { FROM_STATION, TO_STATION, DEPARTURE_DATE, STATIONS } from '../constants/keys'
 import store from '../store'
 
 const mapStateToProps = state => {
@@ -48,7 +48,7 @@ const mapDispatchToProps = dispatch => {
                 payload: {
                     [FROM_STATION]: store.getState().station[FROM_STATION],
                     [TO_STATION]: store.getState().station[TO_STATION],
-                    [ON_DATE]: store.getState().date[ON_DATE],
+                    [DEPARTURE_DATE]: store.getState().date[DEPARTURE_DATE],
                 },
                 meta: {
                     debounce: {
