@@ -4,6 +4,7 @@ import Station from '../components/Station'
 import { SEARCH, SWAP_STATION, SET_FROM_STATION, SET_TO_STATION } from '../constants/actionTypes'
 import { FROM_STATION, TO_STATION, DEPARTURE_DATE, STATIONS } from '../constants/keys'
 import store from '../store'
+import { handleSwapStation, handleSetFromStation, handleSetToStation, handleSearchRequest } from '../constants/actionCreators'
 
 const mapStateToProps = state => {
     return {
@@ -15,47 +16,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleSetFromStation: event => {
-            dispatch({
-                type: SET_FROM_STATION,
-                payload: {
-                    [FROM_STATION]: event.target.value,
-                },
-            })
+        onSetFromStation: event => {
+            handleSetFromStation(event.target.value)
         },
-        handleSetToStation: event => {
-            dispatch({
-                type: SET_TO_STATION,
-                payload: {
-                    [TO_STATION]: event.target.value,
-                },
-            })
+        onSetToStation: event => {
+            handleSetToStation(event.target.value)
         },
-        handleSwapStation: event => {
-            dispatch({
-                type: SWAP_STATION,
-                meta: {
-                    debounce: {
-                        time: 300,
-                        leading: true,
-                    },
-                },
-            })
+        onSwapStation: event => {
+            handleSwapStation()
         },
-        handleSearch: event => {
-            dispatch({
-                type: SEARCH,
-                payload: {
-                    [FROM_STATION]: store.getState().station[FROM_STATION],
-                    [TO_STATION]: store.getState().station[TO_STATION],
-                    [DEPARTURE_DATE]: store.getState().date[DEPARTURE_DATE],
-                },
-                meta: {
-                    debounce: {
-                        time: 500,
-                    },
-                },
-            })
+        onSearch: event => {
+            handleSearchRequest()
         },
     }
 }

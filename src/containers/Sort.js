@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleChangeSort: value => {
+        onChangeSort: value => {
             dispatch({
                 type: SET_SORT,
                 payload: {

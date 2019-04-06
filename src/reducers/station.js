@@ -1,7 +1,7 @@
 import {
+    SWAP_STATION,
     SET_FROM_STATION,
     SET_TO_STATION,
-    SWAP_STATION,
 } from '../constants/actionTypes'
 import {
     FROM_STATION,
@@ -27,19 +27,21 @@ const default_state = {
 export default (state=default_state, action) => {
     const next = {...state}
 
-    switch (action.type) {
-        case SET_FROM_STATION:
-            next[FROM_STATION] = parseInt(action.payload[FROM_STATION])
-            break
-        case SET_TO_STATION:
-            next[TO_STATION] = parseInt(action.payload[TO_STATION])
-            break
-        case SWAP_STATION:
-            next[FROM_STATION] = state[TO_STATION]
-            next[TO_STATION] = state[FROM_STATION]
-            break
-        default:
-            break
+    if (action !== undefined) {
+        switch (action.type) {
+            case SET_FROM_STATION:
+                next[FROM_STATION] = parseInt(action.payload[FROM_STATION])
+                break
+            case SET_TO_STATION:
+                next[TO_STATION] = parseInt(action.payload[TO_STATION])
+                break
+            case SWAP_STATION:
+                next[FROM_STATION] = state[TO_STATION]
+                next[TO_STATION] = state[FROM_STATION]
+                break
+            default:
+                break
+        }
     }
 
     return next

@@ -8,7 +8,7 @@ import { FROM_STATION, TO_STATION, STATIONS } from '../constants/keys'
 
 
 const Station = ({from, to, stations,
-                  handleSwapStation, handleSetFromStation, handleSetToStation, handleSearch}) => {
+                  onSwapStation, onSetFromStation, onSetToStation, onSearch}) => {
     return (
         <Grid
           container
@@ -34,7 +34,7 @@ const Station = ({from, to, stations,
                           native
                           key={ from }
                           defaultValue={ from }
-                          onChange={ handleSetFromStation }
+                          onChange={ onSetFromStation }
                           style={ {width: '100%'} }
                         >
                         {
@@ -56,7 +56,7 @@ const Station = ({from, to, stations,
                       xs={3}
                     >
                         <Button
-                          onClick={ handleSwapStation }
+                          onClick={ onSwapStation }
                           variant='text'
                           color='primary'
                           size='small'
@@ -84,7 +84,7 @@ const Station = ({from, to, stations,
                           native
                           key={ to }
                           defaultValue={ to }
-                          onChange={ handleSetToStation }
+                          onChange={ onSetToStation }
                           style={ {width: '100%'} }
                         >
                         {
@@ -107,7 +107,7 @@ const Station = ({from, to, stations,
                       xs={3}
                     >
                         <Button
-                          onClick={ handleSearch }
+                          onClick={ onSearch }
                           variant='text'
                           color='secondary'
                           size='small'
@@ -125,10 +125,10 @@ Station.propTypes = {
     from: PropTypes.string.isRequired,
     to: PropTypes.string.isRequired,
     stations: PropTypes.array.isRequired,
-    handleSwapStation: PropTypes.func.isRequired,
-    handleSetFromStation: PropTypes.func.isRequired,
-    handleSetToStation: PropTypes.func.isRequired,
-    handleSearch: PropTypes.func.isRequired,
+    onSwapStation: PropTypes.func.isRequired,
+    onSetFromStation: PropTypes.func.isRequired,
+    onSetToStation: PropTypes.func.isRequired,
+    onSearch: PropTypes.func.isRequired,
 }
 
 export default Station

@@ -4,7 +4,7 @@ import { Grid, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search'
 
 
-const Search = ({ handleSearch }) => {
+const Search = ({ onSearch }) => {
     return (
         <Grid
           container
@@ -17,7 +17,7 @@ const Search = ({ handleSearch }) => {
             >
                 <Button
                   size='small'
-                  onClick={ handleSearch }
+                  onClick={ onSearch }
                   variant='contained'
                   color='secondary'
                 >
@@ -29,7 +29,7 @@ const Search = ({ handleSearch }) => {
 }
 
 Search.propTypes = {
-    handleSearch: PropTypes.func.isRequired,
+    onSearch: PropTypes.func.isRequired,
 }
 
 export default Search

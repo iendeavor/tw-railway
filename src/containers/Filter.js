@@ -19,7 +19,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleAddingFilter: value => {
+        onAddingFilter: value => {
             dispatch({
                 type: ADD_FILTER,
                 payload: {
@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => {
                 },
             })
         },
-        handleRemovingFilter: value=> {
+        onRemovingFilter: value=> {
             dispatch({
                 type: REMOVE_FILTER,
                 payload: {

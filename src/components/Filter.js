@@ -12,7 +12,7 @@ import {
 } from '../constants/labels'
 
 
-const Filter = ({selectedValues, handleAddingFilter, handleRemovingFilter}) => {
+const Filter = ({selectedValues, onAddingFilter, onRemovingFilter}) => {
     const options = [
         {value: WHEEL_CHAIR, label: FILTER_LABELS.tw[WHEEL_CHAIR]},
         {value: BIKE_SPACE, label: FILTER_LABELS.tw[BIKE_SPACE]},
@@ -40,9 +40,9 @@ const Filter = ({selectedValues, handleAddingFilter, handleRemovingFilter}) => {
                           color='primary'
                           onClick={ _ => {
                               if (selectedValues.indexOf(option.value) === -1) {
-                                  handleAddingFilter(option.value)
+                                  onAddingFilter(option.value)
                               } else {
-                                  handleRemovingFilter(option.value)
+                                  onRemovingFilter(option.value)
                               }
                           }}
                           style={ {width: '100%'} }
@@ -59,8 +59,8 @@ const Filter = ({selectedValues, handleAddingFilter, handleRemovingFilter}) => {
 
 Filter.propTypes = {
     selectedValues: PropTypes.array.isRequired,
-    handleAddingFilter: PropTypes.func.isRequired,
-    handleRemovingFilter: PropTypes.func.isRequired,
+    onAddingFilter: PropTypes.func.isRequired,
+    onRemovingFilter: PropTypes.func.isRequired,
 }
 
 export default Filter

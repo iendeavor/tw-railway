@@ -1,33 +1,25 @@
-import {
-    SET_SORT,
-    SET_ORDER,
-} from '../constants/actionTypes'
-import {
-    SORT_BY,
-    ORDER_BY,
-} from '../constants/keys'
-import {
-    ARRIVAL,
-    FIRST,
-} from '../constants/sortTypes'
+import ACTION_TYPES from '../constants/actionTypes'
+import KEYS from '../constants/keys'
 
 const defaultState = {
-    [SORT_BY]: ARRIVAL,
-    [ORDER_BY]: FIRST,
+    [KEYS.sortBy]: KEYS.arrival,
+    [KEYS.orderBy]: KEYS.departure,
 }
 
 export default (state=defaultState, action) => {
     const next = {...state}
 
-    switch (action.type) {
-        case SET_SORT:
-            next[SORT_BY] = action.payload[SORT_BY]
-            break
-        case SET_ORDER:
-            next[ORDER_BY] = action.payload[ORDER_BY]
-            break
-        default:
-            break
+    if (action !== undefined) {
+        switch (action.type) {
+            case ACTION_TYPES.setSort:
+                next[KEYS.sortBy] = action.payload[KEYS.sortBy]
+                break
+            case ACTION_TYPES.setOrder:
+                next[KEYS.orderBy] = action.payload[KEYS.orderBy]
+                break
+            default:
+                break
+        }
     }
 
     return next

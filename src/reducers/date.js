@@ -18,23 +18,25 @@ const defaultState = {
 export default (state=defaultState, action) => {
     const next = {...state}
 
-    switch (action.type) {
-        case SET_DATE:
-            const today = getUnifiedToday()
-            let selected_date
-            if (typeof action.payload[DEPARTURE_DATE] === 'string') {
-                selected_date = new Date(action.payload[DEPARTURE_DATE])
-            } else {
-                selected_date = unifyDate(action.payload[DEPARTURE_DATE])
-            }
-            if (+selected_date >= +today) {
-                next[DEPARTURE_DATE] = selected_date
-            }
-            next[TODAY] = today
-            next[TOMORROW] = getUnifiedTomorrow()
-            break
-        default:
-            break
+    if (action !== undefined) {
+        switch (action.type) {
+            case SET_DATE:
+                const today = getUnifiedToday()
+                let selected_date
+                if (typeof action.payload[DEPARTURE_DATE] === 'string') {
+                    selected_date = new Date(action.payload[DEPARTURE_DATE])
+                } else {
+                    selected_date = unifyDate(action.payload[DEPARTURE_DATE])
+                }
+                if (+selected_date >= +today) {
+                    next[DEPARTURE_DATE] = selected_date
+                }
+                next[TODAY] = today
+                next[TOMORROW] = getUnifiedTomorrow()
+                break
+            default:
+                break
+        }
     }
 
     return next

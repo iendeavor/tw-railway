@@ -13,7 +13,7 @@ import {
 } from '../constants/sortTypes'
 
 
-const Sort = ({SORT_BY, ORDER_BY, handleChangeSort}) => {
+const Sort = ({SORT_BY, ORDER_BY, onChangeSort}) => {
     const selectedSort = SORT_BY
     const sortOptions = [
         {value: ARRIVAL, label: LABEL.tw[ARRIVAL]},
@@ -44,7 +44,7 @@ const Sort = ({SORT_BY, ORDER_BY, handleChangeSort}) => {
                           variant={ selectedSort === option.value ? 'contained' : 'text' }
                           color='primary'
                           onClick={ _ => {
-                              handleChangeSort(option.value)
+                              onChangeSort(option.value)
                           }}
                           style={ {width: '100%'} }
                         >
@@ -60,7 +60,7 @@ const Sort = ({SORT_BY, ORDER_BY, handleChangeSort}) => {
 
 Sort.propTypes = {
     [SORT_BY]: PropTypes.oneOf([ARRIVAL, DEPARTURE, CHEAP_COST, SMALL_TRANSFER]).isRequired,
-    handleChangeSort: PropTypes.func.isRequired,
+    onChangeSort: PropTypes.func.isRequired,
 }
 
 export default Sort

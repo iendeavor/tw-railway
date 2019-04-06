@@ -2,6 +2,7 @@ import {
     ADD_FILTER,
     REMOVE_FILTER,
 } from '../constants/actionTypes'
+import KEYS from '../constants/keys'
 
 
 const defaultState = {
@@ -13,10 +14,10 @@ export default (state=defaultState, action) => {
 
     switch (action.type) {
         case ADD_FILTER:
-            next.selectedValues.add(action.payload.value)
+            next[KEYS.selectedValues].add(action.payload.value)
             break
         case REMOVE_FILTER:
-            next.selectedValues.delete(action.payload.value)
+            next[KEYS.selectedValues].delete(action.payload.value)
             break
         default:
             break
