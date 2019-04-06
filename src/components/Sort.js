@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Grid, InputLabel, Button } from '@material-ui/core'
 
-import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
 import {
     LABEL,

@@ -13,6 +13,7 @@ export const REMOVE_FILTER     = 'ACTION_REMOVE_FILTER'
 export const FILTER            = 'ACTION_FILTER'
 
 export const SEARCH            = 'ACTION_SEARCH'
+export const RESTORE_SEARCH    = 'ACTION_RESTORE_SEARCH'
 
 const ACTION_TYPES = {
     setFromStation : SET_FROM_STATION,
@@ -30,6 +31,7 @@ const ACTION_TYPES = {
     filter         : FILTER,
 
     search         : SEARCH,
+    restoreSearch  : RESTORE_SEARCH,
 }
 
 export default ACTION_TYPES

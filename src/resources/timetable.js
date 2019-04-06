@@ -1,6 +1,4 @@
 import { getTrainTypeName } from './train_type'
-import { getFare } from './fare'
-import KEYS from '../constants/keys'
 
 export const getTimetable = (from, to, on) => {
     const yyyymmdd = on.toISOString().slice(0, 10)
@@ -52,9 +50,9 @@ const formatTimetable = timetable => {
             duration: calcDuration(pair),
             departure: pair.OriginStopTime.DepartureTime,
             arrival: pair.DestinationStopTime.ArrivalTime,
-            has_wheel_chair: pair.DailyTrainInfo.WheelchairFlag == 1,
-            has_nursing_room: pair.DailyTrainInfo.BreastFeedingFlag == 1,
-            is_bike_allowed: pair.DailyTrainInfo.BikeFlag == 1,
+            has_wheel_chair: pair.DailyTrainInfo.WheelchairFlag === 1,
+            has_nursing_room: pair.DailyTrainInfo.BreastFeedingFlag === 1,
+            is_bike_allowed: pair.DailyTrainInfo.BikeFlag === 1,
             train_type_name: getTrainTypeName(pair.DailyTrainInfo.TrainTypeID),
             note: pair.DailyTrainInfo.Note.Zh_tw,
         }

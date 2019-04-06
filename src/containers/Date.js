@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 
 import Date_ from '../components/Date'
-import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
 import CREATORS from '../constants/actionCreators'
 import store from '../store'
@@ -20,13 +19,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onChangeDate: event => {
-            CREATORS.handleChangeDate(event.target.value)
+            CREATORS.handleSetDate(event.target.value)
         },
         onSetToday: event => {
-            CREATORS.handleChangeDate(store.getState().date[KEYS.today])
+            CREATORS.handleSetDate(store.getState().date[KEYS.today])
         },
         onSetTomorrow: event => {
-            CREATORS.handleChangeDate(store.getState().date[KEYS.tomorrow])
+            CREATORS.handleSetDate(store.getState().date[KEYS.tomorrow])
         },
     }
 }

@@ -1,39 +1,7 @@
 import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
-import { getTimetable } from '../resources/timetable'
-import store from '../store'
 
 
-const example = [
-    {
-        price: '720',
-        duration: '02:10',
-        from: '1008',
-        to: '1238',
-        departure: '08:28',
-        arrival: '16:50',
-        is_bike_allowed: true,
-        has_wheel_chair: true,
-    },
-    {
-        price: '123',
-        duration: '02:10',
-        note: 'blah blah',
-        from: '1008',
-        to: '1238',
-        departure: '08:28',
-        arrival: '16:50',
-        has_nursing_room: true,
-    },
-    {
-        price: '333',
-        duration: '03:15',
-        from: '1008',
-        to: '1238',
-        departure: '04:28',
-        arrival: '19:50',
-    },
-]
 const default_state = {
     [KEYS.schedules]: [],
     [KEYS.originalSchedules]: [],
@@ -47,8 +15,11 @@ export default (state=default_state, action) => {
             next[KEYS.schedules] = action.payload[KEYS.schedules]
             next[KEYS.originalSchedules] = action.payload[KEYS.schedules]
             break
+        case TYPES.restoreSearch:
+            next[KEYS.schedules] = state[KEYS.originalSchedules].slice()
+            break
         case TYPES.sort:
-            next[KEYS.schedules] = action.payload[KEYS.schedules].slice().sort((a, b) => {
+            next[KEYS.schedules] = state[KEYS.schedules].slice().sort((a, b) => {
                 let a_arrival = (parseInt(a.arrival.slice(0, 2)) * 60 +
                                    parseInt(a.arrival.slice(3, 5)))
                 let b_arrival = (parseInt(b.arrival.slice(0, 2)) * 60 +
@@ -67,40 +38,38 @@ export default (state=default_state, action) => {
                             b_arrival += 86400
                         }
                         return a_arrival - b_arrival
-                        break
                     case KEYS.departure:
                         return a_departure - b_departure
-                        break
                     case KEYS.duration:
                         const a_duration = (parseInt(a.duration.slice(0, 2)) * 60 +
                                             parseInt(a.duration.slice(3, 5)))
                         const b_duration = (parseInt(b.duration.slice(0, 2)) * 60 +
                                             parseInt(b.duration.slice(3, 5)))
                         return a_duration - b_duration
-                        break
                     default:
                         break
                 }
+
+                return 0
             })
             break
         case TYPES.filter:
-            let schedules = action.payload[KEYS.schedules].slice()
+            let schedules = state[KEYS.schedules].slice()
 
             for (let filter of action.payload[KEYS.selectedFilters]) {
                 schedules = schedules.slice().filter(schedule => {
                     switch (filter) {
                         case KEYS.wheelChair:
                             return schedule.has_wheel_chair
-                            break
                         case KEYS.bikeSpace:
                             return schedule.is_bike_allowed
-                            break
                         case KEYS.nursingRoom:
                             return schedule.has_nursing_room
-                            break
                         default:
                             break
                     }
+
+                    return true
                 })
             }
 

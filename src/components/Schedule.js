@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import { Card, withStyles, Icon, Grid, Button, Chip, Link } from '@material-ui/core'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+import { Card, Icon, Grid, Button } from '@material-ui/core'
 import KEYS from '../constants/keys'
 
 import { getName } from '../resources/stations'
@@ -57,7 +56,7 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
             return (
                 <React.Fragment>
                     <hr
-                      style={ {'background-color': '#555', width: '100%', height: '0.05rem', border: 'none'} }
+                      style={ {'backgroundColor': '#555', width: '100%', height: '0.05rem', border: 'none'} }
                     />
                     <Grid
                       item
@@ -96,6 +95,7 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
 
     const renderStop = (time, name) => (
         <Grid
+          key={time}
           item
           xs={12}
         >
@@ -137,7 +137,7 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
         <Card
           style={ {margin: '1rem 0 0 0',
                    padding: '.3rem',
-                   'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'} }
+                   'boxShadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'} }
         >
             <Grid
               container
@@ -161,8 +161,6 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
 Schedule.propTypes = {
     index: PropTypes.number.isRequired,
 
-    train_type_name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
     from: PropTypes.string.isRequired,
     to: PropTypes.string.isRequired,
     departure: PropTypes.string.isRequired,

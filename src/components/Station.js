@@ -4,8 +4,6 @@ import { Button, Grid, InputLabel, Select } from '@material-ui/core'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 import SearchIcon from '@material-ui/icons/Search'
 
-import KEYS from '../constants/keys'
-
 
 const Station = ({selectedFrom, selectedTo, stations,
                   onSwapStation, onSetFromStation, onSetToStation, onSearch}) => {

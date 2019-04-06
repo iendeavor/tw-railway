@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 
 import Filter from '../components/Filter'
-import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
 import CREATORS from '../constants/actionCreators'
 

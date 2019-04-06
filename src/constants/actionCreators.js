@@ -6,7 +6,7 @@ import { getTimetable } from '../resources/timetable'
 
 const dispatch = store.dispatch
 
-const handleChangeDate = date => {
+const handleSetDate = date => {
     dispatch({
         type: TYPES.setDate,
         payload: {
@@ -69,6 +69,12 @@ const handleSearchRequest = () => {
     })
 }
 
+const handleRestoreSearch = () => {
+    dispatch({
+        type: TYPES.restoreSearch,
+    })
+}
+
 const handleSetSort = value => {
     dispatch({
         type: TYPES.setSort,
@@ -82,19 +88,16 @@ const handleSetSort = value => {
             },
         },
     })
+    handleRestoreSearch()
     handleSort()
-    handleFilter(store.getState().schedule[KEYS.schedules])
+    handleFilter()
 }
 
-const handleSort = schedules => {
-    if (schedules === undefined) {
-        schedules = store.getState().schedule[KEYS.originalSchedules]
-    }
+const handleSort = () => {
     dispatch({
         type: TYPES.sort,
         payload: {
             [KEYS.sortBy]: store.getState().sort[KEYS.sortBy],
-            [KEYS.schedules]: schedules,
         },
         meta: {
             debounce: {
@@ -105,15 +108,11 @@ const handleSort = schedules => {
     })
 }
 
-const handleFilter = schedules => {
-    if (schedules === undefined) {
-        schedules = store.getState().schedule[KEYS.originalSchedules]
-    }
+const handleFilter = () => {
     dispatch({
         type: TYPES.filter,
-        payload: {
+        payload:{
             [KEYS.selectedFilters]: store.getState().filter[KEYS.selectedFilters],
-            [KEYS.schedules]: schedules,
         },
         meta: {
             debounce: {
@@ -138,7 +137,7 @@ const handleAddingFilter = value => {
         },
     })
     handleFilter()
-    handleSort(store.getState().schedule[KEYS.schedules])
+    handleSort()
 }
 
 const handleRemovingFilter = value => {
@@ -154,20 +153,26 @@ const handleRemovingFilter = value => {
             },
         },
     })
+    handleRestoreSearch()
     handleFilter()
     handleSort(store.getState().schedule[KEYS.schedules])
 }
 
 const CREATORS = Object.freeze({
-    handleChangeDate,
+    handleSetDate,
+
     handleSetFromStation,
     handleSetToStation,
     handleSwapStation,
+
     handleSearchRequest,
+    handleRestoreSearch,
+
     handleAddingFilter,
     handleRemovingFilter,
-    handleSetSort,
     handleFilter,
+
+    handleSetSort,
     handleSort,
 })
 

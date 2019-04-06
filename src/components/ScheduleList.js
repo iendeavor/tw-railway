@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Grid } from '@material-ui/core'
 
-import KEYS from '../constants/keys'
 import Schedule from '../containers/Schedule'
 
 
@@ -20,6 +19,7 @@ const ScheduleList = ({schedules}) => {
                         <Schedule
                           {...schedule}
                           index={ i }
+                          key={i}
                         />
                     )
                 })}

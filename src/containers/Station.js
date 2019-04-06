@@ -1,10 +1,8 @@
 import { connect } from 'react-redux'
 
 import Station from '../components/Station'
-import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
 import CREATORS from '../constants/actionCreators'
-import store from '../store'
 
 const mapStateToProps = state => {
     return {

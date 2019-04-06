@@ -7,10 +7,10 @@ const parseTrainTypes = () => {
             let res = {}
 
             const name = train_type_info.TrainTypeName.En
-            if (name.indexOf('Limited Express') != -1) {
+            if (name.indexOf('Limited Express') !== -1) {
                 res[train_type_info.TrainTypeID] = KEYS.limitedExpress
                 res[KEYS.limitedExpress] = train_type_info.TrainTypeID
-            } else if (name.indexOf('Express') != -1) {
+            } else if (name.indexOf('Express') !== -1) {
                 res[train_type_info.TrainTypeID] = KEYS.epress
                 res[KEYS.epress] = train_type_info.TrainTypeID
             } else {
