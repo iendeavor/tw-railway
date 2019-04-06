@@ -55,7 +55,7 @@ const Sort = ({selectedSort, onSetSort}) => {
 }
 
 Sort.propTypes = {
-    selectedSort: PropTypes.oneOf([KEYS.arrival, KEYS.departure, KEYS.cheapCost, KEYS.smallTransfer]).isRequired,
+    selectedSort: PropTypes.oneOf([KEYS.duration, KEYS.arrival, KEYS.departure, KEYS.cheapCost, KEYS.smallTransfer]).isRequired,
     onSetSort: PropTypes.func.isRequired,
 }
 
