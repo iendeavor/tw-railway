@@ -9,7 +9,9 @@ export const DEPARTURE     = 'DEPARTURE'
 export const ARRIVAL       = 'ARRIVAL'
 export const DURATION      = 'DURATION'
 
-export const ON_DATE       = 'ON_DATE'
+export const DEPARTURE_DATE  = 'DEPARTURE_DATE'
+export const TODAY           = 'TODAY'
+export const TOMORROW        = 'TOMORROW'
 
 export const SCHEDULES     = 'SCHEDULES'
 

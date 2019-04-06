@@ -1,65 +1,32 @@
 import { connect } from 'react-redux'
 
 import { SET_DATE } from '../constants/actionTypes'
-import { ON_DATE } from '../constants/keys'
+import { TODAY, TOMORROW, DEPARTURE_DATE } from '../constants/keys'
 import Date_ from '../components/Date'
+import { handleChangeDate } from '../constants/actionCreators'
+import store from '../store'
 
 
-const toYYYYMMDD = date => date.toISOString().slice(0, 10)
-const getToday = () => new Date()
-const getTomorrow = () => new Date(getToday() / 1 + (86400 * 1000))
+const removeTime = date => date.toISOString().slice(0, 10)
 
 const mapStateToProps = state => {
     return {
-        yyyymmdd: toYYYYMMDD(state.date[ON_DATE]),
-        isToday: toYYYYMMDD(state.date[ON_DATE]) === toYYYYMMDD(getToday()),
-        isTomorrow: toYYYYMMDD(state.date[ON_DATE]) === toYYYYMMDD(getTomorrow()),
+        yyyymmdd: removeTime(state.date[DEPARTURE_DATE]),
+        isToday: removeTime(state.date[DEPARTURE_DATE]) === removeTime(state.date[TODAY]),
+        isTomorrow: removeTime(state.date[DEPARTURE_DATE]) === removeTime(state.date[TOMORROW]),
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleChangeDate: event => {
-            dispatch({
-                type: SET_DATE,
-                payload: {
-                    date: new Date(event.target.value),
-                },
-                meta: {
-                    debounce: {
-                        time: 300,
-                        leading: true,
-                    },
-                },
-            })
+        onChangeDate: event => {
+            handleChangeDate(event.target.value)
         },
-        handleSetToday: event => {
-            dispatch({
-                type: SET_DATE,
-                payload: {
-                    date: getToday(),
-                },
-                meta: {
-                    debounce: {
-                        time: 300,
-                        leading: true,
-                    },
-                },
-            })
+        onSetToday: event => {
+            handleChangeDate(store.getState().date[TODAY])
         },
-        handleSetTomorrow: event => {
-            dispatch({
-                type: SET_DATE,
-                payload: {
-                    date: getTomorrow(),
-                },
-                meta: {
-                    debounce: {
-                        time: 300,
-                        leading: true,
-                    },
-                },
-            })
+        onSetTomorrow: event => {
+            handleChangeDate(store.getState().date[TOMORROW])
         },
     }
 }

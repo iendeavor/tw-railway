@@ -8,7 +8,7 @@ import { ON_DATE } from '../constants/keys'
 
 
 const Date_ = ({yyyymmdd, isToday, isTomorrow,
-                handleChangeDate, handleSetToday, handleSetTomorrow}) => {
+                onChangeDate, onSetToday, onSetTomorrow}) => {
     return(
         <Grid
           container
@@ -25,7 +25,7 @@ const Date_ = ({yyyymmdd, isToday, isTomorrow,
                   style={{width: '100%'}}
                   type="date"
                   value={ yyyymmdd }
-                  onChange={ handleChangeDate }
+                  onChange={ onChangeDate }
                 />
             </Grid>
 
@@ -41,7 +41,7 @@ const Date_ = ({yyyymmdd, isToday, isTomorrow,
                         <Button
                           variant={ isToday ? 'contained' : 'text' }
                           color='primary'
-                          onClick={ handleSetToday }
+                          onClick={ onSetToday }
                           size='small'
                         >
                             Today
@@ -53,7 +53,7 @@ const Date_ = ({yyyymmdd, isToday, isTomorrow,
                         <Button
                           variant={ isTomorrow ? 'contained' : 'text' }
                           color='primary'
-                          onClick={ handleSetTomorrow }
+                          onClick={ onSetTomorrow }
                           size='small'
                         >
                             Tomorrow
@@ -69,9 +69,9 @@ Date_.propTypes = {
     yyyymmdd: PropTypes.string.isRequired,
     isToday: PropTypes.bool,
     isTomorrow: PropTypes.bool,
-    handleChangeDate: PropTypes.func.isRequired,
-    handleSetToday: PropTypes.func.isRequired,
-    handleSetTomorrow: PropTypes.func.isRequired,
+    onChangeDate: PropTypes.func.isRequired,
+    onSetToday: PropTypes.func.isRequired,
+    onSetTomorrow: PropTypes.func.isRequired,
 }
 
 export default Date_

@@ -1,11 +1,18 @@
 import { SET_DATE } from '../constants/actionTypes'
-import { ON_DATE } from '../constants/keys'
+import { TODAY, TOMORROW, DEPARTURE_DATE } from '../constants/keys'
 
 
-const toYYYYMMDD = date => date.toISOString().substring(0, 10)  // 1970-01-01
+const getTimezoneOffset = () => new Date().getTimezoneOffset() * 60 * 1000
+const offsetDate = date => new Date(+date - getTimezoneOffset())
+const removeTime = date => date.toISOString().substring(0, 10)  // 1970-01-01
+const unifyDate = date => new Date(removeTime(offsetDate(date)))
+const getUnifiedToday = () => unifyDate(new Date())
+const getUnifiedTomorrow = () => unifyDate(new Date(+new Date() + 86400 * 1000))
 
 const defaultState = {
-    [ON_DATE]: new Date()
+    [DEPARTURE_DATE]: unifyDate(new Date()),
+    [TODAY]: getUnifiedToday(),
+    [TOMORROW]: getUnifiedTomorrow(),
 }
 
 export default (state=defaultState, action) => {
@@ -13,11 +20,18 @@ export default (state=defaultState, action) => {
 
     switch (action.type) {
         case SET_DATE:
-            const today = Math.floor(new Date(toYYYYMMDD(new Date())) / 1000)
-            const date = Math.floor(action.payload.date / 1000)
-            if (date >= today) {
-                next[ON_DATE] = action.payload.date
+            const today = getUnifiedToday()
+            let selected_date
+            if (typeof action.payload[DEPARTURE_DATE] === 'string') {
+                selected_date = new Date(action.payload[DEPARTURE_DATE])
+            } else {
+                selected_date = unifyDate(action.payload[DEPARTURE_DATE])
             }
+            if (+selected_date >= +today) {
+                next[DEPARTURE_DATE] = selected_date
+            }
+            next[TODAY] = today
+            next[TOMORROW] = getUnifiedTomorrow()
             break
         default:
             break
