@@ -15,31 +15,50 @@ const Main = props => (
         <Grid
           item
           xs={12}
-          md={6}
+          style={{
+              border: '1px solid #ddd',
+              boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
+              borderRadius: '5px',
+              padding: '5px'
+          }}
         >
-            <DateComponent />
-        </Grid>
+            <Grid
+              container
+            >
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  style={{padding: '5px 0'}}
+                >
+                    <DateComponent />
+                </Grid>
 
-        <Grid
-          item
-          xs={12}
-          md={6}
-        >
-            <Station />
-        </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  style={{padding: '5px 0'}}
+                >
+                    <Station />
+                </Grid>
 
-        <Grid
-          item
-          xs={10}
-        >
-            <Filter />
-        </Grid>
+                <Grid
+                  item
+                  xs={10}
+                  style={{padding: '15px 0 5px'}}
+                >
+                    <Filter />
+                </Grid>
 
-        <Grid
-          item
-          xs={12}
-        >
-            <Sort />
+                <Grid
+                  item
+                  xs={12}
+                  style={{padding: '5px 0'}}
+                >
+                    <Sort />
+                </Grid>
+            </Grid>
         </Grid>
 
         <Grid

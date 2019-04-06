@@ -135,9 +135,11 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
 
     return (
         <Card
-          style={ {margin: '1rem 0 0 0',
-                   padding: '.3rem',
-                   'boxShadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'} }
+          style={{
+              margin: '1rem 0 0 0',
+              padding: '.3rem',
+              boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
+          }}
         >
             <Grid
               container

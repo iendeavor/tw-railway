@@ -22,7 +22,7 @@ const Station = ({selectedFrom, selectedTo, stations,
                 >
                     <Grid
                       item
-                      xs={9}
+                      xs={8}
                     >
                         <InputLabel shrink>
                             From
@@ -72,7 +72,7 @@ const Station = ({selectedFrom, selectedTo, stations,
                 >
                     <Grid
                       item
-                      xs={9}
+                      xs={8}
                     >
                         <InputLabel shrink>
                             To
@@ -106,7 +106,7 @@ const Station = ({selectedFrom, selectedTo, stations,
                     >
                         <Button
                           onClick={ onSearch }
-                          variant='text'
+                          variant='contained'
                           color='secondary'
                           size='small'
                         >

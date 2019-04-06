@@ -10,9 +10,12 @@ const Date_ = ({selectedDate, isToday, isTomorrow,
         <Grid
           container
           alignItems="flex-end"
+          justify='space-between'
         >
             <Grid
               item
+              xs={5}
+              sm={4}
             >
                 <InputLabel shrink>
                     Depature date
@@ -28,6 +31,7 @@ const Date_ = ({selectedDate, isToday, isTomorrow,
 
             <Grid
               item
+              xs={7}
             >
                 <Grid
                   container
