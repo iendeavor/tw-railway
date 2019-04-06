@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 
 import ScheduleList from '../components/ScheduleList'
-import { SCHEDULES } from '../constants/keys'
+import KEYS from '../constants/keys'
 
 
 const mapStateToProps = state => {
     return {
-        schedules: state.schedule[SCHEDULES],
+        schedules: state.schedule[KEYS.schedules],
     }
 }
 

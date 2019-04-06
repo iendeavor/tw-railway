@@ -1,5 +1,5 @@
 import reducer from '../date'
-import ACTION_TYPES from '../../constants/actionTypes'
+import TYPES from '../../constants/actionTypes'
 import KEYS from '../../constants/keys'
 
 const format = date => date.toISOString().substring(0, 10) // '1970-01-01'
@@ -19,7 +19,7 @@ describe('Test date reducer', () => {
         })
 
         const ACTION = {
-            type: ACTION_TYPES.setDate,
+            type: TYPES.setDate,
             payload: {
                 [KEYS.departureDate]: TOMORROW,
             }
@@ -35,7 +35,7 @@ describe('Test date reducer', () => {
         })
 
         const ACTION = {
-            type: ACTION_TYPES.setDate,
+            type: TYPES.setDate,
             payload: {
                 [KEYS.departureDate]: FORMATTED_TOMORROW,
             }

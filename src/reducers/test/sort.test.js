@@ -1,4 +1,4 @@
-import ACTION_TYPES from '../../constants/actionTypes'
+import TYPES from '../../constants/actionTypes'
 import KEYS from '../../constants/keys'
 
 import reducer from '../sort'
@@ -18,7 +18,7 @@ describe('Test sort reducer', () => {
 
     it('should update with specified key', () => {
         const action = {
-            type: ACTION_TYPES.setSort,
+            type: TYPES.setSort,
             payload: {
                 [KEYS.sortBy]: KEYS.departure
             }

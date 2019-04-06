@@ -1,4 +1,4 @@
-import ACTION_TYPES from '../../constants/actionTypes'
+import TYPES from '../../constants/actionTypes'
 import KEYS from '../../constants/keys'
 
 import reducer from '../station'
@@ -24,7 +24,7 @@ describe('Test station reducer', () => {
 
     it('should update from station with specified key', () => {
         const action = {
-            type: ACTION_TYPES.setFromStation,
+            type: TYPES.setFromStation,
             payload: {
                 [KEYS.fromStation]: RANDOM_ID,
             }
@@ -37,7 +37,7 @@ describe('Test station reducer', () => {
 
     it('should update to station with specified key', () => {
         const action = {
-            type: ACTION_TYPES.setToStation,
+            type: TYPES.setToStation,
             payload: {
                 [KEYS.toStation]: RANDOM_ID,
             }
@@ -50,7 +50,7 @@ describe('Test station reducer', () => {
 
     it('should swap from and to station', () => {
         const action = {
-            type: ACTION_TYPES.swapStation,
+            type: TYPES.swapStation,
         }
 
         const nextState = reducer(prevState, action)

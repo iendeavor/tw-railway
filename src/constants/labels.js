@@ -1,10 +1,10 @@
-import { WHEEL_CHAIR, BIKE_SPACE, NURSING_ROOM } from './keys'
+import KEYS from './keys'
 
 export const FILTER_LABELS = Object.freeze({
     tw: {
-        [WHEEL_CHAIR]: '輪椅',
-        [BIKE_SPACE]: '自行車位',
-        [NURSING_ROOM]: '哺乳室',
+        [KEYS.wheelChair]: '輪椅',
+        [KEYS.bikeSpace]: '自行車位',
+        [KEYS.nursingRoom]: '哺乳室',
     }
 })
 

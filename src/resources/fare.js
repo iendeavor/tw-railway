@@ -1,4 +1,4 @@
-import { LIMITED_EXPRESS, EXPRESS, SEMI_EXPRESS } from '../constants/train'
+import KEYS from '../constants/keys'
 
 export const getFare = (from, to) => {
     return new Promise((success, error) => {
@@ -28,13 +28,13 @@ const formatFare = fare => {
     for (let f of fare) {
         switch (f.TicketType) {
             case '成自':
-                res[LIMITED_EXPRESS] = f.Price
+                res[KEYS.limitedExpress] = f.Price
                 break
             case '成莒':
-                res[EXPRESS] = f.Price
+                res[KEYS.epress] = f.Price
                 break
             case '成普':
-                res[SEMI_EXPRESS] = f.Price
+                res[KEYS.semiExpress] = f.Price
                 break
             default:
                 break

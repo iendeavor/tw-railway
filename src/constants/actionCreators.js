@@ -1,15 +1,14 @@
-import ACTION_TYPES from './actionTypes'
+import TYPES from './actionTypes'
 import KEYS from './keys'
-
 import store from '../store'
 import { getTimetable } from '../resources/timetable'
 
 
 const dispatch = store.dispatch
 
-export const handleChangeDate = date => {
+const handleChangeDate = date => {
     dispatch({
-        type: ACTION_TYPES.setDate,
+        type: TYPES.setDate,
         payload: {
             [KEYS.departureDate]: date,
         },
@@ -22,9 +21,9 @@ export const handleChangeDate = date => {
     })
 }
 
-export const handleSetFromStation = ID => {
+const handleSetFromStation = ID => {
     dispatch({
-        type: ACTION_TYPES.setFromStation,
+        type: TYPES.setFromStation,
         payload: {
             [KEYS.fromStation]: ID,
         },
@@ -37,9 +36,9 @@ export const handleSetFromStation = ID => {
     })
 }
 
-export const handleSetToStation = ID => {
+const handleSetToStation = ID => {
     dispatch({
-        type: ACTION_TYPES.setToStation,
+        type: TYPES.setToStation,
         payload: {
             [KEYS.toStation]: ID,
         },
@@ -51,21 +50,126 @@ export const handleSetToStation = ID => {
     })
 }
 
-export const handleSwapStation = () => {
-    dispatch({ type: ACTION_TYPES.swapStation, })
+const handleSwapStation = () => {
+    dispatch({ type: TYPES.swapStation, })
 }
 
-export const handleSearchRequest = () => {
+const handleSearchRequest = () => {
     const from = store.getState().station[KEYS.fromStation]
     const to = store.getState().station[KEYS.toStation]
     const on = store.getState().date[KEYS.departureDate]
     getTimetable(from, to, on).then(timetable => {
         dispatch({
-            type: ACTION_TYPES.search,
+            type: TYPES.search,
             payload: {
                 [KEYS.schedules]: timetable,
             },
         })
+        handleSetSort(store.getState().sort[KEYS.sortBy])
     })
 }
+
+const handleSetSort = value => {
+    dispatch({
+        type: TYPES.setSort,
+        payload: {
+            [KEYS.sortBy]: value
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
+    handleSort()
+    handleFilter(store.getState().schedule[KEYS.schedules])
+}
+
+const handleSort = schedules => {
+    if (schedules === undefined) {
+        schedules = store.getState().schedule[KEYS.originalSchedules]
+    }
+    dispatch({
+        type: TYPES.sort,
+        payload: {
+            [KEYS.sortBy]: store.getState().sort[KEYS.sortBy],
+            [KEYS.schedules]: schedules,
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
+}
+
+const handleFilter = schedules => {
+    if (schedules === undefined) {
+        schedules = store.getState().schedule[KEYS.originalSchedules]
+    }
+    dispatch({
+        type: TYPES.filter,
+        payload: {
+            [KEYS.selectedFilters]: store.getState().filter[KEYS.selectedFilters],
+            [KEYS.schedules]: schedules,
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
+}
+
+const handleAddingFilter = value => {
+    dispatch({
+        type: TYPES.addFilter,
+        payload: {
+            [KEYS.selectedFilter]: value,
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
+    handleFilter()
+    handleSort(store.getState().schedule[KEYS.schedules])
+}
+
+const handleRemovingFilter = value => {
+    dispatch({
+        type: TYPES.removeFilter,
+        payload: {
+            [KEYS.selectedFilter]: value,
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
+    handleFilter()
+    handleSort(store.getState().schedule[KEYS.schedules])
+}
+
+const CREATORS = Object.freeze({
+    handleChangeDate,
+    handleSetFromStation,
+    handleSetToStation,
+    handleSwapStation,
+    handleSearchRequest,
+    handleAddingFilter,
+    handleRemovingFilter,
+    handleSetSort,
+    handleFilter,
+    handleSort,
+})
+
+export default CREATORS
 

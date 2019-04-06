@@ -1,32 +1,32 @@
 import { connect } from 'react-redux'
 
 import Station from '../components/Station'
-import { SEARCH, SWAP_STATION, SET_FROM_STATION, SET_TO_STATION } from '../constants/actionTypes'
-import { FROM_STATION, TO_STATION, DEPARTURE_DATE, STATIONS } from '../constants/keys'
+import TYPES from '../constants/actionTypes'
+import KEYS from '../constants/keys'
+import CREATORS from '../constants/actionCreators'
 import store from '../store'
-import { handleSwapStation, handleSetFromStation, handleSetToStation, handleSearchRequest } from '../constants/actionCreators'
 
 const mapStateToProps = state => {
     return {
-        from: state.station[FROM_STATION] + '',
-        to: state.station[TO_STATION] + '',
-        stations: state.station[STATIONS],
+        selectedFrom: state.station[KEYS.fromStation] + '',
+        selectedTo: state.station[KEYS.toStation] + '',
+        stations: state.station[KEYS.stations],
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onSetFromStation: event => {
-            handleSetFromStation(event.target.value)
+            CREATORS.handleSetFromStation(event.target.value)
         },
         onSetToStation: event => {
-            handleSetToStation(event.target.value)
+            CREATORS.handleSetToStation(event.target.value)
         },
         onSwapStation: event => {
-            handleSwapStation()
+            CREATORS.handleSwapStation()
         },
         onSearch: event => {
-            handleSearchRequest()
+            CREATORS.handleSearchRequest()
         },
     }
 }

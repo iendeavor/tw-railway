@@ -1,4 +1,4 @@
-import ACTION_TYPES from '../constants/actionTypes'
+import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
 
 const defaultState = {
@@ -11,10 +11,10 @@ export default (state=defaultState, action) => {
 
     if (action !== undefined) {
         switch (action.type) {
-            case ACTION_TYPES.setSort:
+            case TYPES.setSort:
                 next[KEYS.sortBy] = action.payload[KEYS.sortBy]
                 break
-            case ACTION_TYPES.setOrder:
+            case TYPES.setOrder:
                 next[KEYS.orderBy] = action.payload[KEYS.orderBy]
                 break
             default:

@@ -1,5 +1,5 @@
 import src from './train_type.json'
-import { LIMITED_EXPRESS, EXPRESS, SEMI_EXPRESS } from '../constants/train'
+import KEYS from '../constants/keys'
 
 const parseTrainTypes = () => {
     return Object.freeze(
@@ -8,14 +8,14 @@ const parseTrainTypes = () => {
 
             const name = train_type_info.TrainTypeName.En
             if (name.indexOf('Limited Express') != -1) {
-                res[train_type_info.TrainTypeID] = LIMITED_EXPRESS
-                res[LIMITED_EXPRESS] = train_type_info.TrainTypeID
+                res[train_type_info.TrainTypeID] = KEYS.limitedExpress
+                res[KEYS.limitedExpress] = train_type_info.TrainTypeID
             } else if (name.indexOf('Express') != -1) {
-                res[train_type_info.TrainTypeID] = EXPRESS
-                res[EXPRESS] = train_type_info.TrainTypeID
+                res[train_type_info.TrainTypeID] = KEYS.epress
+                res[KEYS.epress] = train_type_info.TrainTypeID
             } else {
-                res[train_type_info.TrainTypeID] = SEMI_EXPRESS
-                res[SEMI_EXPRESS] = train_type_info.TrainTypeID
+                res[train_type_info.TrainTypeID] = KEYS.semiExpress
+                res[KEYS.semiExpress] = train_type_info.TrainTypeID
             }
 
             return res

@@ -32,14 +32,14 @@ const Main = props => (
           item
           xs={10}
         >
-            {false && <Filter />}
+            <Filter />
         </Grid>
 
         <Grid
           item
           xs={12}
         >
-            {false && <Sort />}
+            <Sort />
         </Grid>
 
         <Grid

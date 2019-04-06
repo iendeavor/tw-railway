@@ -4,10 +4,10 @@ import { Button, Grid, InputLabel, Select } from '@material-ui/core'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 import SearchIcon from '@material-ui/icons/Search'
 
-import { FROM_STATION, TO_STATION, STATIONS } from '../constants/keys'
+import KEYS from '../constants/keys'
 
 
-const Station = ({from, to, stations,
+const Station = ({selectedFrom, selectedTo, stations,
                   onSwapStation, onSetFromStation, onSetToStation, onSearch}) => {
     return (
         <Grid
@@ -32,8 +32,8 @@ const Station = ({from, to, stations,
 
                         <Select
                           native
-                          key={ from }
-                          defaultValue={ from }
+                          key={ selectedFrom }
+                          defaultValue={ selectedFrom }
                           onChange={ onSetFromStation }
                           style={ {width: '100%'} }
                         >
@@ -82,8 +82,8 @@ const Station = ({from, to, stations,
 
                         <Select
                           native
-                          key={ to }
-                          defaultValue={ to }
+                          key={ selectedTo }
+                          defaultValue={ selectedTo }
                           onChange={ onSetToStation }
                           style={ {width: '100%'} }
                         >
@@ -122,8 +122,8 @@ const Station = ({from, to, stations,
 }
 
 Station.propTypes = {
-    from: PropTypes.string.isRequired,
-    to: PropTypes.string.isRequired,
+    selectedFrom: PropTypes.string.isRequired,
+    selectedTo: PropTypes.string.isRequired,
     stations: PropTypes.array.isRequired,
     onSwapStation: PropTypes.func.isRequired,
     onSetFromStation: PropTypes.func.isRequired,

@@ -1,23 +1,22 @@
-import {
-    ADD_FILTER,
-    REMOVE_FILTER,
-} from '../constants/actionTypes'
+import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
 
 
 const defaultState = {
-    selectedValues: new Set(),
+    [KEYS.selectedFilters]: new Set(),
 }
 
 export default (state=defaultState, action) => {
     const next = {...state}
 
+    let selectedFilters = new Set(Array.from(next[KEYS.selectedFilters]))
     switch (action.type) {
-        case ADD_FILTER:
-            next[KEYS.selectedValues].add(action.payload.value)
+        case TYPES.addFilter:
+            next[KEYS.selectedFilters] = selectedFilters.add(action.payload[KEYS.selectedFilter])
             break
-        case REMOVE_FILTER:
-            next[KEYS.selectedValues].delete(action.payload.value)
+        case TYPES.removeFilter:
+            selectedFilters.delete(action.payload[KEYS.selectedFilter])
+            next[KEYS.selectedFilters] = selectedFilters
             break
         default:
             break

@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import { withStyles, Icon, Grid, Button, Chip, Link } from '@material-ui/core'
+import { Card, withStyles, Icon, Grid, Button, Chip, Link } from '@material-ui/core'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+import KEYS from '../constants/keys'
 
 import { getName } from '../resources/stations'
 
 
-const Schedule = ({train_type_name, from, to, duration, arrival, departure, type, price, has_nursing_room, is_bike_allowed, has_wheel_chair, isDaily, note}) => {
+const Schedule = ({train_type_name, from, to, duration, arrival, departure, type, price, has_nursing_room, is_bike_allowed, has_wheel_chair, isDaily, note, index, onAddingFilter, onRemovingFilter}) => {
     const ICON_STYLE = {
         height: '1.8rem',
 
@@ -62,9 +63,30 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
                       item
                       xs={12}
                     >
-                        {has_nursing_room && <Icon style={ NURSING_ROOM_STYLE } className={ clsx('fas fa-baby') } />}
-                        {is_bike_allowed && <Icon style={ BIKE_SPACE_STYLE } className={ clsx('fas fa-bicycle') } />}
-                        {has_wheel_chair && <Icon style={ WHEEL_CHAIR_STYLE } className={ clsx('fas fa-wheelchair') } />}
+                        {has_nursing_room && (
+                            <Button
+                              size='small'
+                              onClick={ () => onAddingFilter(KEYS.nursingRoom) }
+                            >
+                                <Icon style={ NURSING_ROOM_STYLE } className={ clsx('fas fa-baby') } />
+                            </Button>
+                        )}
+                        {is_bike_allowed && (
+                            <Button
+                              size='small'
+                              onClick={ () => onAddingFilter(KEYS.bikeSpace) }
+                            >
+                                <Icon style={ BIKE_SPACE_STYLE } className={ clsx('fas fa-bicycle') } />
+                            </Button>
+                        )}
+                        {has_wheel_chair && (
+                            <Button
+                              size='small'
+                              onClick={ () => onAddingFilter(KEYS.wheelChair) }
+                            >
+                                <Icon style={ WHEEL_CHAIR_STYLE } className={ clsx('fas fa-wheelchair') } />
+                            </Button>
+                        )}
                         <span style={ {fontSize: '.8rem'} }>{ note }</span>
                     </Grid>
                 </React.Fragment>
@@ -112,24 +134,33 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
     )
 
     return (
-        <Grid
-          container
-          justify='center'
-          alignItems='center'
+        <Card
+          style={ {margin: '1rem 0 0 0',
+                   padding: '.3rem',
+                   'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'} }
         >
-            { renderHeader() }
+            <Grid
+              container
+              justify='center'
+              alignItems='center'
+              key={ departure + arrival + '-' + index }
+            >
+                { renderHeader() }
 
-            {  renderStops([
-                    {time: departure, name: getName(from)},
-                    {time: arrival, name: getName(to)}],
-            )}
+                {  renderStops([
+                        {time: departure, name: getName(from)},
+                        {time: arrival, name: getName(to)}],
+                )}
 
-            { renderFooter() }
-        </Grid>
+                { renderFooter() }
+            </Grid>
+        </Card>
     )
 }
 
 Schedule.propTypes = {
+    index: PropTypes.number.isRequired,
+
     train_type_name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     from: PropTypes.string.isRequired,
@@ -142,6 +173,9 @@ Schedule.propTypes = {
     is_bike_allowed: PropTypes.bool,
     is_daily: PropTypes.bool,
     note: PropTypes.string,
+
+    onAddingFilter: PropTypes.func.isRequired,
+    onRemovingFilter: PropTypes.func.isRequired,
 }
 
 export default Schedule

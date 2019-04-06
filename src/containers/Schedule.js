@@ -1,13 +1,12 @@
 import { connect } from 'react-redux'
 
-import Filter from '../components/Filter'
-import TYPES from '../constants/actionTypes'
+import Schedule from '../components/Schedule'
 import KEYS from '../constants/keys'
 import CREATORS from '../constants/actionCreators'
 
+
 const mapStateToProps = state => {
     return {
-       selectedValues: Array.from(state.filter[KEYS.selectedFilters]),
     }
 }
 
@@ -22,5 +21,5 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default connect(mapStateToProps, mapDispatchToProps)(Schedule)
 

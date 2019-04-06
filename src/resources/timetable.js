@@ -1,6 +1,6 @@
 import { getTrainTypeName } from './train_type'
 import { getFare } from './fare'
-import { LIMITED_EXPRESS } from '../constants/train'
+import KEYS from '../constants/keys'
 
 export const getTimetable = (from, to, on) => {
     const yyyymmdd = on.toISOString().slice(0, 10)
@@ -39,7 +39,9 @@ const calcDuration = pair => {
     }
     const duration_minute = (arrival_minute - departure_minute) % 60
     const duration_hour = parseInt((arrival_minute - departure_minute) / 60)
-    return duration_hour + ':' + duration_minute
+    return (String(duration_hour).padStart(2, '0') +
+            ':' +
+            String(duration_minute).padStart(2, '0'))
 }
 
 const formatTimetable = timetable => {

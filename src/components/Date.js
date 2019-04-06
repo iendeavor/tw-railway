@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { InputLabel, Grid, TextField, Button } from '@material-ui/core';
 import 'react-datepicker/dist/react-datepicker.css'
 
-import { SET_DATE } from '../constants/actionTypes'
-import { ON_DATE } from '../constants/keys'
+import TYPES from '../constants/actionTypes'
+import KEYS from '../constants/keys'
 
 
-const Date_ = ({yyyymmdd, isToday, isTomorrow,
+const Date_ = ({selectedDate, isToday, isTomorrow,
                 onChangeDate, onSetToday, onSetTomorrow}) => {
     return(
         <Grid
@@ -24,7 +24,7 @@ const Date_ = ({yyyymmdd, isToday, isTomorrow,
                 <TextField
                   style={{width: '100%'}}
                   type="date"
-                  value={ yyyymmdd }
+                  value={ selectedDate }
                   onChange={ onChangeDate }
                 />
             </Grid>
@@ -66,7 +66,7 @@ const Date_ = ({yyyymmdd, isToday, isTomorrow,
 }
 
 Date_.propTypes = {
-    yyyymmdd: PropTypes.string.isRequired,
+    selectedDate: PropTypes.string.isRequired,
     isToday: PropTypes.bool,
     isTomorrow: PropTypes.bool,
     onChangeDate: PropTypes.func.isRequired,

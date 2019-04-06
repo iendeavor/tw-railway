@@ -2,11 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Button, InputLabel } from '@material-ui/core'
 
-import {
-    WHEEL_CHAIR,
-    BIKE_SPACE,
-    NURSING_ROOM,
-} from '../constants/keys'
+import KEYS from '../constants/keys'
 import {
     FILTER_LABELS,
 } from '../constants/labels'
@@ -14,9 +10,9 @@ import {
 
 const Filter = ({selectedValues, onAddingFilter, onRemovingFilter}) => {
     const options = [
-        {value: WHEEL_CHAIR, label: FILTER_LABELS.tw[WHEEL_CHAIR]},
-        {value: BIKE_SPACE, label: FILTER_LABELS.tw[BIKE_SPACE]},
-        {value: NURSING_ROOM, label: FILTER_LABELS.tw[NURSING_ROOM]},
+        {value: KEYS.wheelChair, label: FILTER_LABELS.tw[KEYS.wheelChair]},
+        {value: KEYS.bikeSpace, label: FILTER_LABELS.tw[KEYS.bikeSpace]},
+        {value: KEYS.nursingRoom, label: FILTER_LABELS.tw[KEYS.nursingRoom]},
     ]
 
     return (

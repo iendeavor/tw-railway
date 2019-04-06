@@ -1,13 +1,5 @@
-import {
-    SWAP_STATION,
-    SET_FROM_STATION,
-    SET_TO_STATION,
-} from '../constants/actionTypes'
-import {
-    FROM_STATION,
-    TO_STATION,
-    STATIONS,
-} from '../constants/keys'
+import TYPES from '../constants/actionTypes'
+import KEYS from '../constants/keys'
 import { stations } from '../resources/stations'
 
 
@@ -19,9 +11,9 @@ const options = stations.map(station => {
 })
 
 const default_state = {
-    [FROM_STATION]: 1008,
-    [TO_STATION]: 1238,
-    [STATIONS]: options,
+    [KEYS.fromStation]: 1008,
+    [KEYS.toStation]: 1238,
+    [KEYS.stations]: options,
 }
 
 export default (state=default_state, action) => {
@@ -29,15 +21,15 @@ export default (state=default_state, action) => {
 
     if (action !== undefined) {
         switch (action.type) {
-            case SET_FROM_STATION:
-                next[FROM_STATION] = parseInt(action.payload[FROM_STATION])
+            case TYPES.setFromStation:
+                next[KEYS.fromStation] = parseInt(action.payload[KEYS.fromStation])
                 break
-            case SET_TO_STATION:
-                next[TO_STATION] = parseInt(action.payload[TO_STATION])
+            case TYPES.setToStation:
+                next[KEYS.toStation] = parseInt(action.payload[KEYS.toStation])
                 break
-            case SWAP_STATION:
-                next[FROM_STATION] = state[TO_STATION]
-                next[TO_STATION] = state[FROM_STATION]
+            case TYPES.swapStation:
+                next[KEYS.fromStation] = state[KEYS.toStation]
+                next[KEYS.toStation] = state[KEYS.fromStation]
                 break
             default:
                 break

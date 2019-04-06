@@ -2,24 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Grid, InputLabel, Button } from '@material-ui/core'
 
-import { SET_SORT } from '../constants/actionTypes'
-import { SORT_BY } from '../constants/keys'
+import TYPES from '../constants/actionTypes'
+import KEYS from '../constants/keys'
 import {
-    ARRIVAL,
-    DEPARTURE,
-    CHEAP_COST,
-    SMALL_TRANSFER,
     LABEL,
 } from '../constants/sortTypes'
 
 
-const Sort = ({SORT_BY, ORDER_BY, onChangeSort}) => {
-    const selectedSort = SORT_BY
+const Sort = ({selectedSort, onSetSort}) => {
     const sortOptions = [
-        {value: ARRIVAL, label: LABEL.tw[ARRIVAL]},
-        {value: DEPARTURE, label: LABEL.tw[DEPARTURE]},
-        {value: CHEAP_COST, label: LABEL.tw[CHEAP_COST]},
-        {value: SMALL_TRANSFER, label: LABEL.tw[SMALL_TRANSFER]},
+        {value: KEYS.arrival, label: LABEL.tw[KEYS.arrival]},
+        {value: KEYS.departure, label: LABEL.tw[KEYS.departure]},
+        {value: KEYS.duration, label: LABEL.tw[KEYS.duration]},
+        //{value: KEYS.cheapCost, label: LABEL.tw[KEYS.cheapCost]},
+        //{value: KEYS.smallTransfer, label: LABEL.tw[KEYS.smallTransfer]},
     ]
 
     return (
@@ -44,7 +40,7 @@ const Sort = ({SORT_BY, ORDER_BY, onChangeSort}) => {
                           variant={ selectedSort === option.value ? 'contained' : 'text' }
                           color='primary'
                           onClick={ _ => {
-                              onChangeSort(option.value)
+                              onSetSort(option.value)
                           }}
                           style={ {width: '100%'} }
                         >
@@ -59,8 +55,8 @@ const Sort = ({SORT_BY, ORDER_BY, onChangeSort}) => {
 }
 
 Sort.propTypes = {
-    [SORT_BY]: PropTypes.oneOf([ARRIVAL, DEPARTURE, CHEAP_COST, SMALL_TRANSFER]).isRequired,
-    onChangeSort: PropTypes.func.isRequired,
+    selectedSort: PropTypes.oneOf([KEYS.arrival, KEYS.departure, KEYS.cheapCost, KEYS.smallTransfer]).isRequired,
+    onSetSort: PropTypes.func.isRequired,
 }
 
 export default Sort
