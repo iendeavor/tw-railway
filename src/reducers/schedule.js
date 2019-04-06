@@ -1,7 +1,7 @@
-import { SEARCH_REQUEST, SEARCH_SUCCESS, SET_SORT } from '../constants/actionTypes'
+import ACTION_TYPES from '../constants/actionTypes'
+import KEYS from '../constants/keys'
 import { getTimetable } from '../resources/timetable'
 import store from '../store'
-import { DEPARTURE_DATE, FROM_STATION, TO_STATION, SCHEDULES, DEPARTURE, ARRIVAL, SORT_BY, ORDER_BY, } from '../constants/keys'
 
 
 const example = [
@@ -35,34 +35,20 @@ const example = [
     },
 ]
 const default_state = {
-    [SCHEDULES]: [],
+    [KEYS.schedules]: [],
 }
 
 export default (state=default_state, action) => {
     const next = {...state}
 
     switch(action.type) {
-        case SEARCH_REQUEST:
-            const from = action.payload[FROM_STATION]
-            const to = action.payload[TO_STATION]
-            const on = action.payload[DEPARTURE_DATE]
-            const promise = getTimetable(from, to, on)
-            promise.then(timetable => {
-                store.dispatch({
-                    type: SEARCH_SUCCESS,
-                    payload: {
-                        [SCHEDULES]: timetable,
-                    },
-                })
-            })
+        case ACTION_TYPES.search:
+            next[KEYS.schedules] = action.payload[KEYS.schedules]
             break
-        case SEARCH_SUCCESS:
-            next[SCHEDULES] = action.payload[SCHEDULES]
-            break
-        case SET_SORT:
-            switch (action.payload[SORT_BY]) {
-                case ARRIVAL:
-                    next[SCHEDULES] = state[SCHEDULES].sort((a, b) => {
+        case ACTION_TYPES.setSort:
+            switch (action.payload[KEYS.sortBy]) {
+                case KEYS.arrival:
+                    next[KEYS.schedules] = state[KEYS.schedules].sort((a, b) => {
                         const a_arrival = (parseInt(a.arrival.slice(0, 2)) * 60 +
                                            parseInt(a.arrival.slice(3, 5)))
                         const b_arrival = (parseInt(b.arrival.slice(0, 2)) * 60 +
@@ -70,8 +56,8 @@ export default (state=default_state, action) => {
                         return a_arrival - b_arrival
                     })
                     break
-                case DEPARTURE:
-                    next[SCHEDULES] = state[SCHEDULES].sort((a, b) => {
+                case KEYS.departure:
+                    next[KEYS.schedules] = state[KEYS.schedules].sort((a, b) => {
                         const a_departure = (parseInt(a.departure.slice(0, 2)) * 60 +
                                              parseInt(a.departure.slice(3, 5)))
                         const b_departure = (parseInt(b.departure.slice(0, 2)) * 60 +

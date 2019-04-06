@@ -1,17 +1,5 @@
-import {
-    SET_DATE,
-    SET_FROM_STATION,
-    SET_TO_STATION,
-    SEARCH_REQUEST,
-    SEARCH_SUCCESS,
-    SWAP_STATION,
-} from './actionTypes'
-import {
-    FROM_STATION,
-    TO_STATION,
-    DEPARTURE_DATE,
-    SCHEDULES,
-} from './keys'
+import ACTION_TYPES from './actionTypes'
+import KEYS from './keys'
 
 import store from '../store'
 import { getTimetable } from '../resources/timetable'
@@ -21,9 +9,9 @@ const dispatch = store.dispatch
 
 export const handleChangeDate = date => {
     dispatch({
-        type: SET_DATE,
+        type: ACTION_TYPES.setDate,
         payload: {
-            [DEPARTURE_DATE]: date,
+            [KEYS.departureDate]: date,
         },
         meta: {
             debounce: {
@@ -36,9 +24,9 @@ export const handleChangeDate = date => {
 
 export const handleSetFromStation = ID => {
     dispatch({
-        type: SET_FROM_STATION,
+        type: ACTION_TYPES.setFromStation,
         payload: {
-            [FROM_STATION]: ID,
+            [KEYS.fromStation]: ID,
         },
         meta: {
             debounce: {
@@ -51,9 +39,9 @@ export const handleSetFromStation = ID => {
 
 export const handleSetToStation = ID => {
     dispatch({
-        type: SET_TO_STATION,
+        type: ACTION_TYPES.setToStation,
         payload: {
-            [TO_STATION]: ID,
+            [KEYS.toStation]: ID,
         },
         meta: {
             debounce: {
@@ -64,22 +52,20 @@ export const handleSetToStation = ID => {
 }
 
 export const handleSwapStation = () => {
-    dispatch({ type: SWAP_STATION, })
+    dispatch({ type: ACTION_TYPES.swapStation, })
 }
 
 export const handleSearchRequest = () => {
-    const from = store.getState().station[FROM_STATION]
-    const to = store.getState().station[TO_STATION]
-    const on = store.getState().date[DEPARTURE_DATE]
+    const from = store.getState().station[KEYS.fromStation]
+    const to = store.getState().station[KEYS.toStation]
+    const on = store.getState().date[KEYS.departureDate]
     getTimetable(from, to, on).then(timetable => {
         dispatch({
-            type: SEARCH_SUCCESS,
+            type: ACTION_TYPES.search,
             payload: {
-                [SCHEDULES]: timetable,
+                [KEYS.schedules]: timetable,
             },
         })
     })
 }
-
-export const handleSearchSuccess = () => {}
 

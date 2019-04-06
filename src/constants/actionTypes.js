@@ -10,9 +10,7 @@ export const SET_ORDER         = 'ACTION_SET_ORDER'
 export const ADD_FILTER        = 'ACTION_ADD_FILTER'
 export const REMOVE_FILTER     = 'ACTION_REMOVE_FILTER'
 
-export const SEARCH_REQUEST    = 'ACTION_SEARCH_REQUEST'
-export const SEARCH_SUCCESS    = 'ACTION_SEARCH_SUCCESS'
-export const SEARCHED          = 'ACTION_SEARCHED'
+export const SEARCH            = 'ACTION_SEARCH'
 export const SORT              = 'ACTION_SORT'
 
 const ACTION_TYPES = {
@@ -28,9 +26,7 @@ const ACTION_TYPES = {
     addFilter      : ADD_FILTER,
     removeFilter   : REMOVE_FILTER,
 
-    searchRequest  : SEARCH_REQUEST,
-    searchSuccess  : SEARCH_SUCCESS,
-    searched       : SEARCHED,
+    search         : SEARCH,
     sort           : SORT,
 }
 

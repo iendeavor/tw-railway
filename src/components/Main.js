@@ -6,7 +6,6 @@ import DateComponent from '../containers/Date'
 import Filter from '../containers/Filter'
 import Sort from '../containers/Sort'
 import ScheduleList from '../containers/ScheduleList'
-import Search from '../containers/Search'
 
 const Main = props => (
     <Grid
