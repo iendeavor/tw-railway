@@ -1,5 +1,6 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography, Grid } from '@material-ui/core'
+import { Button, Icon, Link, AppBar, Toolbar, Typography, Grid } from '@material-ui/core'
+import clsx from 'clsx'
 
 
 const Header = props => {
@@ -16,13 +17,48 @@ const Header = props => {
                     <Toolbar>
                         <Grid
                           container
-                          justify="center"
+                          justify="space-around"
                         >
-                            <Typography
-                              variant='h5'
+                            <Grid
+                              item
                             >
-                                Taiwan Railway Search
-                            </Typography>
+                                <Typography
+                                  variant='h5'
+                                >
+                                    Taiwan Railway
+                                </Typography>
+                            </Grid>
+                            <Grid
+                              item
+                            >
+                                <Grid
+                                  container
+                                  justify='flex-end'
+                                >
+                                    <Button
+                                      size='small'
+                                      style={{padding: '0', paddingTop: '4px', minWidth: '44px'}}
+                                    >
+                                        <Link
+                                          href='https://github.com/iendeavor'
+                                          style={{width: '100%', color: 'white'}}
+                                        >
+                                            <Icon className={ clsx('fab fa-github') } />
+                                        </Link>
+                                    </Button>
+                                    <Button
+                                      size='small'
+                                      style={{padding: '0', paddingTop: '4px', minWidth: '44px'}}
+                                    >
+                                        <Link
+                                          href='https://github.com/iendeavor/tw-tailway'
+                                          style={{width: '100%', color: 'white'}}
+                                        >
+                                            <Icon className={ clsx('fas fa-code-branch') } />
+                                        </Link>
+                                    </Button>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Toolbar>
                 </AppBar>
