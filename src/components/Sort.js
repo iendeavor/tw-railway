@@ -27,9 +27,9 @@ const Sort = ({selectedSort, onSetSort}) => {
               justify='space-between'
             >
             {
-                sortOptions.map(option => (
+                sortOptions.map((option, i) => (
                     <Grid
-                      key={option.value}
+                      key={i}
                       item
                       xs={3}
                     >

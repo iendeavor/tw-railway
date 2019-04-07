@@ -9,7 +9,6 @@ const STATIONS      = 'STATIONS' + genRandom()
 
 const ARRIVAL         = 'ARRIVAL' + genRandom()
 const DEPARTURE       = 'DEPARTURE' + genRandom()
-const CHEAP_COST      = 'CHEAP_COST' + genRandom()
 const SMALL_TRANSFER  = 'SMALL_TRANSFER' + genRandom()
 const DURATION        = 'DURATION' + genRandom()
 const FARE            = 'FARE' + genRandom()
@@ -46,7 +45,7 @@ const KEYS = Object.freeze({
 
     departure     : DEPARTURE,
     arrival       : ARRIVAL,
-    cheapCost     : CHEAP_COST,
+    fare          : FARE,
     smallTransfer : SMALL_TRANSFER,
     duration      : DURATION,
     first         : FIRST,
