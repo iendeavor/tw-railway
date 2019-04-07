@@ -44,6 +44,7 @@ const handleSetToStation = ID => {
         },
         meta: {
             debounce: {
+                time: 300,
                 leading: true,
             },
         },
