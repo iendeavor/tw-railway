@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import { Card, Icon, Grid, Button } from '@material-ui/core'
+import { Link, Card, Icon, Grid, Button } from '@material-ui/core'
 import KEYS from '../constants/keys'
 
 import { getName } from '../resources/stations'
 
 
-const Schedule = ({train_type_name, from, to, duration, arrival, departure, type, price, has_nursing_room, is_bike_allowed, has_wheel_chair, isDaily, note, index, onAddingFilter, onRemovingFilter}) => {
+const Schedule = ({train_type_name, from, to, duration, arrival, departure, type, fare, has_nursing_room, is_bike_allowed, has_wheel_chair, isDaily, note, index, onAddingFilter, onRemovingFilter}) => {
     const ICON_STYLE = {
         height: '1.8rem',
 
@@ -24,6 +24,7 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
     }
     const WHEEL_CHAIR_STYLE = {
         ...ICON_STYLE,
+        height: '1.75rem',
         width: '2rem',
         color: 'blue'
     }
@@ -40,7 +41,7 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
                 <Grid
                   item
                 >
-                    { price && `$${price}NTD` }
+                    $ { fare } NTD
                 </Grid>
                 <Grid
                   item
@@ -63,28 +64,28 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
                       xs={12}
                     >
                         {has_nursing_room && (
-                            <Button
-                              size='small'
+                            <Link
+                              style={{cursor: 'pointer'}}
                               onClick={ () => onAddingFilter(KEYS.nursingRoom) }
                             >
                                 <Icon style={ NURSING_ROOM_STYLE } className={ clsx('fas fa-baby') } />
-                            </Button>
+                            </Link>
                         )}
                         {is_bike_allowed && (
-                            <Button
-                              size='small'
+                            <Link
+                              style={{cursor: 'pointer'}}
                               onClick={ () => onAddingFilter(KEYS.bikeSpace) }
                             >
                                 <Icon style={ BIKE_SPACE_STYLE } className={ clsx('fas fa-bicycle') } />
-                            </Button>
+                            </Link>
                         )}
                         {has_wheel_chair && (
-                            <Button
-                              size='small'
+                            <Link
+                              style={{cursor: 'pointer'}}
                               onClick={ () => onAddingFilter(KEYS.wheelChair) }
                             >
                                 <Icon style={ WHEEL_CHAIR_STYLE } className={ clsx('fas fa-wheelchair') } />
-                            </Button>
+                            </Link>
                         )}
                         <span style={ {fontSize: '.8rem'} }>{ note }</span>
                     </Grid>
@@ -163,6 +164,8 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
 Schedule.propTypes = {
     index: PropTypes.number.isRequired,
 
+    train_type: PropTypes.oneOf([KEYS.limitedExpress, KEYS.express, KEYS.semiExpress]).isRequired,
+    fare: PropTypes.number,
     from: PropTypes.string.isRequired,
     to: PropTypes.string.isRequired,
     departure: PropTypes.string.isRequired,

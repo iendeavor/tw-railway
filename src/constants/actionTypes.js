@@ -15,6 +15,8 @@ export const FILTER            = 'ACTION_FILTER'
 export const SEARCH            = 'ACTION_SEARCH'
 export const RESTORE_SEARCH    = 'ACTION_RESTORE_SEARCH'
 
+export const SET_FARE          = 'ACTION_SET_FARE'
+
 const ACTION_TYPES = {
     setFromStation : SET_FROM_STATION,
     setToStation   : SET_TO_STATION,
@@ -32,6 +34,8 @@ const ACTION_TYPES = {
 
     search         : SEARCH,
     restoreSearch  : RESTORE_SEARCH,
+
+    setFare        : SET_FARE,
 }
 
 export default ACTION_TYPES

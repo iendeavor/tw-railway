@@ -17,7 +17,7 @@ const Header = props => {
                     <Toolbar>
                         <Grid
                           container
-                          justify="space-around"
+                          justify="space-between"
                         >
                             <Grid
                               item

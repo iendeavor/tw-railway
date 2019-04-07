@@ -1,4 +1,4 @@
-import { getTrainTypeName } from './train_type'
+import { getTrainTypeName, getTrainTypeID } from './train_type'
 
 export const getTimetable = (from, to, on) => {
     const yyyymmdd = on.toISOString().slice(0, 10)
@@ -54,6 +54,7 @@ const formatTimetable = timetable => {
             has_nursing_room: pair.DailyTrainInfo.BreastFeedingFlag === 1,
             is_bike_allowed: pair.DailyTrainInfo.BikeFlag === 1,
             train_type_name: getTrainTypeName(pair.DailyTrainInfo.TrainTypeID),
+            train_type: getTrainTypeID(pair.DailyTrainInfo.TrainTypeID),
             note: pair.DailyTrainInfo.Note.Zh_tw,
         }
     })

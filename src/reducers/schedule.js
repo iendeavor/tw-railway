@@ -12,11 +12,17 @@ export default (state=default_state, action) => {
 
     switch(action.type) {
         case TYPES.search:
-            next[KEYS.schedules] = action.payload[KEYS.schedules]
-            next[KEYS.originalSchedules] = action.payload[KEYS.schedules]
+            next[KEYS.originalSchedules] = action.payload[KEYS.schedules].slice().map(schedule => {
+                schedule.fare = state[KEYS.fares][schedule.train_type]
+                return schedule
+            })
+            next[KEYS.schedules] = next[KEYS.originalSchedules].slice()
             break
         case TYPES.restoreSearch:
             next[KEYS.schedules] = state[KEYS.originalSchedules].slice()
+            break
+        case TYPES.setFare:
+            next[KEYS.fares] = action.payload[KEYS.fares]
             break
         case TYPES.sort:
             next[KEYS.schedules] = state[KEYS.schedules].slice().sort((a, b) => {
@@ -46,6 +52,10 @@ export default (state=default_state, action) => {
                         const b_duration = (parseInt(b.duration.slice(0, 2)) * 60 +
                                             parseInt(b.duration.slice(3, 5)))
                         return a_duration - b_duration
+                    case KEYS.fare:
+                        const a_fare = parseInt(a.fare)
+                        const b_fare = parseInt(b.fare)
+                        return a_fare - b_fare
                     default:
                         break
                 }

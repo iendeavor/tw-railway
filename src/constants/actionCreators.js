@@ -2,6 +2,7 @@ import TYPES from './actionTypes'
 import KEYS from './keys'
 import store from '../store'
 import { getTimetable } from '../resources/timetable'
+import { getFare } from '../resources/fare'
 
 
 const dispatch = store.dispatch
@@ -59,15 +60,26 @@ const handleSearchRequest = () => {
     const from = store.getState().station[KEYS.fromStation]
     const to = store.getState().station[KEYS.toStation]
     const on = store.getState().date[KEYS.departureDate]
-    getTimetable(from, to, on).then(timetable => {
-        dispatch({
-            type: TYPES.search,
-            payload: {
-                [KEYS.schedules]: timetable,
-            },
+    getFare(from, to)
+        .then(fares => {
+            dispatch({
+                type: TYPES.setFare,
+                payload: {
+                    [KEYS.fares]: fares,
+                },
+            })
         })
-        handleSetSort(store.getState().sort[KEYS.sortBy])
-    })
+        .then(() => {
+            getTimetable(from, to, on).then(timetable => {
+                dispatch({
+                    type: TYPES.search,
+                    payload: {
+                        [KEYS.schedules]: timetable,
+                    },
+                })
+                handleSetSort(store.getState().sort[KEYS.sortBy])
+            })
+        })
 }
 
 const handleRestoreSearch = () => {

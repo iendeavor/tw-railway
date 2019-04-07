@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, InputLabel, Button } from '@material-ui/core'
+import { InputLabel, Grid, Button } from '@material-ui/core'
 
 import KEYS from '../constants/keys'
 import {
@@ -10,21 +10,21 @@ import {
 
 const Sort = ({selectedSort, onSetSort}) => {
     const sortOptions = [
-        {value: KEYS.arrival, label: LABEL.tw[KEYS.arrival]},
         {value: KEYS.departure, label: LABEL.tw[KEYS.departure]},
+        {value: KEYS.arrival, label: LABEL.tw[KEYS.arrival]},
         {value: KEYS.duration, label: LABEL.tw[KEYS.duration]},
-        //{value: KEYS.cheapCost, label: LABEL.tw[KEYS.cheapCost]},
-        //{value: KEYS.smallTransfer, label: LABEL.tw[KEYS.smallTransfer]},
+        {value: KEYS.fare, label: LABEL.tw[KEYS.fare]},
     ]
 
     return (
         <React.Fragment>
             <InputLabel shrink>
-                Sort
+                Primary
             </InputLabel>
 
             <Grid
               container
+              justify='space-between'
             >
             {
                 sortOptions.map(option => (

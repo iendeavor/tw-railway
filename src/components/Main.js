@@ -3,8 +3,6 @@ import { Grid } from '@material-ui/core'
 
 import Station from '../containers/Station'
 import DateComponent from '../containers/Date'
-import Filter from '../containers/Filter'
-import Sort from '../containers/Sort'
 import ScheduleList from '../containers/ScheduleList'
 
 const Main = props => (
@@ -19,7 +17,7 @@ const Main = props => (
               border: '1px solid #ddd',
               boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
               borderRadius: '5px',
-              padding: '5px'
+              padding: '.5rem'
           }}
         >
             <Grid
@@ -41,22 +39,6 @@ const Main = props => (
                   style={{padding: '5px 0'}}
                 >
                     <Station />
-                </Grid>
-
-                <Grid
-                  item
-                  xs={10}
-                  style={{padding: '15px 0 5px'}}
-                >
-                    <Filter />
-                </Grid>
-
-                <Grid
-                  item
-                  xs={12}
-                  style={{padding: '5px 0'}}
-                >
-                    <Sort />
                 </Grid>
             </Grid>
         </Grid>

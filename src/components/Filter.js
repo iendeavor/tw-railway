@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Button, InputLabel } from '@material-ui/core'
+import { InputLabel, Grid, Button } from '@material-ui/core'
 
 import KEYS from '../constants/keys'
 import {
@@ -18,17 +18,19 @@ const Filter = ({selectedValues, onAddingFilter, onRemovingFilter}) => {
     return (
         <React.Fragment>
             <InputLabel shrink>
-                Must have
+                Filter
             </InputLabel>
 
-            <Grid
+        <Grid
               container
+              justify='space-between'
             >
             {
                 options.map(option => (
                     <Grid
                       item
                       key={ option.value }
+                      xs={4}
                     >
                         <Button
                           variant={ selectedValues.indexOf(option.value) === -1 ? 'text' : 'contained' }

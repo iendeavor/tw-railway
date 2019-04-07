@@ -16,25 +16,25 @@ export const getFare = (from, to) => {
 }
 
 const getFareURL = (from, to) => {
-    return ('https://ptx.transportdata.tw/MOTC/v2/Rail/TRA/ODFare?$select=Fares&$filter=OriginStationID%20eq%20' +
-        from +
-        '%20and%20DestinationStationID%20eq%20' +
-        to +
-        '&$top=30&$format=JSON')
+    return ('https://ptx.transportdata.tw/MOTC/v2/Rail/TRA/ODFare/' +
+            from +
+            '/to/' +
+            to +
+            '?$format=JSON')
 }
 
-const formatFare = fare => {
+const formatFare = fare_info => {
     let res = {}
-    for (let f of fare) {
-        switch (f.TicketType) {
+    for (let fare of fare_info[0].Fares) {
+        switch (fare.TicketType) {
             case '成自':
-                res[KEYS.limitedExpress] = f.Price
+                res[KEYS.limitedExpress] = fare.Price
                 break
             case '成莒':
-                res[KEYS.epress] = f.Price
+                res[KEYS.express] = fare.Price
                 break
             case '成普':
-                res[KEYS.semiExpress] = f.Price
+                res[KEYS.semiExpress] = fare.Price
                 break
             default:
                 break

@@ -1,35 +1,40 @@
-const SORT_BY       = 'SORT_BY'
-const ORDER_BY      = 'ORDER_BY'
+const genRandom = () => Math.random().toString(36).substring(10)
 
-const FROM_STATION  = 'FROM_STATION'
-const TO_STATION    = 'TO_STATION'
-const STATIONS      = 'STATIONS'
+const SORT_BY       = 'SORT_BY' + genRandom()
+const ORDER_BY      = 'ORDER_BY' + genRandom()
 
-const ARRIVAL         = 'ARRIVAL'
-const DEPARTURE       = 'DEPARTURE'
-const CHEAP_COST      = 'CHEAP_COST'
-const SMALL_TRANSFER  = 'SMALL_TRANSFER'
-const DURATION        = 'DURATION'
-const FIRST           = 'FIRST'
-const LAST            = 'LAST'
+const FROM_STATION  = 'FROM_STATION' + genRandom()
+const TO_STATION    = 'TO_STATION' + genRandom()
+const STATIONS      = 'STATIONS' + genRandom()
 
-const DEPARTURE_DATE  = 'DEPARTURE_DATE'
-const TODAY           = 'TODAY'
-const TOMORROW        = 'TOMORROW'
+const ARRIVAL         = 'ARRIVAL' + genRandom()
+const DEPARTURE       = 'DEPARTURE' + genRandom()
+const CHEAP_COST      = 'CHEAP_COST' + genRandom()
+const SMALL_TRANSFER  = 'SMALL_TRANSFER' + genRandom()
+const DURATION        = 'DURATION' + genRandom()
+const FARE            = 'FARE' + genRandom()
+const FIRST           = 'FIRST' + genRandom()
+const LAST            = 'LAST' + genRandom()
 
-const ORIGINAL_SCHEDULES = 'ORIGINAL_SCHEDULES'
-const SCHEDULES        = 'SCHEDULES'
+const DEPARTURE_DATE  = 'DEPARTURE_DATE' + genRandom()
+const TODAY           = 'TODAY' + genRandom()
+const TOMORROW        = 'TOMORROW' + genRandom()
 
-const SELECTED_FILTERS = 'SELECTED_FILTERS'
-const SELECTED_FILTER = 'SELECTED_FILTER'
-const WHEEL_CHAIR     = 'WHEEL_CHAIR'
-const BIKE_SPACE      = 'BIKE_SPACE'
-const NURSING_ROOM    = 'NURSING_ROOM'
+const ORIGINAL_SCHEDULES = 'ORIGINAL_SCHEDULES' + genRandom()
+const SCHEDULES          = 'SCHEDULES' + genRandom()
 
-const TRAIN_TYPE      = 'TRAIN_TYPE'
-const LIMITED_EXPRESS = 'LIMITED_EXPRESS'
-const EXPRESS         = 'EXPRESS'
-const SEMI_EXPRESS    = 'SEMI_EXPRESS'
+const FARES              = 'FARES' + genRandom()
+
+const SELECTED_FILTERS = 'SELECTED_FILTERS' + genRandom()
+const SELECTED_FILTER = 'SELECTED_FILTER' + genRandom()
+const WHEEL_CHAIR     = 'WHEEL_CHAIR' + genRandom()
+const BIKE_SPACE      = 'BIKE_SPACE' + genRandom()
+const NURSING_ROOM    = 'NURSING_ROOM' + genRandom()
+
+const TRAIN_TYPE      = 'TRAIN_TYPE' + genRandom()
+const LIMITED_EXPRESS = 'LIMITED_EXPRESS' + genRandom()
+const EXPRESS         = 'EXPRESS' + genRandom()
+const SEMI_EXPRESS    = 'SEMI_EXPRESS' + genRandom()
 
 const KEYS = Object.freeze({
     sortBy        : SORT_BY,
@@ -53,6 +58,8 @@ const KEYS = Object.freeze({
 
     originalSchedules : ORIGINAL_SCHEDULES,
     schedules         : SCHEDULES,
+
+    fares           : FARES,
 
     selectedFilters : SELECTED_FILTERS,
     selectedFilter  : SELECTED_FILTER,
