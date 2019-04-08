@@ -26,7 +26,7 @@ const Main = props => (
                 <Grid
                   item
                   xs={12}
-                  md={6}
+                  lg={6}
                   style={{padding: '5px 0'}}
                 >
                     <DateComponent />
@@ -35,7 +35,7 @@ const Main = props => (
                 <Grid
                   item
                   xs={12}
-                  md={6}
+                  lg={6}
                   style={{padding: '5px 0'}}
                 >
                     <Station />
