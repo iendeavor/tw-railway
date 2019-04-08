@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import { Link, Card, Icon, Grid, Button } from '@material-ui/core'
+import { Card, Icon, Grid, Button } from '@material-ui/core'
 import KEYS from '../constants/keys'
 
 import { getName } from '../resources/stations'
@@ -9,24 +9,19 @@ import { getName } from '../resources/stations'
 
 const Schedule = ({train_type_name, from, to, duration, arrival, departure, type, fare, has_nursing_room, is_bike_allowed, has_wheel_chair, isDaily, note, index, onAddingFilter, onRemovingFilter}) => {
     const ICON_STYLE = {
-        height: '1.8rem',
-
+        width: '30px',
     }
     const BIKE_SPACE_STYLE = {
         ...ICON_STYLE,
-        width: '2.5rem',
         color: 'green',
     }
     const NURSING_ROOM_STYLE = {
         ...ICON_STYLE,
-        width: '2rem',
         color: 'red',
     }
     const WHEEL_CHAIR_STYLE = {
         ...ICON_STYLE,
-        height: '1.75rem',
-        width: '2rem',
-        color: 'blue'
+        color: 'blue',
     }
 
     const renderHeader = () => (
@@ -64,28 +59,28 @@ const Schedule = ({train_type_name, from, to, duration, arrival, departure, type
                       xs={12}
                     >
                         {has_nursing_room && (
-                            <Link
-                              style={{cursor: 'pointer'}}
+                            <Button
+                              style={{minWidth: '30px'}}
                               onClick={ () => onAddingFilter(KEYS.nursingRoom) }
                             >
                                 <Icon style={ NURSING_ROOM_STYLE } className={ clsx('fas fa-baby') } />
-                            </Link>
+                            </Button>
                         )}
                         {is_bike_allowed && (
-                            <Link
-                              style={{cursor: 'pointer'}}
+                            <Button
+                              style={{minWidth: '30px'}}
                               onClick={ () => onAddingFilter(KEYS.bikeSpace) }
                             >
                                 <Icon style={ BIKE_SPACE_STYLE } className={ clsx('fas fa-bicycle') } />
-                            </Link>
+                            </Button>
                         )}
                         {has_wheel_chair && (
-                            <Link
-                              style={{cursor: 'pointer'}}
+                            <Button
+                              style={{minWidth: '30px'}}
                               onClick={ () => onAddingFilter(KEYS.wheelChair) }
                             >
                                 <Icon style={ WHEEL_CHAIR_STYLE } className={ clsx('fas fa-wheelchair') } />
-                            </Link>
+                            </Button>
                         )}
                         <span style={ {fontSize: '.8rem'} }>{ note }</span>
                     </Grid>

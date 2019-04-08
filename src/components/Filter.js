@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { InputLabel, Grid, Button } from '@material-ui/core'
+import clsx from 'clsx'
+import { Icon, InputLabel, Grid, Button } from '@material-ui/core'
+import Box from '@material-ui/core/Box'
 
 import KEYS from '../constants/keys'
 import {
@@ -10,9 +12,21 @@ import {
 
 const Filter = ({selectedValues, onAddingFilter, onRemovingFilter}) => {
     const options = [
-        {value: KEYS.wheelChair, label: FILTER_LABELS.tw[KEYS.wheelChair]},
-        {value: KEYS.bikeSpace, label: FILTER_LABELS.tw[KEYS.bikeSpace]},
-        {value: KEYS.nursingRoom, label: FILTER_LABELS.tw[KEYS.nursingRoom]},
+        {
+            value: KEYS.wheelChair,
+            label: FILTER_LABELS.tw[KEYS.wheelChair],
+            icon: 'fas fa-wheelchair',
+        },
+        {
+            value: KEYS.bikeSpace,
+            label: FILTER_LABELS.tw[KEYS.bikeSpace],
+            icon: 'fas fa-bicycle',
+        },
+        {
+            value: KEYS.nursingRoom,
+            label: FILTER_LABELS.tw[KEYS.nursingRoom],
+            icon: 'fas fa-baby',
+        },
     ]
 
     return (
@@ -45,7 +59,10 @@ const Filter = ({selectedValues, onAddingFilter, onRemovingFilter}) => {
                           }}
                           style={ {width: '100%'} }
                         >
-                            { option.label }
+                            <Icon className={ clsx(option.icon) } p={0.5} style={{width: 'auto'}}/>
+                            <Box display={{xs: 'none', sm: 'none', md: 'block'}} p={0.5}>
+                                { option.label }
+                            </Box>
                         </Button>
                     </Grid>
                 ))

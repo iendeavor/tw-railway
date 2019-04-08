@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { InputLabel, Grid, Button } from '@material-ui/core'
+import clsx from 'clsx'
+import { Typography, Icon, InputLabel, Grid, Button } from '@material-ui/core'
+import Box from '@material-ui/core/Box'
 
 import KEYS from '../constants/keys'
 import {
@@ -10,10 +12,23 @@ import {
 
 const Sort = ({selectedSort, onSetSort}) => {
     const sortOptions = [
-        {value: KEYS.departure, label: LABEL.tw[KEYS.departure]},
-        {value: KEYS.arrival, label: LABEL.tw[KEYS.arrival]},
-        {value: KEYS.duration, label: LABEL.tw[KEYS.duration]},
-        {value: KEYS.fare, label: LABEL.tw[KEYS.fare]},
+        {
+            value: KEYS.departure,
+            label: LABEL.tw[KEYS.departure],
+            icon: 'fas fa-plane-departure'},
+        {
+            value: KEYS.arrival,
+            label: LABEL.tw[KEYS.arrival],
+            icon: 'fas fa-plane-arrival'},
+        {
+            value: KEYS.duration,
+            label: LABEL.tw[KEYS.duration],
+            icon: 'fas fa-hourglass-start'},
+        {
+            value: KEYS.fare,
+            label: LABEL.tw[KEYS.fare],
+            icon: 'fas fa-dollar-sign',
+        },
     ]
 
     return (
@@ -43,7 +58,10 @@ const Sort = ({selectedSort, onSetSort}) => {
                           }}
                           style={ {width: '100%'} }
                         >
-                            { option.label }
+                            <Icon className={ clsx(option.icon) } style={{width: 'auto'}}/>
+                            <Box display={{xs: 'none', sm: 'none', md: 'block'}} p={0.5}>
+                                { option.label }
+                            </Box>
                         </Button>
                     </Grid>
                 ))
