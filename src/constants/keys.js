@@ -18,6 +18,8 @@ const LAST            = 'LAST' + genRandom()
 const DEPARTURE_DATE  = 'DEPARTURE_DATE' + genRandom()
 const TODAY           = 'TODAY' + genRandom()
 const TOMORROW        = 'TOMORROW' + genRandom()
+const DEPARTURE_TIME  = 'DEPARTURE_TIME' + genRandom()
+const ARRIVAL_TIME    = 'ARRIVAL_TIME' + genRandom()
 
 const ORIGINAL_SCHEDULES = 'ORIGINAL_SCHEDULES' + genRandom()
 const SCHEDULES          = 'SCHEDULES' + genRandom()
@@ -54,6 +56,8 @@ const KEYS = Object.freeze({
     departureDate : DEPARTURE_DATE,
     today         : TODAY,
     tomorrow      : TOMORROW,
+    departureTime : DEPARTURE_TIME,
+    arrivalTime   : ARRIVAL_TIME,
 
     originalSchedules : ORIGINAL_SCHEDULES,
     schedules         : SCHEDULES,

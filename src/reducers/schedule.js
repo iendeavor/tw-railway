@@ -7,6 +7,28 @@ const default_state = {
     [KEYS.originalSchedules]: [],
 }
 
+const convertToTimestamp = time_string => {
+    return (parseInt(time_string.slice(0, 2)) * 60 +
+            parseInt(time_string.slice(3, 5)))
+}
+
+const convertDepartureToTimestamp = departure => {
+    return convertToTimestamp(departure)
+}
+
+const convertArrivalToTimestamp = (arrival, departure) => {
+    let arrival_timestamp = convertToTimestamp(arrival)
+
+    if (departure !== undefined) {
+        const departure_timestamp = convertDepartureToTimestamp(departure)
+        if (arrival_timestamp < departure_timestamp) {
+            arrival_timestamp += 24 * 60
+        }
+    }
+
+    return arrival_timestamp
+}
+
 export default (state=default_state, action) => {
     const next = {...state}
 
@@ -84,6 +106,32 @@ export default (state=default_state, action) => {
             }
 
             next[KEYS.schedules] = schedules
+            break
+        case TYPES.filterDepartureTime:
+            const selected_departure = action.payload[KEYS.departureTime]
+
+            next[KEYS.schedules] = state[KEYS.schedules].slice().filter(schedule => {
+                if (selected_departure === '') {
+                    return true
+                }
+
+                const after = convertDepartureToTimestamp(selected_departure)
+                const departure = convertDepartureToTimestamp(schedule.departure)
+                return after <= departure
+            })
+            break
+        case TYPES.filterArrivalTime:
+            const selected_arrival = action.payload[KEYS.arrivalTime]
+
+            next[KEYS.schedules] = state[KEYS.schedules].slice().filter(schedule => {
+                if (selected_arrival === '') {
+                    return true
+                }
+
+                const before = convertArrivalToTimestamp(selected_arrival)
+                const arrival = convertArrivalToTimestamp(schedule.arrival, schedule.departure)
+                return arrival <= before
+            })
             break
         default:
             break

@@ -166,13 +166,83 @@ const handleRemovingFilter = value => {
             },
         },
     })
+}
+
+const handleSetDepartureTime = time => {
+    dispatch({
+        type: TYPES.setDepartureTime,
+        payload: {
+            [KEYS.departureTime]: time,
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
+    handle()
+}
+
+const handleSetArrivalTime = time => {
+    dispatch({
+        type: TYPES.setArrivalTime,
+        payload: {
+            [KEYS.arrivalTime]: time,
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
+    handle()
+}
+
+const handle = () => {
     handleRestoreSearch()
     handleFilter()
-    handleSort(store.getState().schedule[KEYS.schedules])
+    handleSort()
+    handleFilterDepartureTime()
+    handleFilterArrivalTime()
+    console.log(store.getState())
+}
+
+const handleFilterDepartureTime = () => {
+    dispatch({
+        type: TYPES.filterDepartureTime,
+        payload: {
+            [KEYS.departureTime]: store.getState().time[KEYS.departureTime],
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
+}
+
+const handleFilterArrivalTime = () => {
+    dispatch({
+        type: TYPES.filterArrivalTime,
+        payload: {
+            [KEYS.arrivalTime]: store.getState().time[KEYS.arrivalTime],
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
 }
 
 const CREATORS = Object.freeze({
     handleSetDate,
+    handleSetArrivalTime,
+    handleSetDepartureTime,
 
     handleSetFromStation,
     handleSetToStation,

@@ -5,6 +5,7 @@ import station from './station'
 import filter from './filter'
 import date from './date'
 import schedule from './schedule'
+import time from './time'
 
 
 export default combineReducers({
@@ -13,4 +14,5 @@ export default combineReducers({
     filter,
     date,
     schedule,
+    time,
 })
