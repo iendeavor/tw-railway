@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { InputLabel, Grid, TextField, Button } from '@material-ui/core';
-import 'react-datepicker/dist/react-datepicker.css'
 
 
 const Date_ = ({selectedDate, isToday, isTomorrow,
