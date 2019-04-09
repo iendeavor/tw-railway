@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import { Typography, Icon, InputLabel, Grid, Button } from '@material-ui/core'
+import { Icon, InputLabel, Grid, Button } from '@material-ui/core'
 import Box from '@material-ui/core/Box'
 
 import KEYS from '../constants/keys'
