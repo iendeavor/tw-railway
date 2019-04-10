@@ -120,7 +120,8 @@ const Schedule = ({
                   xs={3}
                 >
                     <Button
-                      style={{width: '100%'}}
+                      style={{width: '100%', color: '#000'}}
+                      disabled
                     >
                         { time }
                     </Button>
@@ -130,7 +131,8 @@ const Schedule = ({
                   xs={9}
                 >
                     <Button
-                      style={{width: '100%'}}
+                      style={{width: '100%', color: '#000'}}
+                      disabled
                     >
                         { name }
                     </Button>
