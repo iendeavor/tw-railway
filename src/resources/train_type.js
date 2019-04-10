@@ -1,7 +1,9 @@
-import src from './train_type.json'
+import source from './train_type.json'
 import KEYS from '../constants/keys'
 
-const parseTrainTypes = () => {
+export const getTrainTypesMapping = src => {
+    if (src === undefined) { src = source }
+
     return Object.freeze(
         src.map(train_type_info => {
             let res = {}
@@ -21,12 +23,19 @@ const parseTrainTypes = () => {
             return res
         }).reduce((accu, curr) => {
             return Object.assign({}, accu, curr)
-        })
+        }, {})
     )
 }
 
-let train_types = parseTrainTypes()
+let train_types_mapping = getTrainTypesMapping()
 
-export const getTrainTypeName = ID => train_types[ID + '']
-export const getTrainTypeID = name => train_types[name]
+export const getTrainTypeName = (ID, train_types) => {
+    if (train_types === undefined) { train_types = train_types_mapping }
+    return train_types[ID + '']
+}
+
+export const getTrainTypeID = (name, train_types) => {
+    if (train_types === undefined) { train_types = train_types_mapping }
+    return train_types[name]
+}
 
