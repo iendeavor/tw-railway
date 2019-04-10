@@ -8,6 +8,7 @@ import { getName } from '../resources/stations'
 
 
 const Schedule = ({
+    number,
     train_type_name,
     from,
     to,
@@ -53,6 +54,11 @@ const Schedule = ({
                   item
                 >
                     $ { fare } NTD
+                </Grid>
+                <Grid
+                  item
+                >
+                    No: { number }
                 </Grid>
                 <Grid
                   item
