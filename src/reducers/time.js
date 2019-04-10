@@ -2,10 +2,6 @@ import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
 
 
-const getTimezoneOffset = () => new Date().getTimezoneOffset() * 60 * 1000
-const offsetDate = date => new Date(+date - getTimezoneOffset())
-const getTimeString = date => offsetDate(date).toISOString().substring(11, 16)  // 10:20
-
 const defaultState = {
     [KEYS.departureTime]: '',
     [KEYS.arrivalTime]: '',
