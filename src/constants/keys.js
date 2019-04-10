@@ -1,47 +1,47 @@
-const genRandom = () => Math.random().toString(36).substring(10)
+import uuid from 'uuid/v4'
 
-const SORT_BY       = 'SORT_BY' + genRandom()
-const ORDER_BY      = 'ORDER_BY' + genRandom()
+const SORT_BY        = uuid() + '-SORT_BY'
+const ORDER_BY       = uuid() + '-ORDER_BY'
 
-const COUNTRIES      = 'COUNTRIES' + genRandom()
-const FROM_STATIONS  = 'FROM_STATIONS' + genRandom()
-const TO_STATIONS    = 'TO_STATIONS' + genRandom()
-const FROM_COUNTRY   = 'FROM_COUNTRY' + genRandom()
-const FROM_STATION   = 'FROM_STATION' + genRandom()
-const TO_COUNTRY     = 'TO_COUNTRY' + genRandom()
-const TO_STATION     = 'TO_STATION' + genRandom()
+const COUNTRIES      = uuid() + '-COUNTRIES'
+const FROM_STATIONS  = uuid() + '-FROM_STATIONS'
+const TO_STATIONS    = uuid() + '-TO_STATIONS'
+const FROM_COUNTRY   = uuid() + '-FROM_COUNTRY'
+const FROM_STATION   = uuid() + '-FROM_STATION'
+const TO_COUNTRY     = uuid() + '-TO_COUNTRY'
+const TO_STATION     = uuid() + '-TO_STATION'
 
-const ARRIVAL         = 'ARRIVAL' + genRandom()
-const DEPARTURE       = 'DEPARTURE' + genRandom()
-const SMALL_TRANSFER  = 'SMALL_TRANSFER' + genRandom()
-const DURATION        = 'DURATION' + genRandom()
-const FARE            = 'FARE' + genRandom()
-const FIRST           = 'FIRST' + genRandom()
-const LAST            = 'LAST' + genRandom()
+const ARRIVAL         = uuid() + '-ARRIVAL'
+const DEPARTURE       = uuid() + '-DEPARTURE'
+const SMALL_TRANSFER  = uuid() + '-SMALL_TRANSFER'
+const DURATION        = uuid() + '-DURATION'
+const FARE            = uuid() + '-FARE'
+const FIRST           = uuid() + '-FIRST'
+const LAST            = uuid() + '-LAST'
 
-const DEPARTURE_DATE  = 'DEPARTURE_DATE' + genRandom()
-const TODAY           = 'TODAY' + genRandom()
-const TOMORROW        = 'TOMORROW' + genRandom()
-const DEPARTURE_TIME  = 'DEPARTURE_TIME' + genRandom()
-const ARRIVAL_TIME    = 'ARRIVAL_TIME' + genRandom()
+const DEPARTURE_DATE  = uuid() + '-DEPARTURE_DATE'
+const TODAY           = uuid() + '-TODAY'
+const TOMORROW        = uuid() + '-TOMORROW'
+const DEPARTURE_TIME  = uuid() + '-DEPARTURE_TIME'
+const ARRIVAL_TIME    = uuid() + '-ARRIVAL_TIME'
 
-const ORIGINAL_SCHEDULES = 'ORIGINAL_SCHEDULES' + genRandom()
-const SCHEDULES          = 'SCHEDULES' + genRandom()
+const ORIGINAL_SCHEDULES = uuid() + '-ORIGINAL_SCHEDULES'
+const SCHEDULES          = uuid() + '-SCHEDULES'
 
-const FARES              = 'FARES' + genRandom()
+const FARES              = uuid() + '-FARES'
 
-const SELECTED_FILTERS = 'SELECTED_FILTERS' + genRandom()
-const SELECTED_FILTER = 'SELECTED_FILTER' + genRandom()
-const WHEEL_CHAIR     = 'WHEEL_CHAIR' + genRandom()
-const BIKE_SPACE      = 'BIKE_SPACE' + genRandom()
-const NURSING_ROOM    = 'NURSING_ROOM' + genRandom()
+const SELECTED_FILTERS = uuid() + '-SELECTED_FILTERS'
+const SELECTED_FILTER  = uuid() + '-SELECTED_FILTER'
+const WHEEL_CHAIR      = uuid() + '-WHEEL_CHAIR'
+const BIKE_SPACE       = uuid() + '-BIKE_SPACE'
+const NURSING_ROOM     = uuid() + '-NURSING_ROOM'
 
-const TRAIN_TYPE      = 'TRAIN_TYPE' + genRandom()
-const LIMITED_EXPRESS = 'LIMITED_EXPRESS' + genRandom()
-const EXPRESS         = 'EXPRESS' + genRandom()
-const SEMI_EXPRESS    = 'SEMI_EXPRESS' + genRandom()
+const TRAIN_TYPE      = uuid() + '-TRAIN_TYPE'
+const LIMITED_EXPRESS = uuid() + '-LIMITED_EXPRESS'
+const EXPRESS         = uuid() + '-EXPRESS'
+const SEMI_EXPRESS    = uuid() + '-SEMI_EXPRESS'
 
-const MESSAGE         = 'MESSAGE' + genRandom()
+const MESSAGE         = uuid() + '-MESSAGE'
 
 const KEYS = Object.freeze({
     sortBy        : SORT_BY,
