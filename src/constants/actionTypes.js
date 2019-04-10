@@ -1,3 +1,5 @@
+export const SET_FROM_COUNTRY  = 'ACTION_SET_FROM_COUNTRY'
+export const SET_TO_COUNTRY    = 'ACTION_SET_TO_COUNTRY'
 export const SET_FROM_STATION  = 'ACTION_SET_FROM_STATION'
 export const SET_TO_STATION    = 'ACTION_SET_TO_STATION'
 export const SWAP_STATION      = 'ACTION_SWAP_STATION'
@@ -25,9 +27,12 @@ export const ADD_MESSAGE       = 'ACTION_ADD_MESSAGE'
 export const REMOVE_MESSAGE    = 'ACTION_REMOVE_MESSAGE'
 
 const ACTION_TYPES = {
+    setFromCountry : SET_FROM_COUNTRY,
+    setToCountry   : SET_TO_COUNTRY,
     setFromStation : SET_FROM_STATION,
     setToStation   : SET_TO_STATION,
     swapStation    : SWAP_STATION,
+
     setDate        : SET_DATE,
     setDepartureTime : SET_DEPARTURE_TIME,
     setArrivalTime   : SET_ARRIVAL_TIME,

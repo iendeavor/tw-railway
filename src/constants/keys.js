@@ -3,9 +3,13 @@ const genRandom = () => Math.random().toString(36).substring(10)
 const SORT_BY       = 'SORT_BY' + genRandom()
 const ORDER_BY      = 'ORDER_BY' + genRandom()
 
-const FROM_STATION  = 'FROM_STATION' + genRandom()
-const TO_STATION    = 'TO_STATION' + genRandom()
-const STATIONS      = 'STATIONS' + genRandom()
+const COUNTRIES      = 'COUNTRIES' + genRandom()
+const FROM_STATIONS  = 'FROM_STATIONS' + genRandom()
+const TO_STATIONS    = 'TO_STATIONS' + genRandom()
+const FROM_COUNTRY   = 'FROM_COUNTRY' + genRandom()
+const FROM_STATION   = 'FROM_STATION' + genRandom()
+const TO_COUNTRY     = 'TO_COUNTRY' + genRandom()
+const TO_STATION     = 'TO_STATION' + genRandom()
 
 const ARRIVAL         = 'ARRIVAL' + genRandom()
 const DEPARTURE       = 'DEPARTURE' + genRandom()
@@ -43,9 +47,13 @@ const KEYS = Object.freeze({
     sortBy        : SORT_BY,
     orderBy       : ORDER_BY,
 
+    countries     : COUNTRIES,
+    fromStations  : FROM_STATIONS,
+    toStations    : TO_STATIONS,
+    fromCountry   : FROM_COUNTRY,
     fromStation   : FROM_STATION,
+    toCountry     : TO_COUNTRY,
     toStation     : TO_STATION,
-    stations      : STATIONS,
 
     departure     : DEPARTURE,
     arrival       : ARRIVAL,

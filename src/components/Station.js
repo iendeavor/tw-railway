@@ -6,11 +6,17 @@ import SearchIcon from '@material-ui/icons/Search'
 
 
 const Station = ({
-    selectedFrom,
-    selectedTo,
-    stations,
+    countries,
+    fromStations,
+    toStations,
+    selectedFromCountry,
+    selectedFromStation,
+    selectedToCountry,
+    selectedToStation,
     onSwapStation,
+    onSetFromCountry,
     onSetFromStation,
+    onSetToCountry,
     onSetToStation,
     onSearch,
 }) => {
@@ -29,27 +35,27 @@ const Station = ({
                 >
                     <Grid
                       item
-                      xs={8}
+                      xs={6}
                     >
                         <InputLabel shrink>
-                            From
+                            From country
                         </InputLabel>
 
                         <Select
                           native
-                          key={ selectedFrom }
-                          defaultValue={ selectedFrom }
-                          onChange={ onSetFromStation }
+                          key={ selectedFromCountry }
+                          defaultValue={ selectedFromCountry }
+                          onChange={ onSetFromCountry }
                           style={ {width: '100%'} }
                         >
                         {
-                            stations.map(option => {
+                            countries.map(option => {
                                 return (
                                     <option
-                                      key={option.value}
-                                      value={option.value}
+                                      key={ option.id }
+                                      value={ option.id }
                                     >
-                                        {option.label}
+                                        { option.name }
                                     </option>
                                 )
                             })
@@ -58,7 +64,108 @@ const Station = ({
                     </Grid>
                     <Grid
                       item
-                      xs={3}
+                      xs={6}
+                    >
+                        <InputLabel shrink>
+                            From station
+                        </InputLabel>
+
+                        <Select
+                          native
+                          key={ selectedFromStation }
+                          defaultValue={ selectedFromStation }
+                          onChange={ onSetFromStation }
+                          style={ {width: '100%'} }
+                        >
+                        {
+                            fromStations.map(option => {
+                                return (
+                                    <option
+                                      key={ option.id }
+                                      value={ option.id }
+                                    >
+                                        { option.name }
+                                    </option>
+                                )
+                            })
+                        }
+                        </Select>
+                    </Grid>
+                </Grid>
+
+                <Grid
+                  container
+                  alignItems='flex-end'
+                  justify='space-between'
+                >
+                    <Grid
+                      item
+                      xs={6}
+                    >
+                        <InputLabel shrink>
+                            To country
+                        </InputLabel>
+
+                        <Select
+                          native
+                          key={ selectedToCountry }
+                          defaultValue={ selectedToCountry }
+                          onChange={ onSetToCountry }
+                          style={ {width: '100%'} }
+                        >
+                        {
+                            countries.map(option => {
+                                return (
+                                    <option
+                                      key={ option.id }
+                                      value={ option.id }
+                                    >
+                                        { option.name }
+                                    </option>
+                                )
+                            })
+                        }
+                        </Select>
+                    </Grid>
+
+                    <Grid
+                      item
+                      xs={6}
+                    >
+                        <InputLabel shrink>
+                            To station
+                        </InputLabel>
+
+                        <Select
+                          native
+                          key={ selectedToStation }
+                          defaultValue={ selectedToStation }
+                          onChange={ onSetToStation }
+                          style={ {width: '100%'} }
+                        >
+                        {
+                            toStations.map(option => {
+                                return (
+                                    <option
+                                      key={ option.id }
+                                      value={ option.id }
+                                    >
+                                        { option.name }
+                                    </option>
+                                )
+                            })
+                        }
+                        </Select>
+                    </Grid>
+                </Grid>
+
+                <Grid
+                  container
+                  alignItems='flex-end'
+                  justify='flex-end'
+                >
+                    <Grid
+                      item
                     >
                         <Button
                           onClick={ onSwapStation }
@@ -70,46 +177,8 @@ const Station = ({
                         </Button>
                     </Grid>
 
-                </Grid>
-
-                <Grid
-                  container
-                  alignItems='flex-end'
-                  justify='space-between'
-                >
                     <Grid
                       item
-                      xs={8}
-                    >
-                        <InputLabel shrink>
-                            To
-                        </InputLabel>
-
-                        <Select
-                          native
-                          key={ selectedTo }
-                          defaultValue={ selectedTo }
-                          onChange={ onSetToStation }
-                          style={ {width: '100%'} }
-                        >
-                        {
-                            stations.map(station => {
-                                return (
-                                    <option
-                                      key={ station.value }
-                                      value={ station.value }
-                                    >
-                                        { station.label }
-                                    </option>
-                                )
-                            })
-                        }
-                        </Select>
-                    </Grid>
-
-                    <Grid
-                      item
-                      xs={3}
                     >
                         <Button
                           onClick={ onSearch }
@@ -127,11 +196,18 @@ const Station = ({
 }
 
 Station.propTypes = {
-    selectedFrom: PropTypes.string.isRequired,
-    selectedTo: PropTypes.string.isRequired,
-    stations: PropTypes.array.isRequired,
+    countries:           PropTypes.array.isRequired,
+    fromStations:        PropTypes.array.isRequired,
+    toStations:          PropTypes.array.isRequired,
+    selectedFromStation: PropTypes.string.isRequired,
+    selectedToStation:   PropTypes.string.isRequired,
+    selectedFromCountry: PropTypes.string.isRequired,
+    selectedToCountry:   PropTypes.string.isRequired,
+
     onSwapStation: PropTypes.func.isRequired,
+    onSetFromCountry: PropTypes.func.isRequired,
     onSetFromStation: PropTypes.func.isRequired,
+    onSetToCountry: PropTypes.func.isRequired,
     onSetToStation: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired,
 }

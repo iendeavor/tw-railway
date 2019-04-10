@@ -1,22 +1,20 @@
 import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
-import { stations } from '../resources/stations'
+import { getCountries, getStationsOfCountry } from '../resources/stations'
 
 
-let options = stations.map(station => {
-    return ({
-        value: station['id'],
-        label: station['name'],
-    })
-})
-options.sort((a, b) => {
-    return a.label.localeCompare(b.label)
-})
-
+const taipei_country_id = '2'
+const kauhsiung_country_id = '14'
+const taipei_station_id = '1008'
+const kauhsiung_station_id = '1238'
 const default_state = {
-    [KEYS.fromStation]: 1008,
-    [KEYS.toStation]: 1238,
-    [KEYS.stations]: options,
+    [KEYS.countries]    : getCountries(),
+    [KEYS.fromStations] : getStationsOfCountry(taipei_country_id),
+    [KEYS.toStations]   : getStationsOfCountry(kauhsiung_country_id),
+    [KEYS.fromCountry]  : getCountries()[taipei_country_id].id,
+    [KEYS.fromStation]  : taipei_station_id,
+    [KEYS.toCountry]    : getCountries()[kauhsiung_country_id].id,
+    [KEYS.toStation]    : kauhsiung_station_id,
 }
 
 export default (state=default_state, action) => {
@@ -24,15 +22,35 @@ export default (state=default_state, action) => {
 
     if (action !== undefined) {
         switch (action.type) {
+            case TYPES.setFromCountry:
+                const fromCountry = action.payload[KEYS.fromCountry]
+                const fromStations = getStationsOfCountry(fromCountry)
+                next[KEYS.fromCountry]  = fromCountry
+                next[KEYS.fromStations] = fromStations
+                next[KEYS.fromStation]  = fromStations[0].id
+                break
+            case TYPES.setToCountry:
+                const toCountry = action.payload[KEYS.toCountry]
+                const toStations = getStationsOfCountry(toCountry)
+                next[KEYS.toCountry]  = toCountry
+                next[KEYS.toStations] = toStations
+                next[KEYS.toStation]  = toStations[0].id
+                break
             case TYPES.setFromStation:
-                next[KEYS.fromStation] = parseInt(action.payload[KEYS.fromStation])
+                const fromStation = action.payload[KEYS.fromStation]
+                next[KEYS.fromStation] = fromStation
                 break
             case TYPES.setToStation:
-                next[KEYS.toStation] = parseInt(action.payload[KEYS.toStation])
+                const toStation = action.payload[KEYS.toStation]
+                next[KEYS.toStation] = toStation
                 break
             case TYPES.swapStation:
-                next[KEYS.fromStation] = state[KEYS.toStation]
-                next[KEYS.toStation] = state[KEYS.fromStation]
+                next[KEYS.fromStations] = state[KEYS.toStations]
+                next[KEYS.toStations]   = state[KEYS.fromStations]
+                next[KEYS.fromCountry]  = state[KEYS.toCountry]
+                next[KEYS.fromStation]  = state[KEYS.toStation]
+                next[KEYS.toCountry]    = state[KEYS.fromCountry]
+                next[KEYS.toStation]    = state[KEYS.fromStation]
                 break
             default:
                 break

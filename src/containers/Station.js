@@ -6,16 +6,26 @@ import CREATORS from '../constants/actionCreators'
 
 const mapStateToProps = state => {
     return {
-        selectedFrom: state.station[KEYS.fromStation] + '',
-        selectedTo: state.station[KEYS.toStation] + '',
-        stations: state.station[KEYS.stations],
+        countries:           state.station[KEYS.countries],
+        selectedFromCountry: state.station[KEYS.fromCountry],
+        selectedFromStation: state.station[KEYS.fromStation],
+        fromStations:        state.station[KEYS.fromStations],
+        selectedToCountry:   state.station[KEYS.toCountry],
+        selectedToStation:   state.station[KEYS.toStation],
+        toStations:          state.station[KEYS.toStations],
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        onSetFromCountry: event => {
+            CREATORS.handleSetFromCountry(event.target.value)
+        },
         onSetFromStation: event => {
             CREATORS.handleSetFromStation(event.target.value)
+        },
+        onSetToCountry: event => {
+            CREATORS.handleSetToCountry(event.target.value)
         },
         onSetToStation: event => {
             CREATORS.handleSetToStation(event.target.value)

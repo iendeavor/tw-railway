@@ -22,6 +22,36 @@ const handleSetDate = date => {
     })
 }
 
+const handleSetFromCountry = ID => {
+    dispatch({
+        type: TYPES.setFromCountry,
+        payload: {
+            [KEYS.fromCountry]: ID,
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
+}
+
+const handleSetToCountry = ID => {
+    dispatch({
+        type: TYPES.setToCountry,
+        payload: {
+            [KEYS.toCountry]: ID,
+        },
+        meta: {
+            debounce: {
+                time: 300,
+                leading: true,
+            },
+        },
+    })
+}
+
 const handleSetFromStation = ID => {
     dispatch({
         type: TYPES.setFromStation,
@@ -256,6 +286,8 @@ const CREATORS = Object.freeze({
     handleSetArrivalTime,
     handleSetDepartureTime,
 
+    handleSetFromCountry,
+    handleSetToCountry,
     handleSetFromStation,
     handleSetToStation,
     handleSwapStation,
