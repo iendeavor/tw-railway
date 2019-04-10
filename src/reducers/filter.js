@@ -13,7 +13,7 @@ export default (state=defaultState, action) => {
 
     const next = {...state}
 
-    let selectedFilters = new Set(Array.from(next[KEYS.selectedFilters]))
+    let selectedFilters = new Set(Array.from(state[KEYS.selectedFilters]))
     switch (action.type) {
         case TYPES.addFilter:
             next[KEYS.selectedFilters] = selectedFilters.add(action.payload[KEYS.selectedFilter])
