@@ -101,9 +101,7 @@ const handleSetSort = value => {
             },
         },
     })
-    handleRestoreSearch()
-    handleSort()
-    handleFilter()
+    handle()
 }
 
 const handleSort = () => {
@@ -149,8 +147,7 @@ const handleAddingFilter = value => {
             },
         },
     })
-    handleFilter()
-    handleSort()
+    handle()
 }
 
 const handleRemovingFilter = value => {
@@ -166,6 +163,7 @@ const handleRemovingFilter = value => {
             },
         },
     })
+    handle()
 }
 
 const handleSetDepartureTime = time => {
