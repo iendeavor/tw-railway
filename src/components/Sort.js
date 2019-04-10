@@ -10,7 +10,10 @@ import {
 } from '../constants/sortTypes'
 
 
-const Sort = ({selectedSort, onSetSort}) => {
+const Sort = ({
+    selectedSort,
+    onSetSort,
+}) => {
     const sortOptions = [
         {
             value: KEYS.departure,

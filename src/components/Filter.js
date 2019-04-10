@@ -10,7 +10,11 @@ import {
 } from '../constants/labels'
 
 
-const Filter = ({selectedValues, onAddingFilter, onRemovingFilter}) => {
+const Filter = ({
+    selectedValues,
+    onAddingFilter,
+    onRemovingFilter,
+}) => {
     const options = [
         {
             value: KEYS.wheelChair,

@@ -7,7 +7,23 @@ import KEYS from '../constants/keys'
 import { getName } from '../resources/stations'
 
 
-const Schedule = ({train_type_name, from, to, duration, arrival, departure, type, fare, has_nursing_room, is_bike_allowed, has_wheel_chair, isDaily, note, index, onAddingFilter}) => {
+const Schedule = ({
+    train_type_name,
+    from,
+    to,
+    duration,
+    arrival,
+    departure,
+    type,
+    fare,
+    has_nursing_room,
+    is_bike_allowed,
+    has_wheel_chair,
+    isDaily,
+    note,
+    index,
+    onAddingFilter,
+}) => {
     const ICON_STYLE = {
         width: '30px',
     }

@@ -5,8 +5,15 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 import SearchIcon from '@material-ui/icons/Search'
 
 
-const Station = ({selectedFrom, selectedTo, stations,
-                  onSwapStation, onSetFromStation, onSetToStation, onSearch}) => {
+const Station = ({
+    selectedFrom,
+    selectedTo,
+    stations,
+    onSwapStation,
+    onSetFromStation,
+    onSetToStation,
+    onSearch,
+}) => {
     return (
         <Grid
           container

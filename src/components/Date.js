@@ -3,8 +3,14 @@ import PropTypes from 'prop-types'
 import { InputLabel, Grid, TextField, Button } from '@material-ui/core';
 
 
-const Date_ = ({selectedDate, isToday, isTomorrow,
-                onChangeDate, onSetToday, onSetTomorrow}) => {
+const Date_ = ({
+    selectedDate,
+    isToday,
+    isTomorrow,
+    onChangeDate,
+    onSetToday,
+    onSetTomorrow,
+}) => {
     return(
         <Grid
           container

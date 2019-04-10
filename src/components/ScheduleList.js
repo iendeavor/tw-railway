@@ -8,7 +8,9 @@ import Sort from '../containers/Sort'
 import Time from '../containers/Time'
 
 
-const ScheduleList = ({schedules}) => {
+const ScheduleList = ({
+    schedules,
+}) => {
     return (
         <Grid
           container
