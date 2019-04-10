@@ -219,7 +219,6 @@ const handle = () => {
     handleSort()
     handleFilterDepartureTime()
     handleFilterArrivalTime()
-    console.log(store.getState())
 }
 
 const handleFilterDepartureTime = () => {
