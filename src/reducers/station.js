@@ -3,11 +3,14 @@ import KEYS from '../constants/keys'
 import { stations } from '../resources/stations'
 
 
-const options = stations.map(station => {
+let options = stations.map(station => {
     return ({
         value: station['id'],
         label: station['name'],
     })
+})
+options.sort((a, b) => {
+    return a.label.localeCompare(b.label)
 })
 
 const default_state = {
