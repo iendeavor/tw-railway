@@ -1,28 +1,6 @@
 import station_source from './stations.json'
 import country_source from './countries.json'
 
-export const stations = Object.freeze(
-    station_source.map(station => {
-        return {
-            id: station['StationID'] + '',
-            name: station['StationName']['En'],
-        }
-    })
-)
-
-const mapping = Object.freeze(
-    station_source.map(station => {
-        return {
-            [station['StationID']]: station['StationName']['En'],
-            [station['StationName']['En']]: station['StationID'],
-        }
-    }).reduce((accu, curr) => {
-        return Object.assign({}, accu, curr)
-    })
-)
-
-export const getName = ID => mapping[ID]
-export const getID = name => mapping[name]
 
 const UNKNOWN_COUNTRY = 'UnknownAddress'
 

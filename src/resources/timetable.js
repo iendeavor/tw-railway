@@ -46,8 +46,10 @@ const formatTimetable = timetable => {
     return timetable.map(pair => {
         return {
             number: pair.DailyTrainInfo.TrainNo,
-            from: pair.OriginStopTime.StationID,
-            to: pair.DestinationStopTime.StationID,
+            fromID: pair.OriginStopTime.StationID,
+            toID: pair.DestinationStopTime.StationID,
+            from: pair.OriginStopTime.StationName.En,
+            to: pair.DestinationStopTime.StationName.En,
             duration: calcDuration(pair),
             departure: pair.OriginStopTime.DepartureTime,
             arrival: pair.DestinationStopTime.ArrivalTime,

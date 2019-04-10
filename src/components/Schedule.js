@@ -4,8 +4,6 @@ import clsx from 'clsx'
 import { Card, Icon, Grid, Button } from '@material-ui/core'
 import KEYS from '../constants/keys'
 
-import { getName } from '../resources/stations'
-
 
 const Schedule = ({
     number,
@@ -170,8 +168,8 @@ const Schedule = ({
                 { renderHeader() }
 
                 {  renderStops([
-                        {time: departure, name: getName(from)},
-                        {time: arrival, name: getName(to)}],
+                        {time: departure, name: from},
+                        {time: arrival, name: to}],
                 )}
 
                 { renderFooter() }
