@@ -34,7 +34,7 @@ export default (state=default_state, action) => {
 
     switch(action.type) {
         case TYPES.search:
-            next[KEYS.originalSchedules] = action.payload[KEYS.schedules].slice().map(schedule => {
+            next[KEYS.originalSchedules] = action.payload[KEYS.schedules].map(schedule => {
                 schedule.fare = state[KEYS.fares][schedule.train_type]
                 return schedule
             })
@@ -89,7 +89,7 @@ export default (state=default_state, action) => {
             let schedules = state[KEYS.schedules].slice()
 
             for (let filter of action.payload[KEYS.selectedFilters]) {
-                schedules = schedules.slice().filter(schedule => {
+                schedules = schedules.filter(schedule => {
                     switch (filter) {
                         case KEYS.wheelChair:
                             return schedule.has_wheel_chair
