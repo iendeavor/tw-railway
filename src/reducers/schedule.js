@@ -48,41 +48,38 @@ export default (state=default_state, action) => {
             break
         case TYPES.sort:
             next[KEYS.schedules] = state[KEYS.schedules].slice().sort((a, b) => {
-                let a_arrival = (parseInt(a.arrival.slice(0, 2)) * 60 +
-                                   parseInt(a.arrival.slice(3, 5)))
-                let b_arrival = (parseInt(b.arrival.slice(0, 2)) * 60 +
-                                   parseInt(b.arrival.slice(3, 5)))
-                const a_departure = (parseInt(a.departure.slice(0, 2)) * 60 +
-                                     parseInt(a.departure.slice(3, 5)))
-                const b_departure = (parseInt(b.departure.slice(0, 2)) * 60 +
-                                     parseInt(b.departure.slice(3, 5)))
+                let flag = 0
 
                 switch (action.payload[KEYS.sortBy]) {
                     case KEYS.arrival:
-                        if (a_departure > a_arrival) {
-                            a_arrival += 86400
-                        }
-                        if (b_departure > b_arrival) {
-                            b_arrival += 86400
-                        }
-                        return a_arrival - b_arrival
+                        const a_arrival   = convertArrivalToTimestamp(a.arrival, a.departure)
+                        const b_arrival   = convertArrivalToTimestamp(b.arrival, b.departure)
+                        flag = a_arrival - b_arrival
+                        break
+
                     case KEYS.departure:
-                        return a_departure - b_departure
+                        const a_departure = convertDepartureToTimestamp(a.departure)
+                        const b_departure = convertDepartureToTimestamp(b.departure)
+                        flag = a_departure - b_departure
+                        break
+
                     case KEYS.duration:
-                        const a_duration = (parseInt(a.duration.slice(0, 2)) * 60 +
-                                            parseInt(a.duration.slice(3, 5)))
-                        const b_duration = (parseInt(b.duration.slice(0, 2)) * 60 +
-                                            parseInt(b.duration.slice(3, 5)))
-                        return a_duration - b_duration
+                        const a_duration  = convertToTimestamp(a.duration)
+                        const b_duration  = convertToTimestamp(b.duration)
+                        flag = a_duration - b_duration
+                        break
+
                     case KEYS.fare:
                         const a_fare = parseInt(a.fare)
                         const b_fare = parseInt(b.fare)
-                        return a_fare - b_fare
+                        flag = a_fare - b_fare
+                        break
+
                     default:
                         break
                 }
 
-                return 0
+                return flag
             })
             break
         case TYPES.filter:
