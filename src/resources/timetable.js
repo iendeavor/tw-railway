@@ -1,6 +1,6 @@
 import { getTrainTypeName, getTrainTypeID } from './train_type'
 
-export const getTimetable = (from, to, on) => {
+export const getTimetable = (from, to, on=new Date()) => {
     const yyyymmdd = on.toISOString().slice(0, 10)
 
     return new Promise((success, error) => {
