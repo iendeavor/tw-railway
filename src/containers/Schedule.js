@@ -13,6 +13,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onAddingFilter: value => {
             CREATORS.handleAddingFilter(value)
+            CREATORS.handleAddingMessage('Added filter.')
         },
         onRemovingFilter: value=> {
             CREATORS.handleRemovingFilter(value)

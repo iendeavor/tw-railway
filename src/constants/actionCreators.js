@@ -56,6 +56,21 @@ const handleSwapStation = () => {
     dispatch({ type: TYPES.swapStation, })
 }
 
+const handleAddingMessage = message => {
+    dispatch({
+        type: TYPES.addMessage,
+        payload: {
+            [KEYS.message]: message,
+        }
+    })
+}
+
+const handleRemovingMessage = message => {
+    dispatch({
+        type: TYPES.removeMessage,
+    })
+}
+
 const handleSearchRequest = () => {
     const from = store.getState().station[KEYS.fromStation]
     const to = store.getState().station[KEYS.toStation]
@@ -255,6 +270,9 @@ const CREATORS = Object.freeze({
 
     handleSetSort,
     handleSort,
+
+    handleAddingMessage,
+    handleRemovingMessage,
 })
 
 export default CREATORS

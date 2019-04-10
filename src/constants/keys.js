@@ -37,6 +37,8 @@ const LIMITED_EXPRESS = 'LIMITED_EXPRESS' + genRandom()
 const EXPRESS         = 'EXPRESS' + genRandom()
 const SEMI_EXPRESS    = 'SEMI_EXPRESS' + genRandom()
 
+const MESSAGE         = 'MESSAGE' + genRandom()
+
 const KEYS = Object.freeze({
     sortBy        : SORT_BY,
     orderBy       : ORDER_BY,
@@ -74,6 +76,8 @@ const KEYS = Object.freeze({
     limitedExpress : LIMITED_EXPRESS,
     express        : EXPRESS,
     semiExpress    : SEMI_EXPRESS,
+
+    message        : MESSAGE,
 })
 
 export default KEYS

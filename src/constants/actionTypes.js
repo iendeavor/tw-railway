@@ -21,6 +21,9 @@ export const RESTORE_SEARCH    = 'ACTION_RESTORE_SEARCH'
 
 export const SET_FARE          = 'ACTION_SET_FARE'
 
+export const ADD_MESSAGE       = 'ACTION_ADD_MESSAGE'
+export const REMOVE_MESSAGE    = 'ACTION_REMOVE_MESSAGE'
+
 const ACTION_TYPES = {
     setFromStation : SET_FROM_STATION,
     setToStation   : SET_TO_STATION,
@@ -43,6 +46,9 @@ const ACTION_TYPES = {
     restoreSearch  : RESTORE_SEARCH,
 
     setFare        : SET_FARE,
+
+    addMessage     : ADD_MESSAGE,
+    removeMessage  : REMOVE_MESSAGE,
 }
 
 export default ACTION_TYPES

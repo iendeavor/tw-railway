@@ -6,6 +6,7 @@ import filter from './filter'
 import date from './date'
 import schedule from './schedule'
 import time from './time'
+import message from './message'
 
 
 export default combineReducers({
@@ -15,4 +16,5 @@ export default combineReducers({
     date,
     schedule,
     time,
+    message,
 })
