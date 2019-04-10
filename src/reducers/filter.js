@@ -7,6 +7,10 @@ const defaultState = {
 }
 
 export default (state=defaultState, action) => {
+    if (action === undefined) {
+        return state
+    }
+
     const next = {...state}
 
     let selectedFilters = new Set(Array.from(next[KEYS.selectedFilters]))

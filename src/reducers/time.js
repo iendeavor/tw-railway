@@ -8,19 +8,21 @@ const defaultState = {
 }
 
 export default (state=defaultState, action) => {
+    if (action === undefined) {
+        return state
+    }
+
     const next = {...state}
 
-    if (action !== undefined) {
-        switch (action.type) {
-            case TYPES.setDepartureTime:
-                next[KEYS.departureTime] = action.payload[KEYS.departureTime]
-                break
-            case TYPES.setArrivalTime:
-                next[KEYS.arrivalTime] = action.payload[KEYS.arrivalTime]
-                break
-            default:
-                break
-        }
+    switch (action.type) {
+        case TYPES.setDepartureTime:
+            next[KEYS.departureTime] = action.payload[KEYS.departureTime]
+            break
+        case TYPES.setArrivalTime:
+            next[KEYS.arrivalTime] = action.payload[KEYS.arrivalTime]
+            break
+        default:
+            break
     }
 
     return next

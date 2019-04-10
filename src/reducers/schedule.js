@@ -30,6 +30,10 @@ const convertArrivalToTimestamp = (arrival, departure) => {
 }
 
 export default (state=default_state, action) => {
+    if (action === undefined) {
+        return state
+    }
+
     const next = {...state}
 
     switch(action.type) {
