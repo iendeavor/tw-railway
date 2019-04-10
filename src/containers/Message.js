@@ -5,7 +5,6 @@ import CREATORS from '../constants/actionCreators'
 
 
 const mapStateToProps = state => {
-    console.log(state)
     return {
         open: state.message.open,
         message: state.message.message,
