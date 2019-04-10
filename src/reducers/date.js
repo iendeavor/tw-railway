@@ -1,11 +1,9 @@
 import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
+import utils from './utils'
 
 
-const getTimezoneOffset = () => new Date().getTimezoneOffset() * 60 * 1000
-const offsetDate = date => new Date(+date - getTimezoneOffset())
-const removeTime = date => date.toISOString().substring(0, 10)  // 1970-01-01
-const unifyDate = date => new Date(removeTime(offsetDate(date)))
+const unifyDate = date => new Date(utils.removeTime(utils.offsetDate(date)))
 const getUnifiedToday = () => unifyDate(new Date())
 const getUnifiedTomorrow = () => unifyDate(new Date(+new Date() + 86400 * 1000))
 
