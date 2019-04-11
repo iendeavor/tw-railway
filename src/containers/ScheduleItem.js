@@ -1,22 +1,22 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import ScheduleItem from '../components/ScheduleItem'
-import CREATORS from '../constants/actionCreators'
-
+import ScheduleItem from '../components/ScheduleItem';
+import CREATORS from '../constants/actionCreators';
 
 const mapStateToProps = state => {
-    return {
-    }
-}
+  return {};
+};
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onAddingFilter: value => {
-            CREATORS.handleAddingFilter(value)
-            CREATORS.handleAddingMessage('Added filter.')
-        },
+  return {
+    onAddingFilter: value => {
+      CREATORS.handleAddingFilter(value);
+      CREATORS.handleAddingMessage('Added filter.');
     }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScheduleItem)
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ScheduleItem);

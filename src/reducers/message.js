@@ -1,34 +1,33 @@
-import TYPES from '../constants/actionTypes'
-import KEYS from '../constants/keys'
+import TYPES from '../constants/actionTypes';
+import KEYS from '../constants/keys';
 
 const defaultState = {
-    open: false,
-    message: '',
-}
+  open: false,
+  message: ''
+};
 
-export default (state=defaultState, action) => {
-    if (action === undefined) {
-        return state
-    }
+export default (state = defaultState, action) => {
+  if (action === undefined) {
+    return state;
+  }
 
-    const next = {...state}
+  const next = { ...state };
 
-    switch(action.type) {
-        case TYPES.addMessage:
-            next.message = action.payload[KEYS.message]
-            next.open = true
-            break
+  switch (action.type) {
+    case TYPES.addMessage:
+      next.message = action.payload[KEYS.message];
+      next.open = true;
+      break;
 
-        case TYPES.removeMessage:
-            next.message = ''
-            next.open = false
+    case TYPES.removeMessage:
+      next.message = '';
+      next.open = false;
 
-            break
+      break;
 
-        default:
-            break
-    }
+    default:
+      break;
+  }
 
-    return next
-}
-
+  return next;
+};

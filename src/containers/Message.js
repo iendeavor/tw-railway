@@ -1,22 +1,23 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import Message from '../components/Message'
-import CREATORS from '../constants/actionCreators'
-
+import Message from '../components/Message';
+import CREATORS from '../constants/actionCreators';
 
 const mapStateToProps = state => {
-    return {
-        open: state.message.open,
-        message: state.message.message,
-    }
-}
+  return {
+    open: state.message.open,
+    message: state.message.message
+  };
+};
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onExitingMessage  : CREATORS.handleRemovingMessage,
-        onRemovingMessage : CREATORS.handleRemovingMessage,
-    }
-}
+  return {
+    onExitingMessage: CREATORS.handleRemovingMessage,
+    onRemovingMessage: CREATORS.handleRemovingMessage
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Message)
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Message);

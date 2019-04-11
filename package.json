@@ -17,6 +17,7 @@
     "react-thunk": "^1.0.0",
     "redux": "^4.0.1",
     "redux-debounced": "^0.5.0",
+    "remove": "^0.1.5",
     "rsuite": "^3.7.9",
     "uuid": "^3.3.2"
   },
@@ -36,5 +37,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {}
+  "devDependencies": {
+    "prettier": "^1.16.4"
+  }
 }

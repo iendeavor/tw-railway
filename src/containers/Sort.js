@@ -1,23 +1,25 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import Sort from '../components/Sort'
-import KEYS from '../constants/keys'
-import CREATORS from '../constants/actionCreators'
+import Sort from '../components/Sort';
+import KEYS from '../constants/keys';
+import CREATORS from '../constants/actionCreators';
 
 const mapStateToProps = state => {
-    return {
-        options: state.sort[KEYS.options],
-        selectedSort: state.sort[KEYS.sortBy],
-    }
+  return {
+    options: state.sort[KEYS.options],
+    selectedSort: state.sort[KEYS.sortBy]
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onSetSort: value => {
-            CREATORS.handleSetSort(value)
-        },
+  return {
+    onSetSort: value => {
+      CREATORS.handleSetSort(value);
     }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sort)
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Sort);
