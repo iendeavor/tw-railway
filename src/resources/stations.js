@@ -1,17 +1,38 @@
 import station_source from './stations.json';
 import country_source from './countries.json';
 
-const UNKNOWN_COUNTRY = 'UnknownAddress';
+const mapping = {
+  "基隆": "Keelung",
+  "臺北": "Taipei",
+  "新北": "New Taipei",
+  "桃園": "Taoyuan",
+  "宜蘭": "Yilan",
+  "新竹": "Hsinchu",
+  "苗栗": "Miaoli",
+  "臺中": "Taichung",
+  "南投": "Nantou",
+  "彰化": "Changhua",
+  "雲林": "Yunlin",
+  "嘉義": "Chiayi",
+  "臺南": "Tainan",
+  "高雄": "Kauhsiung",
+  "屏東": "Pingtung",
+  "臺東": "Taitung",
+  "花蓮": "Hualien",
+  "未知": "UnknownAddress",
+}
+
+const UNKNOWN_COUNTRY = '未知';
 
 export const getCountries = country_src => {
   if (country_src === undefined) {
     country_src = country_source;
   }
 
-  const unknownCountry = [{ id: '0', name: UNKNOWN_COUNTRY }];
+  const unknownCountry = [{ id: '0', name: mapping[UNKNOWN_COUNTRY] }];
   const knownCountry = country_src.map((country, index) => ({
     id: index + 1 + '',
-    name: country
+    name: mapping[country]
   }));
 
   return Object.freeze(unknownCountry.concat(knownCountry));
@@ -57,6 +78,7 @@ export const getStations = src => {
         } else {
           country = UNKNOWN_COUNTRY;
         }
+        country = mapping[country]
         return {
           [country]: {
             id: station['StationID'] + '',
