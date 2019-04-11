@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Time from '../components/Time';
+import Time from '../components/Time.jsx';
 import KEYS from '../constants/keys';
 import CREATORS from '../constants/actionCreators';
 

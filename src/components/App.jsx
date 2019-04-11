@@ -1,9 +1,9 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
 
-import Header from './Header'
-import Main from './Main'
-import Footer from './Footer'
+import Header from './Header.jsx'
+import Main from './Main.jsx'
+import Footer from './Footer.jsx'
 
 const App = props => (
     <Grid

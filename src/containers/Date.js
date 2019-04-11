@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Date_ from '../components/Date';
+import Date_ from '../components/Date.jsx';
 import KEYS from '../constants/keys';
 import CREATORS from '../constants/actionCreators';
 import store from '../store';

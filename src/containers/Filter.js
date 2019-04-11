@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Filter from '../components/Filter';
+import Filter from '../components/Filter.jsx';
 import KEYS from '../constants/keys';
 import CREATORS from '../constants/actionCreators';
 
@@ -8,7 +8,7 @@ const mapStateToProps = state => {
   return {
     options: state.filter[KEYS.options],
     selectedValues: Array.from(state.filter[KEYS.selectedFilters])
-  };
+  }
 };
 
 const mapDispatchToProps = dispatch => {

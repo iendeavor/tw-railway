@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import ScheduleItem from '../components/ScheduleItem';
+import ScheduleItem from '../components/ScheduleItem.jsx';
 import CREATORS from '../constants/actionCreators';
 
 const mapStateToProps = state => {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Message from '../components/Message';
+import Message from '../components/Message.jsx';
 import CREATORS from '../constants/actionCreators';
 
 const mapStateToProps = state => {

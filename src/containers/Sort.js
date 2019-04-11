@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Sort from '../components/Sort';
+import Sort from '../components/Sort.jsx';
 import KEYS from '../constants/keys';
 import CREATORS from '../constants/actionCreators';
 

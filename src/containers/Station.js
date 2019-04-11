@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Station from '../components/Station';
+import Station from '../components/Station.jsx';
 import KEYS from '../constants/keys';
 import CREATORS from '../constants/actionCreators';
 
