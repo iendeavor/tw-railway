@@ -26,6 +26,8 @@ const getFareURL = (from, to) => {
 };
 
 const formatFare = fare_info => {
+  if (fare_info[0] === undefined) return {};
+
   let res = {};
   for (let fare of fare_info[0].Fares) {
     switch (fare.TicketType) {
