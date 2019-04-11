@@ -6,7 +6,8 @@ import CREATORS from '../constants/actionCreators'
 
 const mapStateToProps = state => {
     return {
-       selectedValues: Array.from(state.filter[KEYS.selectedFilters]),
+        options: state.filter[KEYS.options],
+        selectedValues: Array.from(state.filter[KEYS.selectedFilters]),
     }
 }
 

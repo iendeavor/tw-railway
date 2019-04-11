@@ -1,5 +1,7 @@
 import uuid from 'uuid/v4'
 
+const OPTIONS        = uuid() + '-OPTIONS'
+
 const SORT_BY        = uuid() + '-SORT_BY'
 const ORDER_BY       = uuid() + '-ORDER_BY'
 
@@ -44,6 +46,8 @@ const SEMI_EXPRESS    = uuid() + '-SEMI_EXPRESS'
 const MESSAGE         = uuid() + '-MESSAGE'
 
 const KEYS = Object.freeze({
+    options       : OPTIONS,
+
     sortBy        : SORT_BY,
     orderBy       : ORDER_BY,
 

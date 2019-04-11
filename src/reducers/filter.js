@@ -1,9 +1,27 @@
 import TYPES from '../constants/actionTypes'
 import KEYS from '../constants/keys'
 
+const options = [
+    {
+        value: KEYS.wheelChair,
+        name: 'Wheel chair',
+        icon: 'fas fa-wheelchair',
+    },
+    {
+        value: KEYS.bikeSpace,
+        name: 'Bike space',
+        icon: 'fas fa-bicycle',
+    },
+    {
+        value: KEYS.nursingRoom,
+        name: 'Nursing Room',
+        icon: 'fas fa-baby',
+    },
+]
 
 const defaultState = {
     [KEYS.selectedFilters]: new Set(),
+    [KEYS.options]: options,
 }
 
 export default (state=defaultState, action) => {

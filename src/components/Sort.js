@@ -11,29 +11,10 @@ import {
 
 
 const Sort = ({
+    options,
     selectedSort,
     onSetSort,
 }) => {
-    const sortOptions = [
-        {
-            value: KEYS.departure,
-            label: LABEL.tw[KEYS.departure],
-            icon: 'fas fa-plane-departure'},
-        {
-            value: KEYS.arrival,
-            label: LABEL.tw[KEYS.arrival],
-            icon: 'fas fa-plane-arrival'},
-        {
-            value: KEYS.duration,
-            label: LABEL.tw[KEYS.duration],
-            icon: 'fas fa-hourglass-start'},
-        {
-            value: KEYS.fare,
-            label: LABEL.tw[KEYS.fare],
-            icon: 'fas fa-dollar-sign',
-        },
-    ]
-
     return (
         <React.Fragment>
             <InputLabel shrink>
@@ -45,7 +26,7 @@ const Sort = ({
               justify='space-between'
             >
             {
-                sortOptions.map((option, i) => (
+                options.map((option, i) => (
                     <Grid
                       key={i}
                       item
@@ -63,7 +44,7 @@ const Sort = ({
                         >
                             <Icon className={ clsx(option.icon) } style={{width: 'auto'}}/>
                             <Box display={{xs: 'none', sm: 'none', md: 'block'}} p={0.5}>
-                                { option.label }
+                                { option.name }
                             </Box>
                         </Button>
                     </Grid>
@@ -75,6 +56,7 @@ const Sort = ({
 }
 
 Sort.propTypes = {
+    options: PropTypes.array.isRequired,
     selectedSort: PropTypes.oneOf([KEYS.duration, KEYS.arrival, KEYS.departure, KEYS.fare, KEYS.smallTransfer]).isRequired,
     onSetSort: PropTypes.func.isRequired,
 }

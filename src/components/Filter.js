@@ -5,34 +5,14 @@ import { Icon, InputLabel, Grid, Button } from '@material-ui/core'
 import Box from '@material-ui/core/Box'
 
 import KEYS from '../constants/keys'
-import {
-    FILTER_LABELS,
-} from '../constants/labels'
 
 
 const Filter = ({
+    options,
     selectedValues,
     onAddingFilter,
     onRemovingFilter,
 }) => {
-    const options = [
-        {
-            value: KEYS.wheelChair,
-            label: FILTER_LABELS.tw[KEYS.wheelChair],
-            icon: 'fas fa-wheelchair',
-        },
-        {
-            value: KEYS.bikeSpace,
-            label: FILTER_LABELS.tw[KEYS.bikeSpace],
-            icon: 'fas fa-bicycle',
-        },
-        {
-            value: KEYS.nursingRoom,
-            label: FILTER_LABELS.tw[KEYS.nursingRoom],
-            icon: 'fas fa-baby',
-        },
-    ]
-
     return (
         <React.Fragment>
             <InputLabel shrink>
@@ -65,7 +45,7 @@ const Filter = ({
                         >
                             <Icon className={ clsx(option.icon) } p={0.5} style={{width: 'auto'}}/>
                             <Box display={{xs: 'none', sm: 'none', md: 'block'}} p={0.5}>
-                                { option.label }
+                                { option.name }
                             </Box>
                         </Button>
                     </Grid>
@@ -77,6 +57,7 @@ const Filter = ({
 }
 
 Filter.propTypes = {
+    options: PropTypes.array.isRequired,
     selectedValues: PropTypes.array.isRequired,
     onAddingFilter: PropTypes.func.isRequired,
     onRemovingFilter: PropTypes.func.isRequired,

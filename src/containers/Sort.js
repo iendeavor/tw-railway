@@ -6,6 +6,7 @@ import CREATORS from '../constants/actionCreators'
 
 const mapStateToProps = state => {
     return {
+        options: state.sort[KEYS.options],
         selectedSort: state.sort[KEYS.sortBy],
     }
 };
