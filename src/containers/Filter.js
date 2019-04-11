@@ -8,7 +8,7 @@ const mapStateToProps = state => {
   return {
     options: state.filter[KEYS.options],
     selectedValues: Array.from(state.filter[KEYS.selectedFilters])
-  }
+  };
 };
 
 const mapDispatchToProps = dispatch => {
