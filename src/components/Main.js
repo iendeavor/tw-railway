@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core'
 
 import Station from '../containers/Station'
 import DateComponent from '../containers/Date'
-import ScheduleList from '../containers/ScheduleList'
+import Schedule from '../containers/Schedule'
 
 const Main = props => (
     <Grid
@@ -47,7 +47,7 @@ const Main = props => (
           item
           xs={12}
         >
-            <ScheduleList />
+            <Schedule />
         </Grid>
     </Grid>
 )

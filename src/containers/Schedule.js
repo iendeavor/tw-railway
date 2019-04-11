@@ -1,22 +1,14 @@
 import { connect } from 'react-redux'
 
 import Schedule from '../components/Schedule'
-import CREATORS from '../constants/actionCreators'
+import KEYS from '../constants/keys'
 
 
 const mapStateToProps = state => {
     return {
+        schedules: state.schedule[KEYS.schedules],
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onAddingFilter: value => {
-            CREATORS.handleAddingFilter(value)
-            CREATORS.handleAddingMessage('Added filter.')
-        },
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Schedule)
+export default connect(mapStateToProps)(Schedule)
 
