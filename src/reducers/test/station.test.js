@@ -4,8 +4,8 @@ import KEYS from '../../constants/keys'
 import reducer from '../station'
 
 let prevState
-const TAIPEI_ID = 1008
-const KAUHSIUNG_ID = 1238
+const TAIPEI_ID = '1008'
+const KAUHSIUNG_ID = '1238'
 const RANDOM_ID = Math.floor(Math.random() * 1000 + 1000)
 
 describe('Test station reducer', () => {
