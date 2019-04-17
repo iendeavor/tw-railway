@@ -22,6 +22,7 @@ export const FILTER_ARRIVAL_TIME = uuid() + '-ACTION_FILTER_ARRIVAL_TIME';
 
 export const SEARCH = uuid() + '-ACTION_SEARCH';
 export const RESTORE_SEARCH = uuid() + '-ACTION_RESTORE_SEARCH';
+export const CLEAR_TIMETABLE = uuid() + '-ACTION_CLEAR_TIMETABLE';
 
 export const SET_FARE = uuid() + '-ACTION_SET_FARE';
 
@@ -51,6 +52,7 @@ const ACTION_TYPES = {
 
   search: SEARCH,
   restoreSearch: RESTORE_SEARCH,
+  clearTimetable: CLEAR_TIMETABLE,
 
   setFare: SET_FARE,
 

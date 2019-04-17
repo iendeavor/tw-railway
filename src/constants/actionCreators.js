@@ -104,6 +104,9 @@ const handleSearchRequest = () => {
   const from = store.getState().station[KEYS.fromStation];
   const to = store.getState().station[KEYS.toStation];
   const on = store.getState().date[KEYS.departureDate];
+  dispatch({
+    type: TYPES.clearTimetable
+  })
   getFare(from, to)
     .then(fares => {
       dispatch({

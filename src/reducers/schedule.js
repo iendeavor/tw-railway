@@ -37,6 +37,10 @@ export default (state = default_state, action) => {
   const next = { ...state };
 
   switch (action.type) {
+    case TYPES.clearTimetable:
+      next[KEYS.originalSchedules] = [];
+      next[KEYS.schedules] = [];
+      break;
     case TYPES.search:
       next[KEYS.originalSchedules] = action.payload[KEYS.schedules].map(
         schedule => {
