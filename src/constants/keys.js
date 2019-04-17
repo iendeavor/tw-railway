@@ -39,9 +39,10 @@ const BIKE_SPACE = uuid() + '-BIKE_SPACE';
 const NURSING_ROOM = uuid() + '-NURSING_ROOM';
 
 const TRAIN_TYPE = uuid() + '-TRAIN_TYPE';
-const LIMITED_EXPRESS = uuid() + '-LIMITED_EXPRESS';
-const EXPRESS = uuid() + '-EXPRESS';
-const SEMI_EXPRESS = uuid() + '-SEMI_EXPRESS';
+const TZE_TRAIN = uuid() + '-TZE_TRAIN';
+const CHU_TRAIN = uuid() + '-CHU_TRAIN';
+const FU_TRAIN = uuid() + '-FU_TRAIN';
+const ORD_TRAIN = uuid() + '-ORD_TRAIN';
 
 const MESSAGE = uuid() + '-MESSAGE';
 
@@ -85,9 +86,10 @@ const KEYS = Object.freeze({
   nursingRoom: NURSING_ROOM,
 
   trainType: TRAIN_TYPE,
-  limitedExpress: LIMITED_EXPRESS,
-  express: EXPRESS,
-  semiExpress: SEMI_EXPRESS,
+  tzeTrain: TZE_TRAIN,
+  chuTrain: CHU_TRAIN,
+  fuTrain: FU_TRAIN,
+  ordTrain: ORD_TRAIN,
 
   message: MESSAGE
 });

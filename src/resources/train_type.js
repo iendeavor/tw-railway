@@ -11,16 +11,19 @@ export const getTrainTypesMapping = src => {
       .map(train_type_info => {
         let res = {};
 
-        const name = train_type_info.TrainTypeName.En;
-        if (name.indexOf('LimitedExpress') !== -1) {
-          res[train_type_info.TrainTypeID] = KEYS.limitedExpress;
-          res[KEYS.limitedExpress] = train_type_info.TrainTypeID;
-        } else if (name.indexOf('Express') !== -1) {
-          res[train_type_info.TrainTypeID] = KEYS.express;
-          res[KEYS.epress] = train_type_info.TrainTypeID;
+        const name = train_type_info.TrainTypeName.En.toLowerCase();
+        if (name.indexOf('tze') !== -1) {
+          res[train_type_info.TrainTypeID] = KEYS.tzeTrain;
+          res[KEYS.tzeTrain] = train_type_info.TrainTypeID;
+        } else if (name.indexOf('chu') !== -1) {
+          res[train_type_info.TrainTypeID] = KEYS.chuTrain;
+          res[KEYS.chuTrain] = train_type_info.TrainTypeID;
+        } else if (name.indexOf('local') !== -1) {
+          res[train_type_info.TrainTypeID] = KEYS.fuTrain;
+          res[KEYS.fuTrain] = train_type_info.TrainTypeID;
         } else {
-          res[train_type_info.TrainTypeID] = KEYS.semiExpress;
-          res[KEYS.semiExpress] = train_type_info.TrainTypeID;
+          res[train_type_info.TrainTypeID] = KEYS.ordTrain;
+          res[KEYS.ordTrain] = train_type_info.TrainTypeID;
         }
 
         return res;

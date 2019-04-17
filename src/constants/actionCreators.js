@@ -106,7 +106,7 @@ const handleSearchRequest = () => {
   const on = store.getState().date[KEYS.departureDate];
   dispatch({
     type: TYPES.clearTimetable
-  })
+  });
   getFare(from, to)
     .then(fares => {
       dispatch({

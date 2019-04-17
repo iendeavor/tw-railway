@@ -180,8 +180,7 @@ const ScheduleItem = ({
 
 ScheduleItem.propTypes = {
     index: PropTypes.number.isRequired,
-
-    train_type: PropTypes.oneOf([KEYS.limitedExpress, KEYS.express, KEYS.semiExpress]).isRequired,
+    train_type: PropTypes.oneOf([KEYS.tzeTrain, KEYS.chuTrain, KEYS.fuTrain, KEYS.ordTrain]).isRequired,
     fare: PropTypes.number,
     from: PropTypes.string.isRequired,
     to: PropTypes.string.isRequired,
