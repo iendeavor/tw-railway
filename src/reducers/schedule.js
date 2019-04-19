@@ -7,13 +7,13 @@ const default_state = {
 };
 
 export const omitSecondForTimestamp = timestamp => {
-  return (timestamp - timestamp % 60) / 60
+  return (timestamp - (timestamp % 60)) / 60;
 };
 
 export const convertToTimestamp = time_string => {
-  time_string = time_string.replace(/:/g, '')
+  time_string = time_string.replace(/:/g, '');
   while (time_string.length < 6) {
-    time_string += '0'
+    time_string += '0';
   }
   return (
     parseInt(time_string.slice(0, 2)) * 60 * 60 +
@@ -84,8 +84,12 @@ export default (state = default_state, action) => {
             break;
 
           case KEYS.duration:
-            const a_duration = omitSecondForTimestamp(convertToTimestamp(a.duration));
-            const b_duration = omitSecondForTimestamp(convertToTimestamp(b.duration));
+            const a_duration = omitSecondForTimestamp(
+              convertToTimestamp(a.duration)
+            );
+            const b_duration = omitSecondForTimestamp(
+              convertToTimestamp(b.duration)
+            );
             flag = a_duration - b_duration;
             break;
 
