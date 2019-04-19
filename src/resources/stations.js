@@ -19,7 +19,7 @@ const mapping = {
   屏東: 'Pingtung',
   臺東: 'Taitung',
   花蓮: 'Hualien',
-  未知: 'UnknownAddress'
+  未知: 'Unknown Address'
 };
 
 const UNKNOWN_COUNTRY = '未知';
