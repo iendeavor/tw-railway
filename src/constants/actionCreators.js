@@ -106,7 +106,7 @@ const handleSetSort = value => {
       [KEYS.sortBy]: value
     }
   });
-  handle();
+  refresh();
 };
 
 const handleAddingFilter = value => {
@@ -116,7 +116,7 @@ const handleAddingFilter = value => {
       [KEYS.selectedFilter]: value
     }
   });
-  handle();
+  refresh();
 };
 
 const handleRemovingFilter = value => {
@@ -126,7 +126,7 @@ const handleRemovingFilter = value => {
       [KEYS.selectedFilter]: value
     }
   });
-  handle();
+  refresh();
 };
 
 const handleSetDepartureTime = time => {
@@ -136,7 +136,7 @@ const handleSetDepartureTime = time => {
       [KEYS.departureTime]: time
     }
   });
-  handle();
+  refresh();
 };
 
 const handleSetArrivalTime = time => {
@@ -146,31 +146,31 @@ const handleSetArrivalTime = time => {
       [KEYS.arrivalTime]: time
     }
   });
-  handle();
+  refresh();
 };
 
 let debounce = undefined;
-const handle = () => {
+const refresh = () => {
   if (debounce !== undefined) {
     clearTimeout(debounce);
   }
 
   debounce = setTimeout(() => {
-    doRestoreSearch();
-    doFilterDepartureTime();
-    doFilterArrivalTime();
-    doFilter();
-    doSort();
+    restoreSearch();
+    filterDepartureTime();
+    filterArrivalTime();
+    filter();
+    sort();
   }, 300);
 };
 
-const doRestoreSearch = () => {
+const restoreSearch = () => {
   dispatch({
     type: TYPES.restoreSearch
   });
 };
 
-const doFilterDepartureTime = () => {
+const filterDepartureTime = () => {
   dispatch({
     type: TYPES.filterDepartureTime,
     payload: {
@@ -179,7 +179,7 @@ const doFilterDepartureTime = () => {
   });
 };
 
-const doFilterArrivalTime = () => {
+const filterArrivalTime = () => {
   dispatch({
     type: TYPES.filterArrivalTime,
     payload: {
@@ -188,7 +188,7 @@ const doFilterArrivalTime = () => {
   });
 };
 
-const doFilter = () => {
+const filter = () => {
   dispatch({
     type: TYPES.filter,
     payload: {
@@ -197,7 +197,7 @@ const doFilter = () => {
   });
 };
 
-const doSort = () => {
+const sort = () => {
   dispatch({
     type: TYPES.sort,
     payload: {
