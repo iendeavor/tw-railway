@@ -11,12 +11,6 @@ const handleSetDate = date => {
     type: TYPES.setDate,
     payload: {
       [KEYS.departureDate]: date
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
 };
@@ -26,12 +20,6 @@ const handleSetFromCountry = ID => {
     type: TYPES.setFromCountry,
     payload: {
       [KEYS.fromCountry]: ID
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
 };
@@ -41,12 +29,6 @@ const handleSetToCountry = ID => {
     type: TYPES.setToCountry,
     payload: {
       [KEYS.toCountry]: ID
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
 };
@@ -56,12 +38,6 @@ const handleSetFromStation = ID => {
     type: TYPES.setFromStation,
     payload: {
       [KEYS.fromStation]: ID
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
 };
@@ -71,12 +47,6 @@ const handleSetToStation = ID => {
     type: TYPES.setToStation,
     payload: {
       [KEYS.toStation]: ID
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
 };
@@ -129,56 +99,14 @@ const handleSearchRequest = () => {
     });
 };
 
-const handleRestoreSearch = () => {
-  dispatch({
-    type: TYPES.restoreSearch
-  });
-};
-
 const handleSetSort = value => {
   dispatch({
     type: TYPES.setSort,
     payload: {
       [KEYS.sortBy]: value
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
   handle();
-};
-
-const handleSort = () => {
-  dispatch({
-    type: TYPES.sort,
-    payload: {
-      [KEYS.sortBy]: store.getState().sort[KEYS.sortBy]
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
-    }
-  });
-};
-
-const handleFilter = () => {
-  dispatch({
-    type: TYPES.filter,
-    payload: {
-      [KEYS.selectedFilters]: store.getState().filter[KEYS.selectedFilters]
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
-    }
-  });
 };
 
 const handleAddingFilter = value => {
@@ -186,12 +114,6 @@ const handleAddingFilter = value => {
     type: TYPES.addFilter,
     payload: {
       [KEYS.selectedFilter]: value
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
   handle();
@@ -202,12 +124,6 @@ const handleRemovingFilter = value => {
     type: TYPES.removeFilter,
     payload: {
       [KEYS.selectedFilter]: value
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
   handle();
@@ -218,12 +134,6 @@ const handleSetDepartureTime = time => {
     type: TYPES.setDepartureTime,
     payload: {
       [KEYS.departureTime]: time
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
   handle();
@@ -234,51 +144,64 @@ const handleSetArrivalTime = time => {
     type: TYPES.setArrivalTime,
     payload: {
       [KEYS.arrivalTime]: time
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
   handle();
 };
 
+let debounce = undefined;
 const handle = () => {
-  handleRestoreSearch();
-  handleFilter();
-  handleSort();
-  handleFilterDepartureTime();
-  handleFilterArrivalTime();
+  if (debounce !== undefined) {
+    clearTimeout(debounce);
+  }
+
+  debounce = setTimeout(() => {
+    doRestoreSearch();
+    doFilterDepartureTime();
+    doFilterArrivalTime();
+    doFilter();
+    doSort();
+  }, 300);
 };
 
-const handleFilterDepartureTime = () => {
+const doRestoreSearch = () => {
+  dispatch({
+    type: TYPES.restoreSearch
+  });
+};
+
+const doFilterDepartureTime = () => {
   dispatch({
     type: TYPES.filterDepartureTime,
     payload: {
       [KEYS.departureTime]: store.getState().time[KEYS.departureTime]
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
     }
   });
 };
 
-const handleFilterArrivalTime = () => {
+const doFilterArrivalTime = () => {
   dispatch({
     type: TYPES.filterArrivalTime,
     payload: {
       [KEYS.arrivalTime]: store.getState().time[KEYS.arrivalTime]
-    },
-    meta: {
-      debounce: {
-        time: 300,
-        leading: true
-      }
+    }
+  });
+};
+
+const doFilter = () => {
+  dispatch({
+    type: TYPES.filter,
+    payload: {
+      [KEYS.selectedFilters]: store.getState().filter[KEYS.selectedFilters]
+    }
+  });
+};
+
+const doSort = () => {
+  dispatch({
+    type: TYPES.sort,
+    payload: {
+      [KEYS.sortBy]: store.getState().sort[KEYS.sortBy]
     }
   });
 };
@@ -295,14 +218,11 @@ const CREATORS = Object.freeze({
   handleSwapStation,
 
   handleSearchRequest,
-  handleRestoreSearch,
 
   handleAddingFilter,
   handleRemovingFilter,
-  handleFilter,
 
   handleSetSort,
-  handleSort,
 
   handleAddingMessage,
   handleRemovingMessage
