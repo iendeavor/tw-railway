@@ -55,12 +55,12 @@ const formatTimetable = timetable => {
       fromID: pair.OriginStopTime.StationID,
       toID: pair.DestinationStopTime.StationID,
       step: [
-          {
-              from: pair.OriginStopTime.StationName.En,
-              to: pair.DestinationStopTime.StationName.En,
-              departure: pair.OriginStopTime.DepartureTime,
-              arrival: pair.DestinationStopTime.ArrivalTime,
-          },
+        {
+          from: pair.OriginStopTime.StationName.En,
+          to: pair.DestinationStopTime.StationName.En,
+          departure: pair.OriginStopTime.DepartureTime,
+          arrival: pair.DestinationStopTime.ArrivalTime
+        }
       ],
       duration: calcDuration(pair),
       departure: pair.OriginStopTime.DepartureTime,
