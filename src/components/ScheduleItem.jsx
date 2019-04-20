@@ -99,6 +99,7 @@ const ScheduleItem = ({
                                 <Icon style={ WHEEL_CHAIR_STYLE } className={ clsx('fas fa-wheelchair') } />
                             </Button>
                         )}
+                        <br />
                         <span style={ {fontSize: '.8rem'} }>{ note }</span>
                     </Grid>
                 </React.Fragment>
