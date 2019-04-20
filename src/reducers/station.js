@@ -10,9 +10,9 @@ const default_state = {
   [KEYS.countries]: getCountries(),
   [KEYS.fromStations]: getStationsOfCountry(taipei_country_id),
   [KEYS.toStations]: getStationsOfCountry(kauhsiung_country_id),
-  [KEYS.fromCountry]: getCountries()[taipei_country_id].id,
+  [KEYS.fromCountry]: taipei_country_id,
   [KEYS.fromStation]: taipei_station_id,
-  [KEYS.toCountry]: getCountries()[kauhsiung_country_id].id,
+  [KEYS.toCountry]: kauhsiung_country_id,
   [KEYS.toStation]: kauhsiung_station_id
 };
 

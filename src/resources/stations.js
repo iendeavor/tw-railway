@@ -35,7 +35,13 @@ export const getCountries = country_src => {
     name: mapping[country]
   }));
 
-  return Object.freeze(unknownCountry.concat(knownCountry));
+  return Object.freeze(
+    knownCountry
+      .sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      })
+      .concat(unknownCountry)
+  );
 };
 
 const getCountryMapping = countries => {
@@ -109,5 +115,7 @@ export const getStationsOfCountry = (country, stations) => {
     stations = stationsOfCountryMapping;
   }
 
-  return stationsOfCountryMapping[country];
+  return stationsOfCountryMapping[country].sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
 };
