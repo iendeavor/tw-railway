@@ -96,5 +96,21 @@ describe('Test convertToTimestamp', () => {
         // extended format
         expect(convertToTimestamp(`${hh}:${mm}:${ss}`)).toBe(23 * 60 * 60 + 59 * 60 + 60)
     })
+
+    it('should examine invalid range', () => {
+        let hh, mm, ss
+
+        hh = '25'
+        expect(() => convertToTimestamp(`${hh}`)).toThrow()
+
+        hh = '00'
+        mm = '60'
+        expect(() => convertToTimestamp(`${hh}${mm}`)).toThrow()
+
+        hh = '00'
+        mm = '00'
+        ss = '61' // leap second
+        expect(() => convertToTimestamp(`${hh}${mm}${ss}`)).toThrow()
+    })
 });
 

@@ -15,11 +15,15 @@ export const convertToTimestamp = time_string => {
   while (time_string.length < 6) {
     time_string += '0';
   }
-  return (
-    parseInt(time_string.slice(0, 2)) * 60 * 60 +
-    parseInt(time_string.slice(2, 4)) * 60 +
-    parseInt(time_string.slice(4, 6))
-  );
+
+  const hh = parseInt(time_string.slice(0, 2));
+  const mm = parseInt(time_string.slice(2, 4));
+  const ss = parseInt(time_string.slice(4, 6));
+  if (hh > 24 || mm > 59 || ss > 60) {
+    throw new RangeError(`Invalid time: ${hh}:${mm}:${ss}.`);
+  }
+
+  return hh * 60 * 60 + mm * 60 + ss;
 };
 
 export const convertDepartureToTimestamp = departure => {
