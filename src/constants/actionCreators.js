@@ -106,7 +106,9 @@ const handleSearchRequest = () => {
             }
           });
         });
-      handleSetSort(store.getState().sort[KEYS.sortBy]);
+    })
+    .then(() => {
+      refresh();
     });
 };
 
