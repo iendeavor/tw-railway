@@ -64,6 +64,10 @@ export default (state = default_state, action) => {
       );
       next[KEYS.schedules] = next[KEYS.originalSchedules].slice();
       break;
+    case TYPES.restoreHistory:
+      next[KEYS.originalSchedules] = action.payload[KEYS.schedules].slice();
+      next[KEYS.schedules] = action.payload[KEYS.schedules].slice();
+      break;
     case TYPES.restoreSearch:
       next[KEYS.schedules] = state[KEYS.originalSchedules].slice();
       break;

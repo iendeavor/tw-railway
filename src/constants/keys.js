@@ -44,6 +44,8 @@ const CHU_TRAIN = uuid() + '-CHU_TRAIN';
 const FU_TRAIN = uuid() + '-FU_TRAIN';
 const ORD_TRAIN = uuid() + '-ORD_TRAIN';
 
+const HISTORIES = uuid() + '-HISTORIES';
+
 const MESSAGE = uuid() + '-MESSAGE';
 
 const KEYS = Object.freeze({
@@ -90,6 +92,8 @@ const KEYS = Object.freeze({
   chuTrain: CHU_TRAIN,
   fuTrain: FU_TRAIN,
   ordTrain: ORD_TRAIN,
+
+  histories: HISTORIES,
 
   message: MESSAGE
 });

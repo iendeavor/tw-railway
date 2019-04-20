@@ -7,6 +7,7 @@ import date from './date';
 import schedule from './schedule';
 import time from './time';
 import message from './message';
+import history from './history';
 
 export default combineReducers({
   sort,
@@ -15,5 +16,6 @@ export default combineReducers({
   date,
   schedule,
   time,
+  history,
   message
 });

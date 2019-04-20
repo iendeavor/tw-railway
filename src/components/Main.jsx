@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core'
 
 import Station from '../containers/Station'
 import DateComponent from '../containers/Date'
+import History from '../containers/History'
 import Schedule from '../containers/Schedule'
 
 const Main = props => (
@@ -39,6 +40,15 @@ const Main = props => (
                   style={{padding: '5px 0'}}
                 >
                     <Station />
+                </Grid>
+
+                <Grid
+                  item
+                  xs={12}
+                  lg={6}
+                  style={{padding: '5px 0'}}
+                >
+                    <History />
                 </Grid>
             </Grid>
         </Grid>

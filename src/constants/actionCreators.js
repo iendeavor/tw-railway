@@ -87,16 +87,39 @@ const handleSearchRequest = () => {
       });
     })
     .then(() => {
-      getTimetable(from, to, on).then(timetable => {
-        dispatch({
-          type: TYPES.search,
-          payload: {
-            [KEYS.schedules]: timetable
-          }
+      getTimetable(from, to, on)
+        .then(timetable => {
+          dispatch({
+            type: TYPES.search,
+            payload: {
+              [KEYS.schedules]: timetable
+            }
+          });
+        })
+        .then(() => {
+          dispatch({
+            type: TYPES.addHistory,
+            payload: {
+              [KEYS.fromStation]: store.getState().station[KEYS.fromStation],
+              [KEYS.toStation]: store.getState().station[KEYS.toStation],
+              [KEYS.schedules]: store.getState().schedule[KEYS.schedules]
+            }
+          });
         });
-        handleSetSort(store.getState().sort[KEYS.sortBy]);
-      });
+      handleSetSort(store.getState().sort[KEYS.sortBy]);
     });
+};
+
+const handleRestoreHistory = value => {
+  dispatch({
+    type: TYPES.restoreHistory,
+    payload: {
+      [KEYS.schedules]: store.getState().history[KEYS.histories][value][
+        KEYS.schedules
+      ]
+    }
+  });
+  refresh();
 };
 
 const handleSetSort = value => {
@@ -218,6 +241,7 @@ const CREATORS = Object.freeze({
   handleSwapStation,
 
   handleSearchRequest,
+  handleRestoreHistory,
 
   handleAddingFilter,
   handleRemovingFilter,
