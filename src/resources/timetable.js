@@ -54,8 +54,14 @@ const formatTimetable = timetable => {
       number: pair.DailyTrainInfo.TrainNo,
       fromID: pair.OriginStopTime.StationID,
       toID: pair.DestinationStopTime.StationID,
-      from: pair.OriginStopTime.StationName.En,
-      to: pair.DestinationStopTime.StationName.En,
+      step: [
+          {
+              from: pair.OriginStopTime.StationName.En,
+              to: pair.DestinationStopTime.StationName.En,
+              departure: pair.OriginStopTime.DepartureTime,
+              arrival: pair.DestinationStopTime.ArrivalTime,
+          },
+      ],
       duration: calcDuration(pair),
       departure: pair.OriginStopTime.DepartureTime,
       arrival: pair.DestinationStopTime.ArrivalTime,

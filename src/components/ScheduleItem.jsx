@@ -8,11 +8,8 @@ import KEYS from '../constants/keys'
 const ScheduleItem = ({
     number,
     train_type_name,
-    from,
-    to,
     duration,
-    arrival,
-    departure,
+    step,
     type,
     fare,
     has_nursing_room,
@@ -163,14 +160,14 @@ const ScheduleItem = ({
               container
               justify='center'
               alignItems='center'
-              key={ departure + arrival + '-' + index }
+              key={ index }
             >
                 { renderHeader() }
 
-                {  renderStops([
-                        {time: departure, name: from},
-                        {time: arrival, name: to}],
-                )}
+                {  step.map(s => renderStops([
+                    {time: s.departure, name: s.from},
+                    {time: s.arrival, name: s.to}],
+                ))}
 
                 { renderFooter() }
             </Grid>
@@ -182,10 +179,14 @@ ScheduleItem.propTypes = {
     index: PropTypes.number.isRequired,
     train_type: PropTypes.oneOf([KEYS.tzeTrain, KEYS.chuTrain, KEYS.fuTrain, KEYS.ordTrain]).isRequired,
     fare: PropTypes.number,
-    from: PropTypes.string.isRequired,
-    to: PropTypes.string.isRequired,
-    departure: PropTypes.string.isRequired,
     duration: PropTypes.string.isRequired,
+    step: PropTypes.arrayOf(PropTypes.shape({
+        from: PropTypes.string.isRequired,
+        to: PropTypes.string.isRequired,
+        departure: PropTypes.string.isRequired,
+        arrival: PropTypes.string.isRequired,
+    })),
+    departure: PropTypes.string.isRequired,
     arrival: PropTypes.string.isRequired,
     has_wheel_chair: PropTypes.bool,
     has_nursing_room: PropTypes.bool,
