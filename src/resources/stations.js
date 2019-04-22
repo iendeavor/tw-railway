@@ -4,20 +4,24 @@ import country_source from './countries.json';
 const mapping = {
   基隆: 'Keelung',
   臺北: 'Taipei',
+  台北: 'Taipei',
   新北: 'New Taipei',
   桃園: 'Taoyuan',
   宜蘭: 'Yilan',
   新竹: 'Hsinchu',
   苗栗: 'Miaoli',
   臺中: 'Taichung',
+  台中: 'Taichung',
   南投: 'Nantou',
   彰化: 'Changhua',
   雲林: 'Yunlin',
   嘉義: 'Chiayi',
   臺南: 'Tainan',
+  台南: 'Tainan',
   高雄: 'Kauhsiung',
   屏東: 'Pingtung',
   臺東: 'Taitung',
+  台東: 'Taitung',
   花蓮: 'Hualien',
   未知: 'Unknown Address'
 };
@@ -57,7 +61,7 @@ const getCountryMapping = countries => {
       }))
       .reduce((accu, curr) => {
         return Object.assign({}, accu, curr);
-      })
+      }, {})
   );
 };
 
@@ -101,7 +105,7 @@ export const getStations = src => {
         }
         accu[country_id].push(curr[country]);
         return accu;
-      })
+      }, {})
   );
 };
 
