@@ -79,7 +79,7 @@ export const getCountryName = (id, mapping) => {
     mapping = country_mapping;
   }
   return mapping[id];
-}
+};
 
 export const getStations = src => {
   if (src === undefined) {
@@ -133,33 +133,32 @@ export const getStationsOfCountry = (country, stations) => {
 
 const getStationMapping = () => {
   return Object.values(getStations()).reduce((accu, curr) => {
-    let stations = {}
+    let stations = {};
     for (let key in Object.keys(curr)) {
-      const station = curr[key]
-      const id = station.id
-      stations[id] = station
+      const station = curr[key];
+      const id = station.id;
+      stations[id] = station;
     }
-    return Object.assign({}, accu, stations)
-  }, {})
-}
+    return Object.assign({}, accu, stations);
+  }, {});
+};
 
-const station_mapping = getStationMapping()
+const station_mapping = getStationMapping();
 
-export const getStationName = (id) => {
+export const getStationName = id => {
   for (let key of Object.keys(station_mapping)) {
-    const station = station_mapping[key]
+    const station = station_mapping[key];
     if (station.id === id) {
-      return station.name
+      return station.name;
     }
   }
-}
+};
 
-export const getStationID = (name) => {
+export const getStationID = name => {
   for (let key of Object.keys(station_mapping)) {
-    const station = station_mapping[key]
+    const station = station_mapping[key];
     if (station.name === name) {
-      return station.id
+      return station.id;
     }
   }
-}
-
+};

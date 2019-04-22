@@ -1,6 +1,6 @@
 import TYPES from '../constants/actionTypes';
 import KEYS from '../constants/keys';
-import { getStationName } from '../resources/stations'
+import { getStationName } from '../resources/stations';
 
 const defaultState = {
   [KEYS.histories]: {}
@@ -19,7 +19,7 @@ export default (state = defaultState, action) => {
       const toStation = action.payload[KEYS.toStation];
       const schedules = action.payload[KEYS.schedules].slice();
 
-      const id = fromStation + toStation
+      const id = fromStation + toStation;
       if (!(id in next[KEYS.histories])) {
         next[KEYS.histories] = Object.assign({}, next[KEYS.histories], {
           [id]: {

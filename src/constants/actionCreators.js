@@ -85,12 +85,10 @@ const handleSearchRequest = () => {
     .then(fares => {
       getTimetable(from, to, on)
         .then(timetable => {
-          timetable = timetable.map(
-            schedule => {
-              schedule.fare = fares[schedule.train_type];
-              return schedule;
-            }
-          );
+          timetable = timetable.map(schedule => {
+            schedule.fare = fares[schedule.train_type];
+            return schedule;
+          });
           dispatch({
             type: TYPES.setSchedule,
             payload: {
@@ -118,9 +116,9 @@ const handleRestoreHistory = value => {
   dispatch({
     type: TYPES.setSchedule,
     payload: {
-      [KEYS.schedules]: Object.values(store.getState().history[KEYS.histories])[value][
-        KEYS.schedules
-      ]
+      [KEYS.schedules]: Object.values(store.getState().history[KEYS.histories])[
+        value
+      ][KEYS.schedules]
     }
   });
   refresh();
