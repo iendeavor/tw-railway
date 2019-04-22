@@ -1,8 +1,9 @@
 import TYPES from '../constants/actionTypes';
 import KEYS from '../constants/keys';
+import { getStationName } from '../resources/stations'
 
 const defaultState = {
-  [KEYS.histories]: []
+  [KEYS.histories]: {}
 };
 
 export default (state = defaultState, action) => {
@@ -17,22 +18,15 @@ export default (state = defaultState, action) => {
       const fromStation = action.payload[KEYS.fromStation];
       const toStation = action.payload[KEYS.toStation];
       const schedules = action.payload[KEYS.schedules].slice();
-      let not_duplicate = true;
-      for (let i = 0; i < next[KEYS.histories].length; ++i) {
-        if (
-          next[KEYS.histories][i][KEYS.fromStation] === fromStation &&
-          next[KEYS.histories][i][KEYS.toStation] === toStation
-        ) {
-          not_duplicate = false;
-          break;
-        }
-      }
-      if (not_duplicate) {
-        next[KEYS.histories] = next[KEYS.histories].slice();
-        next[KEYS.histories].push({
-          [KEYS.fromStation]: fromStation,
-          [KEYS.toStation]: toStation,
-          [KEYS.schedules]: schedules
+
+      const id = fromStation + toStation
+      if (!(id in next[KEYS.histories])) {
+        next[KEYS.histories] = Object.assign({}, next[KEYS.histories], {
+          [id]: {
+            [KEYS.fromStation]: getStationName(fromStation),
+            [KEYS.toStation]: getStationName(toStation),
+            [KEYS.schedules]: schedules
+          }
         });
       }
       break;

@@ -118,7 +118,7 @@ const handleRestoreHistory = value => {
   dispatch({
     type: TYPES.setSchedule,
     payload: {
-      [KEYS.schedules]: store.getState().history[KEYS.histories][value][
+      [KEYS.schedules]: Object.values(store.getState().history[KEYS.histories])[value][
         KEYS.schedules
       ]
     }

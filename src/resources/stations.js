@@ -67,12 +67,19 @@ const getCountryMapping = countries => {
 
 const country_mapping = getCountryMapping();
 
-const getCountryID = (name, mapping) => {
+export const getCountryID = (name, mapping) => {
   if (mapping === undefined) {
     mapping = country_mapping;
   }
   return mapping[name];
 };
+
+export const getCountryName = (id, mapping) => {
+  if (mapping === undefined) {
+    mapping = country_mapping;
+  }
+  return mapping[id];
+}
 
 export const getStations = src => {
   if (src === undefined) {
@@ -123,3 +130,36 @@ export const getStationsOfCountry = (country, stations) => {
     return a.name.localeCompare(b.name);
   });
 };
+
+const getStationMapping = () => {
+  return Object.values(getStations()).reduce((accu, curr) => {
+    let stations = {}
+    for (let key in Object.keys(curr)) {
+      const station = curr[key]
+      const id = station.id
+      stations[id] = station
+    }
+    return Object.assign({}, accu, stations)
+  }, {})
+}
+
+const station_mapping = getStationMapping()
+
+export const getStationName = (id) => {
+  for (let key of Object.keys(station_mapping)) {
+    const station = station_mapping[key]
+    if (station.id === id) {
+      return station.name
+    }
+  }
+}
+
+export const getStationID = (name) => {
+  for (let key of Object.keys(station_mapping)) {
+    const station = station_mapping[key]
+    if (station.name === name) {
+      return station.id
+    }
+  }
+}
+
