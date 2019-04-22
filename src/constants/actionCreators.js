@@ -74,23 +74,25 @@ const handleSearchRequest = () => {
   const from = store.getState().station[KEYS.fromStation];
   const to = store.getState().station[KEYS.toStation];
   const on = store.getState().date[KEYS.departureDate];
+
   dispatch({
-    type: TYPES.clearTimetable
+    type: TYPES.setSchedule,
+    payload: {
+      [KEYS.schedules]: []
+    }
   });
   getFare(from, to)
     .then(fares => {
-      dispatch({
-        type: TYPES.setFare,
-        payload: {
-          [KEYS.fares]: fares
-        }
-      });
-    })
-    .then(() => {
       getTimetable(from, to, on)
         .then(timetable => {
+          timetable = timetable.map(
+            schedule => {
+              schedule.fare = fares[schedule.train_type];
+              return schedule;
+            }
+          );
           dispatch({
-            type: TYPES.search,
+            type: TYPES.setSchedule,
             payload: {
               [KEYS.schedules]: timetable
             }
@@ -114,7 +116,7 @@ const handleSearchRequest = () => {
 
 const handleRestoreHistory = value => {
   dispatch({
-    type: TYPES.restoreHistory,
+    type: TYPES.setSchedule,
     payload: {
       [KEYS.schedules]: store.getState().history[KEYS.histories][value][
         KEYS.schedules

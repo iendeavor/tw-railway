@@ -51,28 +51,12 @@ export default (state = default_state, action) => {
   const next = { ...state };
 
   switch (action.type) {
-    case TYPES.clearTimetable:
-      next[KEYS.originalSchedules] = [];
-      next[KEYS.schedules] = [];
-      break;
-    case TYPES.search:
-      next[KEYS.originalSchedules] = action.payload[KEYS.schedules].map(
-        schedule => {
-          schedule.fare = state[KEYS.fares][schedule.train_type];
-          return schedule;
-        }
-      );
-      next[KEYS.schedules] = next[KEYS.originalSchedules].slice();
-      break;
-    case TYPES.restoreHistory:
+    case TYPES.setSchedule:
       next[KEYS.originalSchedules] = action.payload[KEYS.schedules].slice();
       next[KEYS.schedules] = action.payload[KEYS.schedules].slice();
       break;
     case TYPES.restoreSearch:
       next[KEYS.schedules] = state[KEYS.originalSchedules].slice();
-      break;
-    case TYPES.setFare:
-      next[KEYS.fares] = action.payload[KEYS.fares];
       break;
     case TYPES.sort:
       next[KEYS.schedules] = state[KEYS.schedules].slice().sort((a, b) => {

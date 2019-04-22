@@ -20,13 +20,9 @@ export const FILTER = uuid() + '-ACTION_FILTER';
 export const FILTER_DEPARTURE_TIME = uuid() + '-ACTION_FILTER_DEPARTURE_TIME';
 export const FILTER_ARRIVAL_TIME = uuid() + '-ACTION_FILTER_ARRIVAL_TIME';
 
-export const SEARCH = uuid() + '-ACTION_SEARCH';
+export const SET_SCHEDULE = uuid() + '-ACTION_SET_SCHEDULE';
 export const RESTORE_SEARCH = uuid() + '-ACTION_RESTORE_SEARCH';
-export const RESTORE_HISTORY = uuid() + '-ACTION_RESTORE_HISTORY';
 export const ADD_HISTORY = uuid() + '-ACTION_ADD_HISTORY';
-export const CLEAR_TIMETABLE = uuid() + '-ACTION_CLEAR_TIMETABLE';
-
-export const SET_FARE = uuid() + '-ACTION_SET_FARE';
 
 export const ADD_MESSAGE = uuid() + '-ACTION_ADD_MESSAGE';
 export const REMOVE_MESSAGE = uuid() + '-ACTION_REMOVE_MESSAGE';
@@ -52,13 +48,9 @@ const ACTION_TYPES = {
   filterDepartureTime: FILTER_DEPARTURE_TIME,
   filterArrivalTime: FILTER_ARRIVAL_TIME,
 
-  search: SEARCH,
+  setSchedule: SET_SCHEDULE,
   restoreSearch: RESTORE_SEARCH,
-  restoreHistory: RESTORE_HISTORY,
   addHistory: ADD_HISTORY,
-  clearTimetable: CLEAR_TIMETABLE,
-
-  setFare: SET_FARE,
 
   addMessage: ADD_MESSAGE,
   removeMessage: REMOVE_MESSAGE
