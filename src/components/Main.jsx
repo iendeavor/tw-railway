@@ -27,28 +27,45 @@ const Main = props => (
                 <Grid
                   item
                   xs={12}
-                  lg={6}
-                  style={{padding: '5px 0'}}
+                  md={6}
                 >
-                    <DateComponent />
+                    <Grid
+                      container
+                    >
+                        <Grid
+                          item
+                          xs={12}
+                          style={{padding: '5px 0'}}
+                        >
+                            <DateComponent />
+                        </Grid>
+
+                        <Grid
+                          item
+                          xs={12}
+                          style={{padding: '5px 0'}}
+                        >
+                            <Station />
+                        </Grid>
+                    </Grid>
                 </Grid>
 
                 <Grid
                   item
                   xs={12}
-                  lg={6}
-                  style={{padding: '5px 0'}}
+                  md={6}
                 >
-                    <Station />
-                </Grid>
-
-                <Grid
-                  item
-                  xs={12}
-                  lg={6}
-                  style={{padding: '5px 0'}}
-                >
-                    <History />
+                    <Grid
+                      container
+                    >
+                        <Grid
+                          item
+                          xs={12}
+                          style={{padding: '5px 0'}}
+                        >
+                            <History />
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

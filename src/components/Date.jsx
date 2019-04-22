@@ -15,12 +15,9 @@ const Date_ = ({
         <Grid
           container
           alignItems="flex-end"
-          justify='space-between'
         >
             <Grid
               item
-              xs={5}
-              sm={4}
             >
                 <InputLabel shrink>
                     Depature date
@@ -36,7 +33,6 @@ const Date_ = ({
 
             <Grid
               item
-              xs={7}
             >
                 <Grid
                   container

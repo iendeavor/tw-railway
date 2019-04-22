@@ -19,14 +19,13 @@ const Filter = ({
 
         <Grid
               container
-              justify='space-between'
+              justify='space-around'
             >
             {
                 options.map(option => (
                     <Grid
                       item
                       key={ option.value }
-                      xs={4}
                     >
                         <Button
                           variant={ selectedValues.indexOf(option.value) === -1 ? 'text' : 'contained' }

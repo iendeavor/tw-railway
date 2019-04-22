@@ -20,14 +20,13 @@ const Sort = ({
 
             <Grid
               container
-              justify='space-between'
+              justify='space-around'
             >
             {
                 options.map((option, i) => (
                     <Grid
                       key={i}
                       item
-                      xs={3}
                     >
                         <Button
                           key={ option.value }

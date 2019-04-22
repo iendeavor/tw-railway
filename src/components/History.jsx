@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { InputLabel, Grid, Button } from '@material-ui/core'
+import { Divider, InputLabel, Grid, Chip, Button } from '@material-ui/core'
 import RestoreIcon from '@material-ui/icons/Restore'
 
 
@@ -9,30 +9,67 @@ const History = ({
     onRestoreHistory
 }) => {
     return (
-        <Grid
-          container
-        >
+        <React.Fragment>
             <InputLabel shrink>
                 History
             </InputLabel>
 
-            { histories.map((history, index) => {
-                return (
-                    <Grid
-                      item
-                      xs={12}
-                      key={index}
-                    >
-                        { history.fromStation } - { history.toStation }
-                        <Button
-                          onClick={ () => onRestoreHistory(index) }
+            <Grid
+              container
+              justify='center'
+            >
+                { histories.map((history, index) => {
+                    return (
+                        <React.Fragment
+                          key={index}
                         >
-                            <RestoreIcon />
-                        </Button>
-                    </Grid>
-                )
-            })}
-        </Grid>
+                            { index !== 0 && <Divider
+                                  style={{width: '100%'}}
+                                  light
+                              />
+                            }
+                            <Grid
+                              item
+                              xs={9}
+                            >
+                                    <Chip
+                                      style={{
+                                        width: '100%',
+                                        maxWidth: '100%',
+                                        margin: '2px'
+                                      }}
+                                      variant='outlined'
+                                          component='span'
+                                      label={ history.fromStation }
+                                    />
+                                    <Chip
+                                      style={{
+                                        width: '100%',
+                                        maxWidth: '100%',
+                                        margin: '2px'
+                                      }}
+                                      variant='outlined'
+                                          component='p'
+                                      label={ history.toStation }
+                                    />
+                            </Grid>
+                            <Grid
+                              item
+                            >
+                                <Button
+                                  onClick={ () => onRestoreHistory(index) }
+                                  color='primary'
+                                  variant='text'
+                                  size='small'
+                                >
+                                    <RestoreIcon />
+                                </Button>
+                            </Grid>
+                        </React.Fragment>
+                    )
+                })}
+            </Grid>
+        </React.Fragment>
     )
 }
 
