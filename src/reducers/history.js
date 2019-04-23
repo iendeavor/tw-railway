@@ -18,13 +18,17 @@ export default (state = defaultState, action) => {
       const fromStation = action.payload[KEYS.fromStation];
       const toStation = action.payload[KEYS.toStation];
       const schedules = action.payload[KEYS.schedules].slice();
+      const departureDate = action.payload[KEYS.departureDate];
 
-      const id = fromStation + toStation;
+      const id = fromStation + toStation + departureDate;
       if (!(id in next[KEYS.histories])) {
         next[KEYS.histories] = Object.assign({}, next[KEYS.histories], {
           [id]: {
-            [KEYS.fromStation]: getStationName(fromStation),
-            [KEYS.toStation]: getStationName(toStation),
+            [KEYS.fromStation]: fromStation,
+            [KEYS.toStation]: toStation,
+            [KEYS.fromStationName]: getStationName(fromStation),
+            [KEYS.toStationName]: getStationName(toStation),
+            [KEYS.departureDate]: departureDate,
             [KEYS.schedules]: schedules
           }
         });

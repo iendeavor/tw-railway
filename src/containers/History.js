@@ -9,7 +9,10 @@ const mapStateToProps = state => {
     histories: Object.values(state.history[KEYS.histories]).map(history => {
       return {
         fromStation: history[KEYS.fromStation],
-        toStation: history[KEYS.toStation]
+        toStation: history[KEYS.toStation],
+        fromStationName: history[KEYS.fromStationName],
+        toStationName: history[KEYS.toStationName],
+        departureDate: history[KEYS.departureDate]
       };
     })
   };
@@ -17,8 +20,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRestoreHistory: index => {
-      CREATORS.handleRestoreHistory(index);
+    onSearch: (from, to, on) => {
+      CREATORS.handleSearchRequest(from, to, on);
     }
   };
 };

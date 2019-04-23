@@ -12,6 +12,8 @@ const FROM_COUNTRY = uuid() + '-FROM_COUNTRY';
 const FROM_STATION = uuid() + '-FROM_STATION';
 const TO_COUNTRY = uuid() + '-TO_COUNTRY';
 const TO_STATION = uuid() + '-TO_STATION';
+const FROM_STATION_NAME = uuid() + '-FROM_STATION_NAME';
+const TO_STATION_NAME = uuid() + '-TO_STATION_NAME';
 
 const ARRIVAL = uuid() + '-ARRIVAL';
 const DEPARTURE = uuid() + '-DEPARTURE';
@@ -57,6 +59,8 @@ const KEYS = Object.freeze({
   toStations: TO_STATIONS,
   fromCountry: FROM_COUNTRY,
   fromStation: FROM_STATION,
+  fromStationName: FROM_STATION_NAME,
+  toStationName: TO_STATION_NAME,
   toCountry: TO_COUNTRY,
   toStation: TO_STATION,
 

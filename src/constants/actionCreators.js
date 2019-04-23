@@ -70,11 +70,30 @@ const handleRemovingMessage = message => {
   });
 };
 
-const handleSearchRequest = () => {
-  const from = store.getState().station[KEYS.fromStation];
-  const to = store.getState().station[KEYS.toStation];
-  const on = store.getState().date[KEYS.departureDate];
+const handleSearchRequest = (from, to, on) => {
+  if (from === undefined) {
+    from = store.getState().station[KEYS.fromStation];
+  }
+  if (to === undefined) {
+    to = store.getState().station[KEYS.toStation];
+  }
+  if (on === undefined) {
+    on = store.getState().date[KEYS.departureDate].toISOString().slice(0, 10);
+  }
 
+  const histories = store.getState().history[KEYS.histories]
+  const keys = Object.keys(histories).filter((key, index) => {
+      return key === from + to + on
+    })
+  if (keys.length === 1) {
+    dispatch({
+      type: TYPES.setSchedule,
+      payload: {
+        [KEYS.schedules]: histories[keys][KEYS.schedules]
+      }
+    })
+    return
+  }
   dispatch({
     type: TYPES.setSchedule,
     payload: {
@@ -100,8 +119,9 @@ const handleSearchRequest = () => {
           dispatch({
             type: TYPES.addHistory,
             payload: {
-              [KEYS.fromStation]: store.getState().station[KEYS.fromStation],
-              [KEYS.toStation]: store.getState().station[KEYS.toStation],
+              [KEYS.fromStation]: from,
+              [KEYS.toStation]: to,
+              [KEYS.departureDate]: on,
               [KEYS.schedules]: store.getState().schedule[KEYS.schedules]
             }
           });
@@ -110,18 +130,6 @@ const handleSearchRequest = () => {
     .then(() => {
       refresh();
     });
-};
-
-const handleRestoreHistory = value => {
-  dispatch({
-    type: TYPES.setSchedule,
-    payload: {
-      [KEYS.schedules]: Object.values(store.getState().history[KEYS.histories])[
-        value
-      ][KEYS.schedules]
-    }
-  });
-  refresh();
 };
 
 const handleSetSort = value => {
@@ -243,7 +251,6 @@ const CREATORS = Object.freeze({
   handleSwapStation,
 
   handleSearchRequest,
-  handleRestoreHistory,
 
   handleAddingFilter,
   handleRemovingFilter,

@@ -6,7 +6,7 @@ import RestoreIcon from '@material-ui/icons/Restore'
 
 const History = ({
     histories,
-    onRestoreHistory
+    onSearch
 }) => {
     return (
         <React.Fragment>
@@ -39,8 +39,18 @@ const History = ({
                                         margin: '2px'
                                       }}
                                       variant='outlined'
+                                          component='p'
+                                      label={ history.departureDate }
+                                    />
+                                    <Chip
+                                      style={{
+                                        width: '100%',
+                                        maxWidth: '100%',
+                                        margin: '2px'
+                                      }}
+                                      variant='outlined'
                                           component='span'
-                                      label={ history.fromStation }
+                                      label={ history.fromStationName }
                                     />
                                     <Chip
                                       style={{
@@ -50,14 +60,14 @@ const History = ({
                                       }}
                                       variant='outlined'
                                           component='p'
-                                      label={ history.toStation }
+                                      label={ history.toStationName }
                                     />
                             </Grid>
                             <Grid
                               item
                             >
                                 <Button
-                                  onClick={ () => onRestoreHistory(index) }
+                                  onClick={ () => onSearch(history.fromStation, history.toStation, history.departureDate) }
                                   color='primary'
                                   variant='text'
                                   size='small'
@@ -77,8 +87,11 @@ History.propTypes = {
     histories: PropTypes.arrayOf(PropTypes.shape({
         fromStation: PropTypes.string.isRequired,
         toStation: PropTypes.string.isRequired,
+        fromStationName: PropTypes.string.isRequired,
+        toStationName: PropTypes.string.isRequired,
+        departureDate: PropTypes.string.isRequired
     })),
-    onRestoreHistory: PropTypes.func.isRequired
+    onSearch: PropTypes.func.isRequired
 }
 
 export default History
