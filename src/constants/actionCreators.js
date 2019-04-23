@@ -95,6 +95,7 @@ const handleSearchRequest = (from, to, on) => {
         [KEYS.schedules]: histories[keys][KEYS.schedules]
       }
     });
+    refresh();
     return;
   }
   dispatch({
