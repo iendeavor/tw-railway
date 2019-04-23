@@ -78,21 +78,24 @@ const handleSearchRequest = (from, to, on) => {
     to = store.getState().station[KEYS.toStation];
   }
   if (on === undefined) {
-    on = store.getState().date[KEYS.departureDate].toISOString().slice(0, 10);
+    on = store
+      .getState()
+      .date[KEYS.departureDate].toISOString()
+      .slice(0, 10);
   }
 
-  const histories = store.getState().history[KEYS.histories]
+  const histories = store.getState().history[KEYS.histories];
   const keys = Object.keys(histories).filter((key, index) => {
-      return key === from + to + on
-    })
+    return key === from + to + on;
+  });
   if (keys.length === 1) {
     dispatch({
       type: TYPES.setSchedule,
       payload: {
         [KEYS.schedules]: histories[keys][KEYS.schedules]
       }
-    })
-    return
+    });
+    return;
   }
   dispatch({
     type: TYPES.setSchedule,
