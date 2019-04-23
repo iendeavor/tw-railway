@@ -51,6 +51,7 @@ const calcDuration = pair => {
 const formatTimetable = timetable => {
   return timetable.map(pair => {
     return {
+      departureDate: pair.TrainDate,
       number: pair.DailyTrainInfo.TrainNo,
       fromID: pair.OriginStopTime.StationID,
       toID: pair.DestinationStopTime.StationID,

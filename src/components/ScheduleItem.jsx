@@ -6,6 +6,7 @@ import KEYS from '../constants/keys'
 
 
 const ScheduleItem = ({
+    departureDate,
     number,
     train_type_name,
     duration,
@@ -48,17 +49,12 @@ const ScheduleItem = ({
                 <Grid
                   item
                 >
+                    { departureDate }
+                </Grid>
+                <Grid
+                  item
+                >
                     $ { fare } NTD
-                </Grid>
-                <Grid
-                  item
-                >
-                    No: { number }
-                </Grid>
-                <Grid
-                  item
-                >
-                    { duration }
                 </Grid>
             </Grid>
         </Grid>
@@ -107,6 +103,43 @@ const ScheduleItem = ({
         }
     }
 
+    const renderStopHeader = (duration, number) => (
+        <Grid
+          key={number}
+          item
+          xs={12}
+        >
+            <Grid
+              container
+              justify='space-between'
+            >
+                <Grid
+                  item
+                  xs={3}
+                >
+                    <Button
+                      style={{width: '100%', color: '#000'}}
+                      disabled
+                    >
+                        <Icon className={ clsx('fas fa-hourglass-start') } />
+                        { duration }
+                    </Button>
+                </Grid>
+                <Grid
+                  item
+                  xs={9}
+                >
+                    <Button
+                      style={{width: '100%', color: '#000'}}
+                      disabled
+                    >
+                        No. { number }
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    )
+
     const renderStop = (time, name) => (
         <Grid
           key={time}
@@ -142,11 +175,9 @@ const ScheduleItem = ({
             </Grid>
         </Grid>
     )
-
+    
     const renderStops = stops => (
-        stops.map(stop => {
-            return renderStop(stop.time, stop.name)
-        })
+        stops.map(stop => renderStop(stop.time, stop.name))
     )
 
     return (
@@ -165,6 +196,8 @@ const ScheduleItem = ({
             >
                 { renderHeader() }
 
+                { renderStopHeader(duration, number) }
+
                 {  step.map(s => renderStops([
                     {time: s.departure, name: s.from},
                     {time: s.arrival, name: s.to}],
@@ -177,6 +210,7 @@ const ScheduleItem = ({
 }
 
 ScheduleItem.propTypes = {
+    departureDate: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     train_type: PropTypes.oneOf([KEYS.tzeTrain, KEYS.chuTrain, KEYS.fuTrain, KEYS.ordTrain]).isRequired,
     fare: PropTypes.number,
