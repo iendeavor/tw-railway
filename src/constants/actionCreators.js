@@ -84,26 +84,36 @@ const handleSearchRequest = (from, to, on) => {
       .slice(0, 10);
   }
 
+  if (existedInHistory(from, to, on)) {
+    pullFromHistory(from, to, on)
+  } else {
+    pullFromAPI(from, to, on)
+  }
+}
+
+const existedInHistory = (from, to, on) => {
   const histories = store.getState().history[KEYS.histories];
   const keys = Object.keys(histories).filter((key, index) => {
     return key === from + to + on;
   });
-  if (keys.length === 1) {
-    dispatch({
-      type: TYPES.setSchedule,
-      payload: {
-        [KEYS.schedules]: histories[keys][KEYS.schedules]
-      }
-    });
-    refresh();
-    return;
-  }
+  return keys.length === 1
+}
+
+const pullFromHistory = (from, to, on) => {
+  const histories = store.getState().history[KEYS.histories];
+  const keys = Object.keys(histories).filter((key, index) => {
+    return key === from + to + on;
+  });
   dispatch({
-    type: TYPES.setSchedule,
+    type: TYPES.pullSchedule,
     payload: {
-      [KEYS.schedules]: []
+      [KEYS.schedules]: histories[keys][KEYS.schedules]
     }
   });
+  refresh();
+}
+
+const pullFromAPI = (from, to, on) => {
   getFare(from, to)
     .then(fares => {
       getTimetable(from, to, on)
@@ -113,7 +123,7 @@ const handleSearchRequest = (from, to, on) => {
             return schedule;
           });
           dispatch({
-            type: TYPES.setSchedule,
+            type: TYPES.pullSchedule,
             payload: {
               [KEYS.schedules]: timetable
             }
@@ -126,7 +136,7 @@ const handleSearchRequest = (from, to, on) => {
               [KEYS.fromStation]: from,
               [KEYS.toStation]: to,
               [KEYS.departureDate]: on,
-              [KEYS.schedules]: store.getState().schedule[KEYS.schedules]
+              [KEYS.schedules]: store.getState().schedule[KEYS.originalSchedules]
             }
           });
         });
@@ -193,17 +203,38 @@ const refresh = () => {
   }
 
   debounce = setTimeout(() => {
-    restoreSearch();
+    clearSchedule()
+
+    forkSchedule()
     filterDepartureTime();
     filterArrivalTime();
     filter();
     sort();
+    pushSchedule();
   }, 300);
 };
 
-const restoreSearch = () => {
+const forkSchedule = () => {
   dispatch({
-    type: TYPES.restoreSearch
+    type: TYPES.forkSchedule
+  });
+};
+
+const clearSchedule = () => {
+  dispatch({
+    type: TYPES.pushSchedule,
+    payload: {
+      [KEYS.schedules]: []
+    }
+  });
+}
+
+const pushSchedule = () => {
+  dispatch({
+    type: TYPES.pushSchedule,
+    payload: {
+      [KEYS.schedules]: store.getState().schedule[KEYS.tempSchedules]
+    }
   });
 };
 

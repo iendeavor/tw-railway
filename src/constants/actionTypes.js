@@ -20,8 +20,9 @@ export const FILTER = uuid() + '-ACTION_FILTER';
 export const FILTER_DEPARTURE_TIME = uuid() + '-ACTION_FILTER_DEPARTURE_TIME';
 export const FILTER_ARRIVAL_TIME = uuid() + '-ACTION_FILTER_ARRIVAL_TIME';
 
-export const SET_SCHEDULE = uuid() + '-ACTION_SET_SCHEDULE';
-export const RESTORE_SEARCH = uuid() + '-ACTION_RESTORE_SEARCH';
+export const PULL_SCHEDULE = uuid() + '-ACTION_PULL_SCHEDULE';
+export const PUSH_SCHEDULE = uuid() + '-ACTION_PUSH_SCHEDULE';
+export const FORK_SCHEDULE = uuid() + '-ACTION_FORK_SCHEDULE';
 export const ADD_HISTORY = uuid() + '-ACTION_ADD_HISTORY';
 
 export const ADD_MESSAGE = uuid() + '-ACTION_ADD_MESSAGE';
@@ -48,8 +49,9 @@ const ACTION_TYPES = {
   filterDepartureTime: FILTER_DEPARTURE_TIME,
   filterArrivalTime: FILTER_ARRIVAL_TIME,
 
-  setSchedule: SET_SCHEDULE,
-  restoreSearch: RESTORE_SEARCH,
+  pullSchedule: PULL_SCHEDULE,
+  pushSchedule: PUSH_SCHEDULE,
+  forkSchedule: FORK_SCHEDULE,
   addHistory: ADD_HISTORY,
 
   addMessage: ADD_MESSAGE,

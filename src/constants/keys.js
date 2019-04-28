@@ -30,6 +30,7 @@ const DEPARTURE_TIME = uuid() + '-DEPARTURE_TIME';
 const ARRIVAL_TIME = uuid() + '-ARRIVAL_TIME';
 
 const ORIGINAL_SCHEDULES = uuid() + '-ORIGINAL_SCHEDULES';
+const TEMP_SCHEDULES = uuid() + '-TEMP_SCHEDULES';
 const SCHEDULES = uuid() + '-SCHEDULES';
 
 const SELECTED_FILTERS = uuid() + '-SELECTED_FILTERS';
@@ -79,6 +80,7 @@ const KEYS = Object.freeze({
   arrivalTime: ARRIVAL_TIME,
 
   originalSchedules: ORIGINAL_SCHEDULES,
+  tempSchedules: TEMP_SCHEDULES,
   schedules: SCHEDULES,
 
   selectedFilters: SELECTED_FILTERS,

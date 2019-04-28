@@ -3,6 +3,7 @@ import KEYS from '../constants/keys';
 
 const default_state = {
   [KEYS.schedules]: [],
+  [KEYS.tempSchedules]: [],
   [KEYS.originalSchedules]: []
 };
 
@@ -51,15 +52,17 @@ export default (state = default_state, action) => {
   const next = { ...state };
 
   switch (action.type) {
-    case TYPES.setSchedule:
+    case TYPES.pullSchedule:
       next[KEYS.originalSchedules] = action.payload[KEYS.schedules].slice();
+      break;
+    case TYPES.forkSchedule:
+      next[KEYS.tempSchedules] = next[KEYS.originalSchedules].slice();
+      break;
+    case TYPES.pushSchedule:
       next[KEYS.schedules] = action.payload[KEYS.schedules].slice();
       break;
-    case TYPES.restoreSearch:
-      next[KEYS.schedules] = state[KEYS.originalSchedules].slice();
-      break;
     case TYPES.sort:
-      next[KEYS.schedules] = state[KEYS.schedules].slice().sort((a, b) => {
+      next[KEYS.tempSchedules] = next[KEYS.tempSchedules].slice().sort((a, b) => {
         let flag = 0;
 
         switch (action.payload[KEYS.sortBy]) {
@@ -99,7 +102,7 @@ export default (state = default_state, action) => {
       });
       break;
     case TYPES.filter:
-      let schedules = state[KEYS.schedules].slice();
+      let schedules = next[KEYS.tempSchedules].slice();
 
       for (let filter of action.payload[KEYS.selectedFilters]) {
         schedules = schedules.filter(schedule => {
@@ -118,12 +121,12 @@ export default (state = default_state, action) => {
         });
       }
 
-      next[KEYS.schedules] = schedules;
+      next[KEYS.tempSchedules] = schedules;
       break;
     case TYPES.filterDepartureTime:
       const selected_departure = action.payload[KEYS.departureTime];
 
-      next[KEYS.schedules] = state[KEYS.schedules].slice().filter(schedule => {
+      next[KEYS.tempSchedules] = next[KEYS.tempSchedules].slice().filter(schedule => {
         if (selected_departure === '') {
           return true;
         }
@@ -136,7 +139,7 @@ export default (state = default_state, action) => {
     case TYPES.filterArrivalTime:
       const selected_arrival = action.payload[KEYS.arrivalTime];
 
-      next[KEYS.schedules] = state[KEYS.schedules].slice().filter(schedule => {
+      next[KEYS.tempSchedules] = next[KEYS.tempSchedules].slice().filter(schedule => {
         if (selected_arrival === '') {
           return true;
         }
