@@ -203,8 +203,6 @@ const refresh = () => {
   }
 
   debounce = setTimeout(() => {
-    clearSchedule()
-
     forkSchedule()
     filterDepartureTime();
     filterArrivalTime();
@@ -219,15 +217,6 @@ const forkSchedule = () => {
     type: TYPES.forkSchedule
   });
 };
-
-const clearSchedule = () => {
-  dispatch({
-    type: TYPES.pushSchedule,
-    payload: {
-      [KEYS.schedules]: []
-    }
-  });
-}
 
 const pushSchedule = () => {
   dispatch({
