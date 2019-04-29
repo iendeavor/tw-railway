@@ -139,10 +139,10 @@ const pullFromAPI = (from, to, on) => {
               [KEYS.schedules]: store.getState().schedule[KEYS.originalSchedules]
             }
           });
+        })
+        .then(() => {
+          refresh();
         });
-    })
-    .then(() => {
-      refresh();
     });
 };
 
