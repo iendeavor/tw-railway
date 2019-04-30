@@ -5,7 +5,6 @@ import KEYS from '../constants/keys';
 import CREATORS from '../constants/actionCreators';
 
 const mapStateToProps = state => {
-
   return {
     histories: Object.values(state.history[KEYS.histories]).map(history => {
       return {

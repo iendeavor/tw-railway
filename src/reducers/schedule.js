@@ -2,9 +2,10 @@ import TYPES from '../constants/actionTypes';
 import KEYS from '../constants/keys';
 
 const default_state = {
-  [KEYS.schedules]: [],
-  [KEYS.tempSchedules]: [],
-  [KEYS.originalSchedules]: []
+  [KEYS.localSchedules]: {},
+  [KEYS.currentSchedules]: [],
+  [KEYS.workingSchedules]: [],
+  [KEYS.finishedSchedules]: []
 };
 
 export const omitSecondForTimestamp = timestamp => {
@@ -44,6 +45,13 @@ export const convertArrivalToTimestamp = (arrival, departure) => {
   return arrival_timestamp;
 };
 
+const getKey = (o, key) => {
+  if (o[key] === undefined) {
+    o[key] = {};
+  }
+  return o[key];
+};
+
 export default (state = default_state, action) => {
   if (action === undefined) {
     return state;
@@ -52,57 +60,96 @@ export default (state = default_state, action) => {
   const next = { ...state };
 
   switch (action.type) {
+    case TYPES.fetchSchedule:
+      {
+        const from = action.payload[KEYS.fromStation];
+        const to = action.payload[KEYS.toStation];
+        const on = action.payload[KEYS.departureDate];
+
+        next[KEYS.localSchedules][from] = getKey(
+          next[KEYS.localSchedules],
+          from
+        );
+        next[KEYS.localSchedules][from][to] = getKey(
+          next[KEYS.localSchedules][from],
+          to
+        );
+        next[KEYS.localSchedules][from][to][on] = action.payload[
+          KEYS.schedules
+        ].slice();
+      }
+      break;
     case TYPES.pullSchedule:
-      next[KEYS.originalSchedules] = action.payload[KEYS.schedules].slice();
+      {
+        const from = action.payload[KEYS.fromStation];
+        const to = action.payload[KEYS.toStation];
+        const on = action.payload[KEYS.departureDate];
+
+        if (
+          next[KEYS.localSchedules][from] !== undefined &&
+          next[KEYS.localSchedules][from][to] !== undefined &&
+          next[KEYS.localSchedules][from][to][on] !== undefined
+        ) {
+          next[KEYS.currentSchedules] = next[KEYS.localSchedules][from][to][on];
+        }
+      }
       break;
-    case TYPES.forkSchedule:
-      next[KEYS.tempSchedules] = next[KEYS.originalSchedules].slice();
+    case TYPES.checkoutSchedule:
+      next[KEYS.workingSchedules] = next[KEYS.currentSchedules].slice();
       break;
-    case TYPES.pushSchedule:
-      next[KEYS.schedules] = action.payload[KEYS.schedules].slice();
+    case TYPES.commitSchedule:
+      next[KEYS.finishedSchedules] = next[KEYS.workingSchedules].slice();
       break;
     case TYPES.sort:
-      next[KEYS.tempSchedules] = next[KEYS.tempSchedules].slice().sort((a, b) => {
-        let flag = 0;
+      next[KEYS.workingSchedules] = next[KEYS.workingSchedules]
+        .slice()
+        .sort((a, b) => {
+          let flag = 0;
 
-        switch (action.payload[KEYS.sortBy]) {
-          case KEYS.arrival:
-            const a_arrival = convertArrivalToTimestamp(a.arrival, a.departure);
-            const b_arrival = convertArrivalToTimestamp(b.arrival, b.departure);
-            flag = a_arrival - b_arrival;
-            break;
+          switch (action.payload[KEYS.sortBy]) {
+            case KEYS.arrival:
+              const a_arrival = convertArrivalToTimestamp(
+                a.arrival,
+                a.departure
+              );
+              const b_arrival = convertArrivalToTimestamp(
+                b.arrival,
+                b.departure
+              );
+              flag = a_arrival - b_arrival;
+              break;
 
-          case KEYS.departure:
-            const a_departure = convertDepartureToTimestamp(a.departure);
-            const b_departure = convertDepartureToTimestamp(b.departure);
-            flag = a_departure - b_departure;
-            break;
+            case KEYS.departure:
+              const a_departure = convertDepartureToTimestamp(a.departure);
+              const b_departure = convertDepartureToTimestamp(b.departure);
+              flag = a_departure - b_departure;
+              break;
 
-          case KEYS.duration:
-            const a_duration = omitSecondForTimestamp(
-              convertToTimestamp(a.duration)
-            );
-            const b_duration = omitSecondForTimestamp(
-              convertToTimestamp(b.duration)
-            );
-            flag = a_duration - b_duration;
-            break;
+            case KEYS.duration:
+              const a_duration = omitSecondForTimestamp(
+                convertToTimestamp(a.duration)
+              );
+              const b_duration = omitSecondForTimestamp(
+                convertToTimestamp(b.duration)
+              );
+              flag = a_duration - b_duration;
+              break;
 
-          case KEYS.fare:
-            const a_fare = parseInt(a.fare);
-            const b_fare = parseInt(b.fare);
-            flag = a_fare - b_fare;
-            break;
+            case KEYS.fare:
+              const a_fare = parseInt(a.fare);
+              const b_fare = parseInt(b.fare);
+              flag = a_fare - b_fare;
+              break;
 
-          default:
-            break;
-        }
+            default:
+              break;
+          }
 
-        return flag;
-      });
+          return flag;
+        });
       break;
     case TYPES.filter:
-      let schedules = next[KEYS.tempSchedules].slice();
+      let schedules = next[KEYS.workingSchedules].slice();
 
       for (let filter of action.payload[KEYS.selectedFilters]) {
         schedules = schedules.filter(schedule => {
@@ -121,36 +168,40 @@ export default (state = default_state, action) => {
         });
       }
 
-      next[KEYS.tempSchedules] = schedules;
+      next[KEYS.workingSchedules] = schedules;
       break;
     case TYPES.filterDepartureTime:
       const selected_departure = action.payload[KEYS.departureTime];
 
-      next[KEYS.tempSchedules] = next[KEYS.tempSchedules].slice().filter(schedule => {
-        if (selected_departure === '') {
-          return true;
-        }
+      next[KEYS.workingSchedules] = next[KEYS.workingSchedules]
+        .slice()
+        .filter(schedule => {
+          if (selected_departure === '') {
+            return true;
+          }
 
-        const after = convertDepartureToTimestamp(selected_departure);
-        const departure = convertDepartureToTimestamp(schedule.departure);
-        return after <= departure;
-      });
+          const after = convertDepartureToTimestamp(selected_departure);
+          const departure = convertDepartureToTimestamp(schedule.departure);
+          return after <= departure;
+        });
       break;
     case TYPES.filterArrivalTime:
       const selected_arrival = action.payload[KEYS.arrivalTime];
 
-      next[KEYS.tempSchedules] = next[KEYS.tempSchedules].slice().filter(schedule => {
-        if (selected_arrival === '') {
-          return true;
-        }
+      next[KEYS.workingSchedules] = next[KEYS.workingSchedules]
+        .slice()
+        .filter(schedule => {
+          if (selected_arrival === '') {
+            return true;
+          }
 
-        const before = convertArrivalToTimestamp(selected_arrival);
-        const arrival = convertArrivalToTimestamp(
-          schedule.arrival,
-          schedule.departure
-        );
-        return arrival <= before;
-      });
+          const before = convertArrivalToTimestamp(selected_arrival);
+          const arrival = convertArrivalToTimestamp(
+            schedule.arrival,
+            schedule.departure
+          );
+          return arrival <= before;
+        });
       break;
     default:
       break;

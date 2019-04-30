@@ -29,8 +29,10 @@ const TOMORROW = uuid() + '-TOMORROW';
 const DEPARTURE_TIME = uuid() + '-DEPARTURE_TIME';
 const ARRIVAL_TIME = uuid() + '-ARRIVAL_TIME';
 
-const ORIGINAL_SCHEDULES = uuid() + '-ORIGINAL_SCHEDULES';
-const TEMP_SCHEDULES = uuid() + '-TEMP_SCHEDULES';
+const LOCAL_SCHEDULES = uuid() + '-LOCAL_SCHEDULES';
+const CURRENT_SCHEDULES = uuid() + '-CURRENT_SCHEDULES';
+const WORKING_SCHEDULES = uuid() + '-WORKING_SCHEDULES';
+const FINISHED_SCHEDULES = uuid() + '-FINISHED_SCHEDULES';
 const SCHEDULES = uuid() + '-SCHEDULES';
 
 const SELECTED_FILTERS = uuid() + '-SELECTED_FILTERS';
@@ -79,8 +81,10 @@ const KEYS = Object.freeze({
   departureTime: DEPARTURE_TIME,
   arrivalTime: ARRIVAL_TIME,
 
-  originalSchedules: ORIGINAL_SCHEDULES,
-  tempSchedules: TEMP_SCHEDULES,
+  localSchedules: LOCAL_SCHEDULES,
+  currentSchedules: CURRENT_SCHEDULES,
+  workingSchedules: WORKING_SCHEDULES,
+  finishedSchedules: FINISHED_SCHEDULES,
   schedules: SCHEDULES,
 
   selectedFilters: SELECTED_FILTERS,

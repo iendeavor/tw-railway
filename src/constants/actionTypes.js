@@ -20,9 +20,10 @@ export const FILTER = uuid() + '-ACTION_FILTER';
 export const FILTER_DEPARTURE_TIME = uuid() + '-ACTION_FILTER_DEPARTURE_TIME';
 export const FILTER_ARRIVAL_TIME = uuid() + '-ACTION_FILTER_ARRIVAL_TIME';
 
+export const FETCH_SCHEDULE = uuid() + '-ACTION_FETCH_SCHEDULE';
 export const PULL_SCHEDULE = uuid() + '-ACTION_PULL_SCHEDULE';
-export const PUSH_SCHEDULE = uuid() + '-ACTION_PUSH_SCHEDULE';
-export const FORK_SCHEDULE = uuid() + '-ACTION_FORK_SCHEDULE';
+export const CHECKOUT_SCHEDULE = uuid() + '-ACTION_CHECKOUT_SCHEDULE';
+export const COMMIT_SCHEDULE = uuid() + '-ACTION_COMMIT_SCHEDULE';
 export const ADD_HISTORY = uuid() + '-ACTION_ADD_HISTORY';
 
 export const ADD_MESSAGE = uuid() + '-ACTION_ADD_MESSAGE';
@@ -49,9 +50,10 @@ const ACTION_TYPES = {
   filterDepartureTime: FILTER_DEPARTURE_TIME,
   filterArrivalTime: FILTER_ARRIVAL_TIME,
 
+  fetchSchedule: FETCH_SCHEDULE,
   pullSchedule: PULL_SCHEDULE,
-  pushSchedule: PUSH_SCHEDULE,
-  forkSchedule: FORK_SCHEDULE,
+  checkoutSchedule: CHECKOUT_SCHEDULE,
+  commitSchedule: COMMIT_SCHEDULE,
   addHistory: ADD_HISTORY,
 
   addMessage: ADD_MESSAGE,

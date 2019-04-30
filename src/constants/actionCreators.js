@@ -59,7 +59,7 @@ const handleAddingMessage = message => {
   dispatch({
     type: TYPES.addMessage,
     payload: {
-      [KEYS.message]: message
+      [KEYS.message]: 'message_' + message
     }
   });
 };
@@ -70,34 +70,43 @@ const handleRemovingMessage = message => {
   });
 };
 
+let searchDebounce = undefined;
 const handleSearchRequest = (from, to, on) => {
-  if (from === undefined) {
-    from = store.getState().station[KEYS.fromStation];
-  }
-  if (to === undefined) {
-    to = store.getState().station[KEYS.toStation];
-  }
-  if (on === undefined) {
-    on = store
-      .getState()
-      .date[KEYS.departureDate].toISOString()
-      .slice(0, 10);
-  }
+  if (searchDebounce === undefined) {
+    searchDebounce = setTimeout(() => {
+      searchDebounce = undefined;
+    }, 300);
 
-  if (existedInHistory(from, to, on)) {
-    pullFromHistory(from, to, on)
+    if (from === undefined) {
+      from = store.getState().station[KEYS.fromStation];
+    }
+    if (to === undefined) {
+      to = store.getState().station[KEYS.toStation];
+    }
+    if (on === undefined) {
+      on = store
+        .getState()
+        .date[KEYS.departureDate].toISOString()
+        .slice(0, 10);
+    }
+
+    if (existedInHistory(from, to, on)) {
+      pullFromHistory(from, to, on);
+    } else {
+      pullFromAPI(from, to, on);
+    }
   } else {
-    pullFromAPI(from, to, on)
+    handleAddingMessage('pleaseWait');
   }
-}
+};
 
 const existedInHistory = (from, to, on) => {
   const histories = store.getState().history[KEYS.histories];
   const keys = Object.keys(histories).filter((key, index) => {
     return key === from + to + on;
   });
-  return keys.length === 1
-}
+  return keys.length === 1;
+};
 
 const pullFromHistory = (from, to, on) => {
   const histories = store.getState().history[KEYS.histories];
@@ -107,43 +116,53 @@ const pullFromHistory = (from, to, on) => {
   dispatch({
     type: TYPES.pullSchedule,
     payload: {
-      [KEYS.schedules]: histories[keys][KEYS.schedules]
+      [KEYS.fromStation]: from,
+      [KEYS.toStation]: to,
+      [KEYS.departureDate]: on
     }
   });
   refresh();
-}
+};
 
 const pullFromAPI = (from, to, on) => {
-  getFare(from, to)
-    .then(fares => {
-      getTimetable(from, to, on)
-        .then(timetable => {
-          timetable = timetable.map(schedule => {
-            schedule.fare = fares[schedule.train_type];
-            return schedule;
-          });
-          dispatch({
-            type: TYPES.pullSchedule,
-            payload: {
-              [KEYS.schedules]: timetable
-            }
-          });
-        })
-        .then(() => {
-          dispatch({
-            type: TYPES.addHistory,
-            payload: {
-              [KEYS.fromStation]: from,
-              [KEYS.toStation]: to,
-              [KEYS.departureDate]: on,
-              [KEYS.schedules]: store.getState().schedule[KEYS.originalSchedules]
-            }
-          });
-        })
-        .then(() => {
-          refresh();
-        });
+  dispatch({
+    type: TYPES.addHistory,
+    payload: {
+      [KEYS.fromStation]: from,
+      [KEYS.toStation]: to,
+      [KEYS.departureDate]: on
+    }
+  });
+
+  getFare(from, to).then(fares => {
+    getTimetable(from, to, on).then(timetable => {
+      timetable = timetable.map(schedule => {
+        schedule.fare = fares[schedule.train_type];
+        return schedule;
+      });
+
+      dispatch({
+        type: TYPES.fetchSchedule,
+        payload: {
+          [KEYS.fromStation]: from,
+          [KEYS.toStation]: to,
+          [KEYS.departureDate]: on,
+          [KEYS.schedules]: timetable
+        }
+      });
+
+      dispatch({
+        type: TYPES.pullSchedule,
+        payload: {
+          [KEYS.fromStation]: from,
+          [KEYS.toStation]: to,
+          [KEYS.departureDate]: on
+        }
+      });
+
+      refresh();
     });
+  });
 };
 
 const handleSetSort = value => {
@@ -203,27 +222,24 @@ const refresh = () => {
   }
 
   debounce = setTimeout(() => {
-    forkSchedule()
+    checkoutSchedule();
     filterDepartureTime();
     filterArrivalTime();
     filter();
     sort();
-    pushSchedule();
+    commitSchedule();
   }, 300);
 };
 
-const forkSchedule = () => {
+const checkoutSchedule = () => {
   dispatch({
-    type: TYPES.forkSchedule
+    type: TYPES.checkoutSchedule
   });
 };
 
-const pushSchedule = () => {
+const commitSchedule = () => {
   dispatch({
-    type: TYPES.pushSchedule,
-    payload: {
-      [KEYS.schedules]: store.getState().schedule[KEYS.tempSchedules]
-    }
+    type: TYPES.commitSchedule
   });
 };
 

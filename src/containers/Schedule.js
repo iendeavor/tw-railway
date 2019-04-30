@@ -5,7 +5,7 @@ import KEYS from '../constants/keys';
 
 const mapStateToProps = state => {
   return {
-    schedules: state.schedule[KEYS.schedules]
+    schedules: state.schedule[KEYS.finishedSchedules]
   };
 };
 

@@ -17,7 +17,6 @@ export default (state = defaultState, action) => {
     case TYPES.addHistory:
       const fromStation = action.payload[KEYS.fromStation];
       const toStation = action.payload[KEYS.toStation];
-      const schedules = action.payload[KEYS.schedules].slice();
       const departureDate = action.payload[KEYS.departureDate];
 
       const id = fromStation + toStation + departureDate;
@@ -28,8 +27,7 @@ export default (state = defaultState, action) => {
             [KEYS.toStation]: toStation,
             [KEYS.fromStationName]: getStationName(fromStation),
             [KEYS.toStationName]: getStationName(toStation),
-            [KEYS.departureDate]: departureDate,
-            [KEYS.schedules]: schedules
+            [KEYS.departureDate]: departureDate
           }
         });
       }
