@@ -1,4 +1,5 @@
 import React from 'react'
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { Card, Icon, Grid, Button } from '@material-ui/core'
@@ -20,6 +21,7 @@ const ScheduleItem = ({
     note,
     index,
     onAddingFilter,
+    t,
 }) => {
     const ICON_STYLE = {
         width: '30px',
@@ -199,8 +201,8 @@ const ScheduleItem = ({
                 { renderStopHeader(duration, number) }
 
                 {  step.map(s => renderStops([
-                    {time: s.departure, name: s.from},
-                    {time: s.arrival, name: s.to}],
+                    {time: s.departure, name: t(s.from.toLowerCase())},
+                    {time: s.arrival, name: t(s.to.toLowerCase())}],
                 ))}
 
                 { renderFooter() }
@@ -232,5 +234,5 @@ ScheduleItem.propTypes = {
     onAddingFilter: PropTypes.func.isRequired,
 }
 
-export default ScheduleItem
+export default withTranslation()(ScheduleItem)
 

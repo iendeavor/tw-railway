@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types'
 import { Button, Grid, InputLabel, Select } from '@material-ui/core'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
@@ -19,6 +20,7 @@ const Station = ({
     onSetToCountry,
     onSetToStation,
     onSearch,
+    t,
 }) => {
     return (
         <Grid
@@ -38,7 +40,7 @@ const Station = ({
                       xs={6}
                     >
                         <InputLabel shrink>
-                            From country
+                            { t('label_fromCountry') }
                         </InputLabel>
 
                         <Select
@@ -55,7 +57,7 @@ const Station = ({
                                       key={ option.id }
                                       value={ option.id }
                                     >
-                                        { option.name }
+                                        { t(option.name.toLowerCase()) }
                                     </option>
                                 )
                             })
@@ -67,7 +69,7 @@ const Station = ({
                       xs={6}
                     >
                         <InputLabel shrink>
-                            From station
+                            { t('label_fromStation') }
                         </InputLabel>
 
                         <Select
@@ -84,7 +86,7 @@ const Station = ({
                                       key={ option.id }
                                       value={ option.id }
                                     >
-                                        { option.name }
+                                        { t(option.name.toLowerCase()) }
                                     </option>
                                 )
                             })
@@ -103,7 +105,7 @@ const Station = ({
                       xs={6}
                     >
                         <InputLabel shrink>
-                            To country
+                            { t('label_toCountry') }
                         </InputLabel>
 
                         <Select
@@ -120,7 +122,7 @@ const Station = ({
                                       key={ option.id }
                                       value={ option.id }
                                     >
-                                        { option.name }
+                                        { t(option.name.toLowerCase()) }
                                     </option>
                                 )
                             })
@@ -133,7 +135,7 @@ const Station = ({
                       xs={6}
                     >
                         <InputLabel shrink>
-                            To station
+                            { t('label_toStation') }
                         </InputLabel>
 
                         <Select
@@ -150,7 +152,7 @@ const Station = ({
                                       key={ option.id }
                                       value={ option.id }
                                     >
-                                        { option.name }
+                                        { t(option.name.toLowerCase()) }
                                     </option>
                                 )
                             })
@@ -212,5 +214,5 @@ Station.propTypes = {
     onSearch: PropTypes.func.isRequired,
 }
 
-export default Station
+export default withTranslation()(Station)
 

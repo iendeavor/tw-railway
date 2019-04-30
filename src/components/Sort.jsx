@@ -1,4 +1,5 @@
 import React from 'react'
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { Icon, InputLabel, Grid, Button } from '@material-ui/core'
@@ -11,11 +12,12 @@ const Sort = ({
     options,
     selectedSort,
     onSetSort,
+    t,
 }) => {
     return (
         <React.Fragment>
             <InputLabel shrink>
-                Primary
+                { t('label_primary') }
             </InputLabel>
 
             <Grid
@@ -40,7 +42,7 @@ const Sort = ({
                         >
                             <Icon className={ clsx(option.icon) } style={{width: 'auto'}}/>
                             <Box display={{xs: 'none', sm: 'none', md: 'block'}} p={0.5}>
-                                { option.name }
+                                { t(option.name.toLowerCase()) }
                             </Box>
                         </Button>
                     </Grid>
@@ -57,5 +59,5 @@ Sort.propTypes = {
     onSetSort: PropTypes.func.isRequired,
 }
 
-export default Sort
+export default withTranslation()(Sort)
 

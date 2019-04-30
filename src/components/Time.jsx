@@ -1,4 +1,5 @@
 import React from 'react'
+import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { InputLabel, Grid, TextField } from '@material-ui/core'
 
@@ -9,6 +10,7 @@ const Date_ = ({
     onSetDepartureTime,
     onSetArrivalTime,
     onResetTime,
+    t,
 }) => {
     return(
         <Grid
@@ -21,7 +23,7 @@ const Date_ = ({
               xs={6}
             >
                 <InputLabel shrink>
-                    Depature time
+                    { t('label_departureTime') }
                 </InputLabel>
 
                 <TextField
@@ -37,7 +39,7 @@ const Date_ = ({
               xs={6}
             >
                 <InputLabel shrink>
-                    Arrival time
+                    { t('label_arrivalTime') }
                 </InputLabel>
 
                 <TextField
@@ -59,5 +61,5 @@ Date_.propTypes = {
     onResetTime: PropTypes.func.isRequired,
 }
 
-export default Date_
+export default withTranslation()(Date_)
 

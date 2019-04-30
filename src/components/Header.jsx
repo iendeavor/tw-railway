@@ -1,6 +1,9 @@
 import React from 'react'
+import { withTranslation } from 'react-i18next';
 import { Button, Icon, Link, AppBar, Toolbar, Typography, Grid } from '@material-ui/core'
 import clsx from 'clsx'
+
+import i18n from '../i18n';
 
 
 const Header = props => {
@@ -25,7 +28,7 @@ const Header = props => {
                                 <Typography
                                   variant='h5'
                                 >
-                                    Taiwan Railway
+                                    { props.t('app_name') }
                                 </Typography>
                             </Grid>
                             <Grid
@@ -35,6 +38,26 @@ const Header = props => {
                                   container
                                   justify='flex-end'
                                 >
+                                    <Button
+                                      size='small'
+                                      style={{padding: '0', paddingTop: '4px', minWidth: '44px'}}
+                                    >
+                                        <Link
+                                          onClick={ () => {
+                                            if (i18n.language === 'en') {
+                                              i18n.changeLanguage('zh_TW')
+                                            } else {
+                                              i18n.changeLanguage('en')
+                                            }
+                                          }}
+                                          style={{width: '100%', color: 'white'}}
+                                        >
+                                            <Icon 
+                                              className={ clsx('fas fa-language') } 
+                                              style={{padding: 0.5, width: 'auto'}}
+                                            />
+                                        </Link>
+                                    </Button>
                                     <Button
                                       size='small'
                                       style={{padding: '0', paddingTop: '4px', minWidth: '44px'}}
@@ -67,5 +90,5 @@ const Header = props => {
     )
 }
 
-export default Header
+export default withTranslation()(Header)
 

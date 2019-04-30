@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import App from './components/App.jsx'
 import store from './store'
+import './i18n';
 
 ReactDOM.render(
     <Provider store={store}>

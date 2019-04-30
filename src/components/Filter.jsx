@@ -1,4 +1,5 @@
 import React from 'react'
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { Icon, InputLabel, Grid, Button } from '@material-ui/core'
@@ -10,11 +11,12 @@ const Filter = ({
     selectedValues,
     onAddingFilter,
     onRemovingFilter,
+    t,
 }) => {
     return (
         <React.Fragment>
             <InputLabel shrink>
-                Filter
+                { t('label_filter') }
             </InputLabel>
 
         <Grid
@@ -42,7 +44,7 @@ const Filter = ({
                         >
                             <Icon className={ clsx(option.icon) } p={0.5} style={{width: 'auto'}}/>
                             <Box display={{xs: 'none', sm: 'none', md: 'block'}} p={0.5}>
-                                { option.name }
+                                { t(option.name.toLowerCase()) }
                             </Box>
                         </Button>
                     </Grid>
@@ -60,5 +62,5 @@ Filter.propTypes = {
     onRemovingFilter: PropTypes.func.isRequired,
 }
 
-export default Filter
+export default withTranslation()(Filter)
 

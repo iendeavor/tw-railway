@@ -1,4 +1,5 @@
 import React from 'react'
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types'
 import { Divider, InputLabel, Grid, Chip, Button } from '@material-ui/core'
 import RestoreIcon from '@material-ui/icons/Restore'
@@ -6,12 +7,13 @@ import RestoreIcon from '@material-ui/icons/Restore'
 
 const History = ({
     histories,
-    onSearch
+    onSearch,
+    t,
 }) => {
     return (
         <React.Fragment>
             <InputLabel shrink>
-                History
+                { t('label_history') }
             </InputLabel>
 
             <Grid
@@ -50,7 +52,7 @@ const History = ({
                                       }}
                                       variant='outlined'
                                           component='span'
-                                      label={ history.fromStationName }
+                                      label={ t(history.fromStationName.toLowerCase()) }
                                     />
                                     <Chip
                                       style={{
@@ -60,7 +62,7 @@ const History = ({
                                       }}
                                       variant='outlined'
                                           component='p'
-                                      label={ history.toStationName }
+                                      label={ t(history.toStationName.toLowerCase()) }
                                     />
                             </Grid>
                             <Grid
@@ -94,5 +96,5 @@ History.propTypes = {
     onSearch: PropTypes.func.isRequired
 }
 
-export default History
+export default withTranslation()(History)
 

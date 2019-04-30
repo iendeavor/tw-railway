@@ -1,4 +1,5 @@
 import React from 'react'
+import { withTranslation } from 'react-i18next';
 import { Snackbar } from '@material-ui/core'
 
 const Message = ({
@@ -6,6 +7,7 @@ const Message = ({
     message,
     onExitingMessage,
     onRemovingMessage,
+    t,
 }) => {
     return (
         <Snackbar
@@ -17,11 +19,11 @@ const Message = ({
           autoHideDuration={ 2000 }
           onClose={ onRemovingMessage }
           onExit={ onExitingMessage }
-          message={<span>{ message }</span>}
+          message={<span>{ message && t(message) }</span>}
         >
         </Snackbar>
     )
 }
 
-export default Message
+export default withTranslation()(Message)
 
