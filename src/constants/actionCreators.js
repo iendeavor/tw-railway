@@ -109,10 +109,6 @@ const existedInHistory = (from, to, on) => {
 };
 
 const pullFromHistory = (from, to, on) => {
-  const histories = store.getState().history[KEYS.histories];
-  const keys = Object.keys(histories).filter((key, index) => {
-    return key === from + to + on;
-  });
   dispatch({
     type: TYPES.pullSchedule,
     payload: {
