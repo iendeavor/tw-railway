@@ -1,8 +1,7 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types'
-import { Divider, InputLabel, Grid, Chip, Button } from '@material-ui/core'
-import RestoreIcon from '@material-ui/icons/Restore'
+import { Card, InputLabel, Grid, Button } from '@material-ui/core'
 
 
 const History = ({
@@ -22,62 +21,35 @@ const History = ({
             >
                 { histories.map((history, index) => {
                     return (
-                        <React.Fragment
+                    <Button
+                      key={index}
+                      onClick={ () => onSearch(history.fromStation, history.toStation, history.departureDate) }
+                      color='primary'
+                      variant='text'
+                      size='small'
+                      style={{
+                        width: '100%',
+                      }}
+                    >
+                        <Card
                           key={index}
+                          style={{
+                            width: '100%',
+                            margin: '.5rem 0',
+                            boxShadow: '0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.1)',
+                          }}
                         >
-                            { index !== 0 && <Divider
-                                  style={{width: '100%'}}
-                                  light
-                              />
-                            }
-                            <Grid
-                              item
-                              xs={9}
-                            >
-                                    <Chip
-                                      style={{
-                                        width: '100%',
-                                        maxWidth: '100%',
-                                        margin: '2px'
-                                      }}
-                                      variant='outlined'
-                                          component='p'
-                                      label={ history.departureDate }
-                                    />
-                                    <Chip
-                                      style={{
-                                        width: '100%',
-                                        maxWidth: '100%',
-                                        margin: '2px'
-                                      }}
-                                      variant='outlined'
-                                          component='span'
-                                      label={ t(history.fromStationName.toLowerCase()) }
-                                    />
-                                    <Chip
-                                      style={{
-                                        width: '100%',
-                                        maxWidth: '100%',
-                                        margin: '2px'
-                                      }}
-                                      variant='outlined'
-                                          component='p'
-                                      label={ t(history.toStationName.toLowerCase()) }
-                                    />
-                            </Grid>
-                            <Grid
-                              item
-                            >
-                                <Button
-                                  onClick={ () => onSearch(history.fromStation, history.toStation, history.departureDate) }
-                                  color='primary'
-                                  variant='text'
-                                  size='small'
-                                >
-                                    <RestoreIcon />
-                                </Button>
-                            </Grid>
-                        </React.Fragment>
+                            <p>
+                              { history.departureDate }
+                            </p>
+                            <p>
+                              { t(history.fromStationName.toLowerCase()) }
+                            </p>
+                            <p>
+                              { t(history.toStationName.toLowerCase()) }
+                            </p>
+                        </Card>
+                    </Button>
                     )
                 })}
             </Grid>
