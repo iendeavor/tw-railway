@@ -4,11 +4,15 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import en from './locales/en/translation'
 import zh_TW from './locales/zh-TW/translation'
+import jp from './locales/jp/translation'
 
 
 const resources = {
   en: {
     translation: en
+  },
+  jp: {
+    translation: jp
   },
   zh_TW: {
     translation: zh_TW

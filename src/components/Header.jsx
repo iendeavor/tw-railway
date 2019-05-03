@@ -44,11 +44,12 @@ const Header = props => {
                                     >
                                         <Link
                                           onClick={ () => {
-                                            if (i18n.language === 'en') {
-                                              i18n.changeLanguage('zh_TW')
-                                            } else {
-                                              i18n.changeLanguage('en')
+                                            const languages = {
+                                              en: 'zh_TW',
+                                              zh_TW: 'jp',
+                                              jp: 'en'
                                             }
+                                            i18n.changeLanguage(languages[i18n.language])
                                           }}
                                           style={{width: '100%', color: 'white'}}
                                         >
