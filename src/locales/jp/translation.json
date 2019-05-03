@@ -1,0 +1,33 @@
+{
+    "app_name": "台湾鉄路列車検索システム",
+
+    "date_today": "今日",
+    "date_tomorrow": "明日",
+
+    "label_departureDate": "出発日",
+    "label_fromCountry": "出発地",
+    "label_fromStation": "出發駅",
+    "label_toCountry": "到着地",
+    "label_toStation": "到着駅",
+    "label_history": "検索履歴",
+    "label_departureTime": "出発",
+    "label_arrivalTime": "到着",
+    "label_filter": "必須項目",
+    "label_primary": "優先表示",
+
+    "wheel chair": "車椅子",
+    "bike space": "自転車",
+    "nursing room": "哺乳室",
+
+    "departure": "出發時刻",
+    "arrival": "到着時刻",
+    "duration": "時間",
+    "fare": "料金",
+
+    "date": "{mm}/{dd}/{yyyy}",
+
+    "message_addFilter": "検索条件が追加されました。",
+    "message_pleaseWait": "ロード中です。しばらくお待ちください。",
+
+    "":""
+}
